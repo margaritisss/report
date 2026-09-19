@@ -1,0 +1,5 @@
+   {
+     "latex-workshop.latex.outDir": "%DIR%/build",   // send every build file into ./build (%DIR% = folder of main.tex)
+     "latex-workshop.latex.autoClean.run": "never",  // keep aux files between builds so recompiles stay fast
+     "latex-workshop.latex.recipe.default": "first"  // keep using the default latexmk recipe on ▷
+   }
