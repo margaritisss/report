@@ -1,0 +1,38 @@
+\documentclass[en]{telereport}   % [en] or [fr] -- same as lang: "en" / "fr"
+
+\usepackage[auto-lang=false]{lipsum} % dummy text, stands in for #lorem(...) (auto-lang=false: no "latin" warning)
+
+\title{Unofficial Télécom Paris Report Template}          % title:
+\subtitle{Styled according to Télécom Paris' graphic chart} % subtitle:
+\shorttitle{Report Template}                              % short-title: (header)
+\addauthor{Jonh Doe}{jonh.doe@test.com}                   % authors: (one line each)
+\addauthor{Jane Doe}{jane.doe@test.fr}
+\addsupervisor{Bob Doe}{bob.doe@bob.org}                  % supervisors:
+\keywords{Report, Template, Télécom Paris}                % keywords:
+\date{2024-01-01}                                         % date:
+\sidebartext{Sidebar text}                                % sidebar-text:
+\showmail                                                 % show-mail: true
+% \nologo                                                 % logo: false
+% \nocoloredbar                                           % show-colored-bar: false
+
+\begin{document}
+
+\begin{abstract}                 % stored for the cover, not printed here
+This is a test of the Télécom Paris report template. It features some simple
+options and basic page layout. It currently supports \texttt{lang} ``fr'' and ``en''
+for text attributes translations (like \texttt{abstract} or \texttt{keywords}).
+See documentation to know about all the available options.
+\end{abstract}
+
+\maketitle                       % builds the red cover page
+
+\section{A Section}              % = A Section
+\lipsum[1]
+
+\subsection{A Subsection}        % == A Subsection
+\lipsum[2-5]
+
+\subsubsection{A Subsubsection}  % === A Subsubsection
+\lipsum[6-7]
+
+\end{document}
