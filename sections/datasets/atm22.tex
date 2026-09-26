@@ -1,0 +1,88 @@
+% ATM'22 dataset -- pulled in by sections/03-dataset.tex
+
+\subsection{The ATM'22 dataset}  % first dataset
+\label{sec:atm22}                % lets other sections write "see Section~\ref{sec:atm22}"
+
+The Multi-site, Multi-domain Airway Tree Modeling dataset (ATM'22) was released
+as part of an official challenge held in conjunction with MICCAI 2022
+\cite{zhang2023atm22}. It targets the binary segmentation of the pulmonary
+airway tree from chest CT, and at the time of its release it was the largest
+publicly available airway dataset with complete voxel-wise annotations. The
+reference benchmark that preceded it, EXACT'09, provided only 40 scans and
+never released its manual annotations, which had long limited the training and
+fair evaluation of data-driven methods.
+
+The dataset contains 500 chest CT scans, partitioned into 300 training, 50
+validation and 150 test cases. The test set is held privately by the organizers
+and is accessible only through the submission of a Docker container, which
+guarantees the fairness and reproducibility of the reported results. The scans
+originate from three sources, as summarized in Table~\ref{tab:atm22_split}.
+
+\begin{table}[htbp]              % htbp = let LaTeX choose a good spot for the table
+  \centering                     % centre the table on the page
+  \caption{Composition of the ATM'22 dataset by split and by source site.}
+  \label{tab:atm22_split}        % target of the \ref above
+  \begin{tabular}{lcccc}         % 1 left-aligned column + 4 centred ones
+    \toprule
+    Split & Shanghai Chest Hospital & LIDC-IDRI & EXACT'09 & Total \\
+    \midrule
+    Training   & 226                  & 54 & 20 & 300 \\
+    Validation & 20                   & 30 & -- & 50  \\
+    Test       & 84 (58 COVID-19)     & 66 & -- & 150 \\
+    \midrule
+    Total      & 330                  & 150 & 20 & 500 \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+For the 20 cases taken from EXACT'09, only the airway annotations are
+distributed; the corresponding CT volumes must be obtained separately from the
+original source.
+
+The acquisition parameters are heterogeneous, which is the basis of the
+multi-site character of the dataset. The scans were acquired on Philips iCT 256,
+GE LightSpeed16 and Toshiba Aquilion scanners, the last of which appears only in
+the test set. Each slice is $512 \times 512$ pixels, and the number of slices per
+scan ranges from 157 to 1125, with a slice thickness between 0.45 and 1.00~mm
+and an in-plane resolution between 0.500 and 0.919~mm. The health status of the
+subjects ranges from healthy volunteers to patients with severe pulmonary
+disease. The multi-domain character comes from the 58 COVID-19 scans included in
+the test set: ground-glass opacity, consolidation and septal thickening alter
+the appearance of the lung parenchyma and blur the airway lumen, so these cases
+form a noisy domain on which the generalization ability of a model trained on
+clean scans can be assessed.
+
+The annotations were produced in two stages. A preliminary segmentation was
+first obtained by ensembling, through majority voting, several airway
+segmentation models trained on the BAS dataset. These preliminary masks were
+then reviewed by three radiologists with more than five years of experience: two
+of them independently refined and cross-checked each scan, and the most senior
+radiologist validated the final annotation. The manual refinement required 60 to
+90 minutes per scan and focused mainly on repairing breakages in the peripheral
+bronchi and removing small leakages into the surrounding parenchyma, using the
+original CT intensities and anatomical prior knowledge. The whole collection and
+annotation process took the organizers approximately one year.
+
+The challenge evaluates submissions along two complementary axes. Topological
+completeness is measured by the tree length detected rate (TD) and the branch
+detected rate (BD),
+\begin{equation}                 % numbered equation, referable with \eqref{eq:td_bd}
+  \mathrm{TD} = \frac{T_{det}}{T_{ref}},
+  \qquad
+  \mathrm{BD} = \frac{B_{det}}{B_{ref}},
+  \label{eq:td_bd}
+\end{equation}
+where $T_{det}$ and $B_{det}$ denote respectively the total length and the
+number of branches correctly detected in the prediction, and $T_{ref}$ and
+$B_{ref}$ the corresponding quantities in the ground truth. Both metrics are
+computed on the largest connected component of the prediction, a branch being
+counted as detected when more than 80\% of its centerline voxels lie within the
+ground truth. Topological correctness is measured by the Dice similarity
+coefficient (DSC) and the precision, with sensitivity and specificity reported
+as complementary indicators. The official ranking is based on the unweighted
+mean of TD, BD, DSC and precision. This dual evaluation reflects the fact that
+overlap-based measures alone are insufficient for tubular structures: a
+prediction may achieve a high Dice score while missing a substantial number of
+distal branches, since the peripheral bronchi account for only a small fraction
+of the total airway volume.
+

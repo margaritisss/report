@@ -1,0 +1,147 @@
+% Affine registration -- version written with ChatGPT.
+% Pulled in by sections/registration/affine-registration.tex.
+
+\subsubsection{ChatGPT}          % second version of the affine-registration text
+\label{sec:affine_chatgpt}       % \secref{sec:affine_chatgpt}
+
+Following template construction, the airway segmentation volumes were spatially
+aligned to a common anatomical reference using affine image registration. The
+registration was performed using the Advanced Normalization Tools (ANTs)
+framework through its Python interface, ANTsPy. ANTs is an open-source
+framework for quantitative medical image analysis whose core functionality
+includes image registration and template construction
+\cite{avants2009ants,tustison2021antsx}. For each subject, the corresponding
+three-dimensional airway segmentation volume from the AIIB23 dataset was
+considered as the \emph{moving} image, whereas the previously constructed
+airway template, \texttt{template\_22.nii.gz}, was used as the \emph{fixed}
+image. In the implemented pipeline, all available input volumes were processed
+independently and registered to this fixed reference.
+
+% ------------------------------------------------------------
+\paragraph{Affine transformation.}  % definition of the affine map
+
+The affine registration models global geometric differences between an
+individual airway tree and the reference template. In three-dimensional
+space, an affine transformation can be written as
+\begin{equation}
+  \mathbf{x}' = \mathbf{A}\mathbf{x} + \mathbf{t},
+  \label{eq:affine_transform}    % linear part A plus translation t
+\end{equation}
+where $\mathbf{x} \in \mathbb{R}^{3}$ denotes a point in the original image
+space, $\mathbf{x}' \in \mathbb{R}^{3}$ its transformed position,
+$\mathbf{A} \in \mathbb{R}^{3\times3}$ is the linear component of the
+transformation, and $\mathbf{t} \in \mathbb{R}^{3}$ is the translation
+vector. The matrix $\mathbf{A}$ can represent rotation, scaling, and shearing,
+whereas $\mathbf{t}$ accounts for translation
+\cite{itk_software_guide}. Consequently, a three-dimensional affine
+transformation contains twelve parameters, corresponding to the nine elements
+of the linear transformation matrix and the three translation parameters. The
+ANTsPy documentation explicitly defines its \texttt{Affine} registration
+option as an affine transformation with 12 parameters
+\cite{antspy_registration}.
+
+In contrast to deformable registration, the affine transformation is global:
+the same transformation is applied throughout the image. It can therefore
+correct subject-specific differences in overall position, orientation, scale,
+and global shear, but it does not introduce spatially varying local
+deformations. Consequently, the relative geometric configuration of the
+airway tree is preserved while the tree is brought into a common global
+coordinate system \cite{itk_software_guide,avants2009ants}.
+
+% ------------------------------------------------------------
+\paragraph{Registration as an optimization problem.}  % transform + metric + optimiser
+
+Let $F$ denote the fixed template and $M$ the moving subject image. The
+registration seeks the affine transformation parameters
+$\boldsymbol{\theta}$ that optimize a similarity-based registration objective
+between the fixed image and the transformed moving image. In general, the
+registration problem can be expressed as
+\begin{equation}
+  \boldsymbol{\theta}^{*}
+  = \underset{\boldsymbol{\theta}}{\operatorname{arg\,opt}}\;
+  \mathcal{C}\left(F,\, M \circ T_{\boldsymbol{\theta}}\right),
+  \label{eq:registration_optimization}  % optimise the objective over the affine parameters
+\end{equation}
+where $T_{\boldsymbol{\theta}}$ is the affine transformation parameterized by
+$\boldsymbol{\theta}$, $M \circ T_{\boldsymbol{\theta}}$ denotes the moving
+image after transformation, and $\mathcal{C}$ denotes the registration
+objective. Image registration frameworks such as ITK formulate registration
+through the combination of a transformation model, a similarity metric, and
+an optimization procedure \cite{itk_software_guide,avants2014itkv4}.
+
+In the present implementation, the registration is invoked through the ANTsPy
+interface as
+
+\begin{lstlisting}
+ants.registration(
+    fixed=fixed,
+    moving=moving,
+    type_of_transform='Affine'
+)
+\end{lstlisting}
+
+\noindent where the fixed image is the image defining the reference space and
+the moving image is the image mapped to that space \cite{antspy_registration}.
+The choice \texttt{type\_of\_transform='Affine'} therefore specifies that the
+estimated transformation belongs to the affine transformation family rather
+than to a deformable model.
+
+The implementation does not explicitly specify additional registration
+parameters such as the similarity metric, optimization schedule, number of
+iterations, or multiresolution settings. These are therefore determined by
+the ANTsPy \texttt{Affine} registration preset associated with the software
+version used in the experiment. The ANTsPy documentation exposes these
+parameters explicitly, including the affine metric, sampling strategy,
+iteration schedule, shrink factors, and smoothing sigmas
+\cite{antspy_registration}. This distinction is important for reproducibility:
+only parameters explicitly specified in the experimental code should be
+reported as manually selected parameters.
+
+% ------------------------------------------------------------
+\paragraph{Mapping and resampling to template space.}  % from transform to output volume
+
+After estimating the affine transformation, the transformed moving image is
+resampled onto the spatial domain of the fixed image. In the ITK registration
+framework, the moving image is evaluated at the physical coordinates induced
+by the estimated transformation, and an interpolator is used when mapped
+locations do not coincide with the original voxel grid
+\cite{itk_software_guide}. The purpose of this resampling step is to obtain a
+representation of the moving image on the grid of the fixed image, allowing
+the registered volumes to share a common spatial reference.
+
+In the implemented pipeline, the registered volume is obtained from the
+\texttt{warpedmovout} output returned by \texttt{ants.registration}. According
+to the ANTsPy documentation, \texttt{warpedmovout} is the moving image warped
+into the space of the fixed image \cite{antspy_registration}. The resulting
+volume is subsequently written as a new NIfTI file, thereby producing an airway
+segmentation expressed in the coordinate system of the template.
+
+The complete procedure can therefore be summarized as
+\begin{equation}
+  \begin{split}
+    &\text{subject airway segmentation}
+     \;\xrightarrow{\text{affine registration}}\;
+     \text{estimated affine transformation} \\
+    &\qquad\xrightarrow{\text{resampling}}\;
+     \text{registered segmentation in template space}.
+  \end{split}
+  \label{eq:affine_pipeline}     % split over two lines so it fits the page width
+\end{equation}
+
+The resulting registered airway volumes share a common spatial reference and
+can consequently be used for subsequent inter-subject analysis, including
+morphological comparison, shape analysis, and representation learning.
+
+% ------------------------------------------------------------
+\paragraph{Implementation and computational setup.}  % parallel execution and outputs
+
+The registration was applied independently to all available AIIB23 airway
+segmentation volumes. The implementation uses a parallelized execution
+strategy, with 12 registration jobs and 4 ITK threads assigned to each job.
+These settings concern the computational execution of the pipeline and do not
+change the mathematical definition of the affine transformation itself.
+
+The registered volumes were saved in the specified output directory using the
+subject identifier followed by the suffix \texttt{\_R.nii.gz}. These files
+represent the final airway segmentations after affine alignment to the common
+template and were used as inputs to the subsequent processing stages.

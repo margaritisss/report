@@ -1,0 +1,11 @@
+% Registration -- parent section; each part is a subsection in its own file.
+
+\section{Registration}           % parent section shown in the table of contents
+\label{sec:registration}         % other sections can write \secref{sec:registration}
+
+\hint{Optional short introduction: why a common spatial reference is needed, and the two
+steps used to obtain it -- building a population template, then registering each airway
+tree to it.}
+
+\input{sections/registration/template-construction}  % Subsection "Template construction"
+\input{sections/registration/affine-registration}    % Subsection "Affine registration"

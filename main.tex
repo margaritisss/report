@@ -1,38 +1,49 @@
-\documentclass[en]{telereport}   % [en] or [fr] -- same as lang: "en" / "fr"
+% =====================================================================
+% Internship Report -- main file. Compile THIS file only.
+% It holds no content: it just pulls in the other files in order,
+% like a Python main.py that imports its modules.
+%
+% Structure:
+%   Title page > Executive Summary > Acknowledgements (optional)
+%   > Table of Contents > Introduction > Datasets > Registration (Template construction, Affine registration)
+%   > Encoding > Labelling > Morphological Metrics > Clustering
+%   > Conclusions and Recommendations > Appendices > List of References
+% Length target: 5-10 pages, about 3000 words (appendices not counted).
+% =====================================================================
 
-\usepackage[auto-lang=false]{lipsum} % dummy text, stands in for #lorem(...) (auto-lang=false: no "latin" warning)
+\documentclass[en]{telereport}   % visual style; [en] = English captions
 
-\title{Unofficial Télécom Paris Report Template}          % title:
-\subtitle{Styled according to Télécom Paris' graphic chart} % subtitle:
-\shorttitle{Report Template}                              % short-title: (header)
-\addauthor{Jonh Doe}{jonh.doe@test.com}                   % authors: (one line each)
-\addauthor{Jane Doe}{jane.doe@test.fr}
-\addsupervisor{Bob Doe}{bob.doe@bob.org}                  % supervisors:
-\keywords{Report, Template, Télécom Paris}                % keywords:
-\date{2024-01-01}                                         % date:
-\sidebartext{Sidebar text}                                % sidebar-text:
-\showmail                                                 % show-mail: true
-% \nologo                                                 % logo: false
-% \nocoloredbar                                           % show-colored-bar: false
+\input{setup/packages}           % booktabs, amsmath, natbib...
+\input{setup/helpers}            % \hint, references list, TOC name
+\input{setup/titlepage}          % cover-page details (name, supervisors, year...)
 
 \begin{document}
 
-\begin{abstract}                 % stored for the cover, not printed here
-This is a test of the Télécom Paris report template. It features some simple
-options and basic page layout. It currently supports \texttt{lang} ``fr'' and ``en''
-for text attributes translations (like \texttt{abstract} or \texttt{keywords}).
-See documentation to know about all the available options.
-\end{abstract}
+\maketitle                       % cover page (not numbered, as the guide asks)
 
-\maketitle                       % builds the red cover page
+% ---------------------------------------------------------------- front matter
+\input{sections/00-executive-summary}
+\clearpage                       % each front-matter item on its own page
+\input{sections/01-acknowledgements}  % optional -- comment out to drop it
+\clearpage
+\tableofcontents                 % built automatically from all the \section commands
+\markboth{Table of Contents}{}   % header text for the TOC page
 
-\section{A Section}              % = A Section
-\lipsum[1]
+% ---------------------------------------------------------------- main text
+\clearpage                       % main text starts on a new page
+\input{sections/02-introduction}
+\input{sections/03-dataset}
+\input{sections/04-registration}          % Registration: Template construction + Affine registration
+\input{sections/05-encoding}
+\input{sections/06-labelling}
+\input{sections/07-morphological-metrics}
+\input{sections/08-clustering}
+\input{sections/09-conclusions}
 
-\subsection{A Subsection}        % == A Subsection
-\lipsum[2-5]
-
-\subsubsection{A Subsubsection}  % === A Subsubsection
-\lipsum[6-7]
+% ---------------------------------------------------------------- end matter
+\clearpage                       % appendices start on a new page
+\input{sections/10-appendices}
+\clearpage                       % the reference list is a separate page (guide section V)
+\input{sections/11-references}
 
 \end{document}

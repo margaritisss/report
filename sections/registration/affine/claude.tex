@@ -1,0 +1,156 @@
+% Affine registration -- version written with Claude.
+% Pulled in by sections/registration/affine-registration.tex.
+
+\subsubsection{Claude}           % first version of the affine-registration text
+\label{sec:affine_claude}        % \secref{sec:affine_claude}
+
+% --- Values to fill in (shown in red in the PDF until replaced) ---
+\newcommand{\ncases}{\TODO{N}}                % number of AIIB23 segmentations registered
+\newcommand{\antspyversion}{\TODO{x.y.z}}     % python -c "import ants; print(ants.__version__)"
+
+% ------------------------------------------------------------
+\paragraph{Objective.}           % why the registration is performed
+
+Airway trees extracted from different subjects differ in position, orientation
+and overall size, as a consequence of patient positioning in the scanner,
+differences in body size and acquisition parameters. To make them directly
+comparable, all airway segmentations were mapped into a common spatial
+reference frame defined by a template airway tree. An affine transformation was
+chosen for this purpose because it compensates for these global differences
+while preserving the local geometry of each airway tree, which is the object of
+the subsequent analysis \cite{maintz1998survey}.
+
+% ------------------------------------------------------------
+\paragraph{Data.}                % input images and reference template
+
+The input data consisted of the \ncases{} ground-truth airway segmentations of
+the AIIB23 challenge dataset \cite{nan2024aiib23}, stored as binary
+three-dimensional volumes in NIfTI format. A single airway tree (template~22)
+was used as the reference image for all registrations.
+% TODO: add one sentence on how template 22 was selected or constructed.
+
+% ------------------------------------------------------------
+\paragraph{Transformation model.}  % mathematical definition of the affine map
+
+Registration consists of finding the spatial transformation $T$ that best aligns
+a \emph{moving} image $M$ with a \emph{fixed} image $F$. In this work, the fixed
+image is the template and each AIIB23 segmentation is, in turn, the moving
+image. The transformation is restricted to the class of three-dimensional affine
+maps,
+\begin{equation}
+  T_{\boldsymbol{\mu}}(\mathbf{x}) = \mathbf{A}\,(\mathbf{x} - \mathbf{c}) + \mathbf{c} + \mathbf{t},
+  \label{eq:affine}              % affine map: linear part A plus translation t
+\end{equation}
+where $\mathbf{x} \in \mathbb{R}^3$ is a point in the fixed image domain,
+$\mathbf{A} \in \mathbb{R}^{3\times 3}$ is a general matrix,
+$\mathbf{t} \in \mathbb{R}^3$ is a translation vector and $\mathbf{c}$ is a
+fixed centre of rotation. The parameter vector $\boldsymbol{\mu}$ therefore
+contains $9 + 3 = 12$ degrees of freedom, which jointly encode translation,
+rotation, anisotropic scaling and shear. Because the transformation is linear up
+to a translation, straight lines are mapped to straight lines and parallelism is
+preserved, so the shape of the airway tree is modified only globally.
+
+% ------------------------------------------------------------
+\paragraph{Similarity metric and optimisation.}  % what is optimised and how
+
+The optimal parameters are obtained by solving
+\begin{equation}
+  \hat{\boldsymbol{\mu}} = \arg\min_{\boldsymbol{\mu}} \;
+  \mathcal{C}\big(F,\, M \circ T_{\boldsymbol{\mu}}\big),
+  \label{eq:optimisation}        % registration as an optimisation problem
+\end{equation}
+where $\mathcal{C}$ is a cost function measuring the dissimilarity between the
+fixed image and the transformed moving image. The cost function used is the
+negative of the Mattes mutual information \cite{mattes2003petct},
+\begin{equation}
+  \mathcal{C}(\boldsymbol{\mu}) = -\sum_{\iota}\sum_{\kappa} p(\iota,\kappa;\boldsymbol{\mu})
+  \log \frac{p(\iota,\kappa;\boldsymbol{\mu})}{p_F(\iota)\, p_M(\kappa;\boldsymbol{\mu})},
+  \label{eq:mattes}              % negative mutual information from the joint histogram
+\end{equation}
+where $p(\iota,\kappa;\boldsymbol{\mu})$ is the joint probability of intensity
+bins $\iota$ and $\kappa$ in the fixed and transformed moving images, and $p_F$
+and $p_M$ are the corresponding marginal distributions. In the Mattes
+formulation, these distributions are estimated with B-spline Parzen windows,
+which makes the metric differentiable with respect to $\boldsymbol{\mu}$. The
+histograms were built with 32 bins from a random sample of 20\% of the voxels,
+which reduces the computational cost of each iteration.
+
+Equation~\eqref{eq:optimisation} was solved with a gradient descent optimiser.
+Before optimisation, the transformation was initialised by aligning the
+intensity centres of mass of the two images, which provides a coarse
+translational alignment and reduces the risk of convergence to a poor local
+optimum.
+
+% ------------------------------------------------------------
+\paragraph{Multi-resolution strategy.}  % coarse-to-fine scheme
+
+To improve robustness and speed, the optimisation was performed within a
+four-level multi-resolution scheme \cite{thevenaz1998pyramid}. At each level,
+both images were smoothed with a Gaussian kernel and downsampled by an integer
+shrink factor; the optimisation then proceeded from the coarsest level to the
+original resolution, with the result of each level used to initialise the next.
+Coarse levels capture the large-scale alignment, while finer levels refine it.
+The settings of each level are listed in Table~\ref{tab:multires}.
+
+\begin{table}[htbp]              % per-level settings of the multi-resolution pyramid
+  \centering                     % centre the table on the page
+  \caption{Multi-resolution settings of the affine registration.}
+  \label{tab:multires}           % referenced in the text above
+  \begin{tabular}{cccc}          % four centred columns
+    \toprule
+    Level & Shrink factor & Gaussian $\sigma$ (voxels) & Maximum iterations \\
+    \midrule
+    1 (coarsest) & 6 & 3 & 2100 \\
+    2            & 4 & 2 & 1200 \\
+    3            & 2 & 1 & 1200 \\
+    4 (finest)   & 1 & 0 & 10   \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+At each level, the optimisation stopped either when the maximum number of
+iterations was reached or when the cost function had converged, i.e.\ when its
+variation over the last 10 iterations fell below $10^{-6}$.
+
+% ------------------------------------------------------------
+\paragraph{Resampling of the registered images.}  % how outputs were produced
+
+Once the optimal transformation $T_{\hat{\boldsymbol{\mu}}}$ had been estimated,
+each moving segmentation was resampled onto the voxel grid of the template using
+linear interpolation and saved in NIfTI format. Since the inputs are binary
+masks, linear interpolation yields intermediate values in $[0,1]$ at the
+boundary of the airway lumen, while voxels well inside or outside the airway
+keep the values 1 and 0 respectively.
+% TODO: if the outputs were thresholded afterwards (e.g. at 0.5), state it here.
+
+% ------------------------------------------------------------
+\paragraph{Implementation.}      % software and computing environment
+
+The registration was implemented in Python~3.11 with ANTsPy (version
+\antspyversion) \cite{tustison2021antsx}, the Python interface of the Advanced
+Normalization Tools (ANTs) \cite{avants2009ants}, which is built on the
+registration framework of the Insight Toolkit (ITK) \cite{avants2014itkv4}. The
+affine registration was obtained with the function \texttt{ants.registration}
+using the predefined \texttt{Affine} transformation type, whose default settings
+correspond to the parameters described above under \emph{Similarity metric and
+optimisation} and \emph{Multi-resolution strategy}.
+
+Since each segmentation is registered to the template independently of the
+others, the task is embarrassingly parallel. The computation was run on a single
+node of a high-performance computing cluster managed by the SLURM workload
+manager \cite{yoo2003slurm}, with 48 CPU cores and 128\,GB of memory allocated
+to the job. Parallelism was organised on two levels: the joblib library
+\cite{joblib} distributed the registrations over 12 independent worker
+processes, and each registration used 4 ITK threads, so that
+\begin{equation}
+  12 \text{ processes} \times 4 \text{ threads} = 48 \text{ cores},
+  \label{eq:cores}               % total cores used = processes x threads per process
+\end{equation}
+matching the allocated resources exactly. Segmentations for which a registered
+output already existed were skipped, which allowed an interrupted job to be
+resumed without repeating completed registrations.
+
+Because the similarity metric is estimated from a random subset of voxels and no
+fixed random seed was set, repeating a registration may yield slightly different
+transformation parameters; these differences are expected to be small relative
+to the global misalignment corrected by the affine transformation.

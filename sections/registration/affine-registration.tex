@@ -1,0 +1,16 @@
+% Affine registration -- mapping individual airway trees to the finished template.
+% Subsection of "Registration", pulled in by sections/04-registration.tex.
+
+% ==============================================================================
+\subsection{Affine registration}
+\label{sec:affine}               % target of \secref{sec:affine} in the template section
+
+% TODO: write this section.
+% Note: groupwise_registration_2_fld.py defines _register_one (SyNOnly registration of
+% single volumes to template.nii.gz, run in parallel with n_workers), but
+% register_groupwise_deformable never calls it. If you later use it, remember that
+% SyNOnly estimates no affine stage (only a centre-of-mass translation), which departs
+% from the assumption of avants2008syn that affine differences are removed first.
+
+\input{sections/registration/affine/claude}   % Subsubsection "Claude"
+\input{sections/registration/affine/chatgpt}  % Subsubsection "ChatGPT"

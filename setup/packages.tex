@@ -1,0 +1,28 @@
+% ---------------------------------------------------------------- extra packages
+% The class already loads fontenc, babel, geometry, graphicx, tikz, hyperref...
+% Anything else the report needs goes here.
+
+\usepackage{booktabs}            % \toprule, \midrule, \bottomrule for clean tables
+\usepackage{amsmath}             % equation environment, \qquad, math spacing
+\usepackage{amssymb}             % \mathbb{R} and other symbols (affine registration)
+\usepackage{xurl}                % let long URLs break across lines
+\usepackage[round]{natbib}       % \cite{key} -> (Zhang et al., 2023), author-year style
+\bibliographystyle{apalike-nd}   % APA-like layout (local copy of apalike: keeps "n.d." in citations)
+\let\cite\citep                 % \cite{key} -> (Zhang et al., 2023); use \citet for "Zhang et al. (2023)"
+\renewcommand{\bibsection}{\section{List of References}}  % keep the guide's title + TOC entry
+
+% ---- code listings (used in the Registration section)
+\usepackage{listings}            % typeset source code blocks
+\lstset{%
+  language=Python,               % keyword highlighting for Python
+  basicstyle=\ttfamily\small,    % monospaced, slightly smaller than the text
+  keywordstyle=\bfseries,        % keywords in bold
+  stringstyle=\color{black!70},  % strings in dark grey
+  frame=single,                  % thin box around the code
+  framesep=4pt,                  % space between box and code
+  xleftmargin=6pt, xrightmargin=6pt,  % keep the box inside the text width
+  columns=fullflexible,          % natural spacing, copy-paste friendly
+  aboveskip=0.8em, belowskip=0.8em}   % air around each block
+
+% ---- TikZ libraries (used for the registration flowchart)
+\usetikzlibrary{positioning,fit,arrows.meta}  % node placement, grouping boxes, arrow tips

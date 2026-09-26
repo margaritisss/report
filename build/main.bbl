@@ -1,0 +1,75 @@
+\begin{thebibliography}{}
+
+\bibitem[{ANTsPy Developers}, n.d.]{antspy_registration}
+{ANTsPy Developers} (n.d.).
+\newblock {ANTsPy} documentation: \texttt{ants.registration}.
+\newblock \url{https://antspy.readthedocs.io}.
+\newblock Accessed: 2026-09-26.
+
+\bibitem[Avants et~al., 2008]{avants2008syn}
+Avants, B.~B., Epstein, C.~L., Grossman, M., and Gee, J.~C. (2008).
+\newblock Symmetric diffeomorphic image registration with cross-correlation: Evaluating automated labeling of elderly and neurodegenerative brain.
+\newblock {\em Medical Image Analysis}, 12(1):26--41.
+
+\bibitem[Avants et~al., 2009]{avants2009ants}
+Avants, B.~B., Tustison, N., and Song, G. (2009).
+\newblock Advanced normalization tools ({ANTS}).
+\newblock {\em Insight Journal}, 2(365):1--35.
+
+\bibitem[Avants et~al., 2014]{avants2014itkv4}
+Avants, B.~B., Tustison, N.~J., Stauffer, M., Song, G., Wu, B., and Gee, J.~C. (2014).
+\newblock The {Insight ToolKit} image registration framework.
+\newblock {\em Frontiers in Neuroinformatics}, 8:44.
+
+\bibitem[Avants et~al., 2010]{avants2010sygn}
+Avants, B.~B., Yushkevich, P., Pluta, J., Minkoff, D., Korczykowski, M., Detre, J., and Gee, J.~C. (2010).
+\newblock The optimal template effect in hippocampus studies of diseased populations.
+\newblock {\em NeuroImage}, 49(3):2457--2466.
+
+\bibitem[{Joblib Development Team}, n.d.]{joblib}
+{Joblib Development Team} (n.d.).
+\newblock Joblib: running {Python} functions as pipeline jobs.
+\newblock \url{https://joblib.readthedocs.io}.
+\newblock Accessed: 2026-09-25.
+
+\bibitem[Johnson et~al., 2015]{itk_software_guide}
+Johnson, H.~J., McCormick, M.~M., Ib{\'a}{\~n}ez, L., and {The Insight Software Consortium} (2015).
+\newblock {\em The {ITK} Software Guide Book 2: Design and Functionality}.
+\newblock Kitware, Inc., fourth edition.
+
+\bibitem[Maintz and Viergever, 1998]{maintz1998survey}
+Maintz, J. B.~A. and Viergever, M.~A. (1998).
+\newblock A survey of medical image registration.
+\newblock {\em Medical Image Analysis}, 2(1):1--36.
+
+\bibitem[Mattes et~al., 2003]{mattes2003petct}
+Mattes, D., Haynor, D.~R., Vesselle, H., Lewellen, T.~K., and Eubank, W. (2003).
+\newblock {PET-CT} image registration in the chest using free-form deformations.
+\newblock {\em IEEE Transactions on Medical Imaging}, 22(1):120--128.
+
+\bibitem[Nan et~al., 2024]{nan2024aiib23}
+Nan, Y., Xing, X., Wang, S., Tang, Z., et~al. (2024).
+\newblock Hunting imaging biomarkers in pulmonary fibrosis: Benchmarks of the {AIIB23} challenge.
+\newblock {\em Medical Image Analysis}, 97:103253.
+
+\bibitem[Th{\'e}venaz et~al., 1998]{thevenaz1998pyramid}
+Th{\'e}venaz, P., Ruttimann, U.~E., and Unser, M. (1998).
+\newblock A pyramid approach to subpixel registration based on intensity.
+\newblock {\em IEEE Transactions on Image Processing}, 7(1):27--41.
+
+\bibitem[Tustison et~al., 2021]{tustison2021antsx}
+Tustison, N.~J., Cook, P.~A., Holbrook, A.~J., Johnson, H.~J., Muschelli, J., Devenyi, G.~A., et~al. (2021).
+\newblock The {ANTsX} ecosystem for quantitative biological and medical imaging.
+\newblock {\em Scientific Reports}, 11:9068.
+
+\bibitem[Yoo et~al., 2003]{yoo2003slurm}
+Yoo, A.~B., Jette, M.~A., and Grondona, M. (2003).
+\newblock {SLURM}: Simple {Linux} utility for resource management.
+\newblock In {\em Job Scheduling Strategies for Parallel Processing (JSSPP 2003)}, volume 2862 of {\em Lecture Notes in Computer Science}, pages 44--60. Springer.
+
+\bibitem[Zhang et~al., 2023]{zhang2023atm22}
+Zhang, M., Wu, Y., Zhang, H., Qin, Y., Zheng, H., et~al. (2023).
+\newblock Multi-site, multi-domain airway tree modeling.
+\newblock {\em Medical Image Analysis}, 90:102957.
+
+\end{thebibliography}
