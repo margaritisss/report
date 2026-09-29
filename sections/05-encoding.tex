@@ -1,4 +1,12 @@
-\section{Encoding}               % turning the data into a usable representation
+% Encoding -- parent section; each approach is a subsection in its own file.
 
-\hint{Describe how the data is represented or encoded (features, embeddings, formats),
-why you chose this representation, and what it captures.}
+\section{Encoding}               % learning a compact representation of each airway tree
+\label{sec:encoding}             % \secref{sec:encoding}
+
+\hint{Optional short introduction: why a learned representation of the airway trees is
+needed, and the three approaches tried -- a variational autoencoder, deterministic and
+sparse autoencoders, and an implicit encoding.}
+
+\input{sections/encoding/vae}           % Subsection "Variational autoencoder"
+\input{sections/encoding/autoencoders}  % Subsection "Deterministic and sparse autoencoders"
+\input{sections/encoding/implicit}      % Subsection "Implicit encoding"

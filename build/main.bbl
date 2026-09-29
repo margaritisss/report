@@ -1,75 +1,493 @@
 \begin{thebibliography}{}
 
-\bibitem[{ANTsPy Developers}, n.d.]{antspy_registration}
-{ANTsPy Developers} (n.d.).
-\newblock {ANTsPy} documentation: \texttt{ants.registration}.
-\newblock \url{https://antspy.readthedocs.io}.
-\newblock Accessed: 2026-09-26.
+\bibitem[Abbasi and Boozarjomehry, 2021]{abbasi2021}
+Abbasi, Z. and Boozarjomehry, R.~B. (2021).
+\newblock Modeling of human conducting airways by stochastic parametric {L}-system.
+\newblock {\em The European Physical Journal Plus}, 136:197.
+
+\bibitem[Agujetas et~al., 2020]{agujetas2020}
+Agujetas, R., Barrio-Perotti, R., Ferrera, C., Pandal-Blanco, A., Walters, D.~K., and Fern{\'a}ndez-Tena, A. (2020).
+\newblock Construction of a hybrid lung model by combining a real geometry of the upper airways and an idealized geometry of the lower airways.
+\newblock {\em Computer Methods and Programs in Biomedicine}, 196:105613.
 
 \bibitem[Avants et~al., 2008]{avants2008syn}
 Avants, B.~B., Epstein, C.~L., Grossman, M., and Gee, J.~C. (2008).
 \newblock Symmetric diffeomorphic image registration with cross-correlation: Evaluating automated labeling of elderly and neurodegenerative brain.
 \newblock {\em Medical Image Analysis}, 12(1):26--41.
 
-\bibitem[Avants et~al., 2009]{avants2009ants}
-Avants, B.~B., Tustison, N., and Song, G. (2009).
-\newblock Advanced normalization tools ({ANTS}).
-\newblock {\em Insight Journal}, 2(365):1--35.
-
-\bibitem[Avants et~al., 2014]{avants2014itkv4}
-Avants, B.~B., Tustison, N.~J., Stauffer, M., Song, G., Wu, B., and Gee, J.~C. (2014).
-\newblock The {Insight ToolKit} image registration framework.
-\newblock {\em Frontiers in Neuroinformatics}, 8:44.
-
 \bibitem[Avants et~al., 2010]{avants2010sygn}
 Avants, B.~B., Yushkevich, P., Pluta, J., Minkoff, D., Korczykowski, M., Detre, J., and Gee, J.~C. (2010).
 \newblock The optimal template effect in hippocampus studies of diseased populations.
 \newblock {\em NeuroImage}, 49(3):2457--2466.
 
-\bibitem[{Joblib Development Team}, n.d.]{joblib}
-{Joblib Development Team} (n.d.).
-\newblock Joblib: running {Python} functions as pipeline jobs.
-\newblock \url{https://joblib.readthedocs.io}.
-\newblock Accessed: 2026-09-25.
+\bibitem[Ba et~al., 2016]{ba2016}
+Ba, J.~L., Kiros, J.~R., and Hinton, G.~E. (2016).
+\newblock Layer normalization.
+\newblock {\em arXiv preprint arXiv:1607.06450}.
 
-\bibitem[Johnson et~al., 2015]{itk_software_guide}
-Johnson, H.~J., McCormick, M.~M., Ib{\'a}{\~n}ez, L., and {The Insight Software Consortium} (2015).
-\newblock {\em The {ITK} Software Guide Book 2: Design and Functionality}.
-\newblock Kitware, Inc., fourth edition.
+\bibitem[Batten et~al., 2025]{batten2025vetta}
+Batten, J., Schaap, M., Sinclair, M., Bai, Y., and Glocker, B. (2025).
+\newblock Vector representations of vessel trees.
+\newblock {\em arXiv preprint arXiv:2506.11163}.
 
-\bibitem[Maintz and Viergever, 1998]{maintz1998survey}
-Maintz, J. B.~A. and Viergever, M.~A. (1998).
-\newblock A survey of medical image registration.
-\newblock {\em Medical Image Analysis}, 2(1):1--36.
+\bibitem[Belchi et~al., 2018]{belchi2018topology}
+Belchi, F., Pirashvili, M., Conway, J., Bennett, M., Djukanovic, R., and Brodzki, J. (2018).
+\newblock Lung topology characteristics in patients with chronic obstructive pulmonary disease.
+\newblock {\em Scientific Reports}, 8(1):5341.
+
+\bibitem[Bodduluri et~al., 2018]{bodduluri2018afd}
+Bodduluri, S. et~al. (2018).
+\newblock Airway fractal dimension predicts respiratory morbidity and mortality in {COPD}.
+\newblock {\em Journal of Clinical Investigation}, 128(12):5374--5382.
+
+\bibitem[Bodduluri et~al., 2021]{bodduluri2021sav}
+Bodduluri, S., Puliyakote, A.~K., Nakhmani, A., Charbonnier, J.-P., Reinhardt, J.~M., and Bhatt, S.~P. (2021).
+\newblock Computed tomography--based airway surface area--to-volume ratio for phenotyping airway remodeling in chronic obstructive pulmonary disease.
+\newblock {\em American Journal of Respiratory and Critical Care Medicine}, 203(2):185--191.
+
+\bibitem[Bordas et~al., 2015]{bordas2015}
+Bordas, R., Lefevre, C., Veeckmans, B., Pitt-Francis, J., Fetita, C., Brightling, C.~E., et~al. (2015).
+\newblock Development and analysis of patient-based complete conducting airways models.
+\newblock {\em PLoS ONE}, 10(12):e0144105.
+
+\bibitem[Boyden, 1949]{boyden1949}
+Boyden, E.~A. (1949).
+\newblock A synthesis of the prevailing patterns of the bronchopulmonary segments in the light of their variations.
+\newblock {\em CHEST Journal}, 15(6):657--668.
+
+\bibitem[Brock et~al., 2016]{brock2016}
+Brock, A., Lim, T., Ritchie, J.~M., and Weston, N. (2016).
+\newblock Generative and discriminative voxel modeling with convolutional neural networks.
+\newblock {\em arXiv preprint arXiv:1608.04236}.
+
+\bibitem[B{\"u}low et~al., 2006]{bulow2006point}
+B{\"u}low, T., Lorenz, C., Wiemker, R., and Honko, J. (2006).
+\newblock Point based methods for automatic bronchial tree matching and labeling.
+\newblock In {\em SPIE Medical Imaging}, volume 6143, pages 225--234.
+
+\bibitem[Bumgarner and Nelson, 2022]{bumgarner2022}
+Bumgarner, J.~R. and Nelson, R.~J. (2022).
+\newblock Open-source analysis and visualization of segmented vasculature datasets with {VesselVio}.
+\newblock {\em Cell Reports Methods}, 2(4):100189.
+
+\bibitem[Clevert et~al., 2016]{clevert2016}
+Clevert, D.-A., Unterthiner, T., and Hochreiter, S. (2016).
+\newblock Fast and accurate deep network learning by exponential linear units ({ELUs}).
+\newblock In {\em International Conference on Learning Representations (ICLR)}.
+
+\bibitem[Davoodi and Boozarjomehry, 2016]{davoodi2016}
+Davoodi, A. and Boozarjomehry, R.~B. (2016).
+\newblock Developmental model of an automatic production of the human bronchial tree based on {L}-system.
+\newblock {\em Computer Methods and Programs in Biomedicine}, 132:1--10.
+
+\bibitem[Feldman et~al., 2023]{feldman2023vesselvae}
+Feldman, P., Fainstein, M., Siless, V., Delrieux, C., and Iarussi, E. (2023).
+\newblock {VesselVAE}: Recursive variational autoencoders for {3D} blood vessel synthesis.
+\newblock In {\em Medical Image Computing and Computer Assisted Intervention (MICCAI)}.
+
+\bibitem[Feldman et~al., 2025]{feldman2025vesselgpt}
+Feldman, P., Sinnona, M., Delrieux, C., Siless, V., and Iarussi, E. (2025).
+\newblock {VesselGPT}: Autoregressive modeling of vascular geometry.
+\newblock {\em arXiv preprint arXiv:2505.13318}.
+
+\bibitem[Feragen et~al., 2011a]{feragen2011means}
+Feragen, A., Hauberg, S., Nielsen, M., and Lauze, F. (2011a).
+\newblock Means in spaces of tree-like shapes.
+\newblock In {\em IEEE International Conference on Computer Vision (ICCV)}.
+
+\bibitem[Feragen et~al., 2011b]{feragen2011airway}
+Feragen, A., Lo, P., Gorbunova, V., Nielsen, M., Dirksen, A., Reinhardt, J.~M., Lauze, F., and de~Bruijne, M. (2011b).
+\newblock An airway tree-shape model for geodesic airway branch labeling.
+\newblock In {\em MICCAI Workshop on Mathematical Foundations of Computational Anatomy (MFCA)}, pages 123--134.
+
+\bibitem[Feragen et~al., 2013]{feragen2013geometric}
+Feragen, A., Petersen, J., Grimm, D., Dirksen, A., Pedersen, J.~H., Borgwardt, K., and de~Bruijne, M. (2013).
+\newblock Geometric tree kernels: Classification of {COPD} from airway tree geometry.
+\newblock In {\em Information Processing in Medical Imaging (IPMI)}, volume 7917 of {\em Lecture Notes in Computer Science}, pages 171--183.
+
+\bibitem[Feragen et~al., 2012]{feragen2012hierarchical}
+Feragen, A., Petersen, J., Owen, M., Lo, P., Thomsen, L.~H., Wille, M. M.~W., Dirksen, A., and de~Bruijne, M. (2012).
+\newblock A hierarchical scheme for geodesic anatomical labeling of airway trees.
+\newblock In {\em Medical Image Computing and Computer-Assisted Intervention (MICCAI)}, volume 7512 of {\em Lecture Notes in Computer Science}, pages 147--155.
+
+\bibitem[Florens et~al., 2010]{florens2010}
+Florens, M., Sapoval, B., and Filoche, M. (2010).
+\newblock An anatomical and functional model of the human tracheobronchial tree.
+\newblock {\em Journal of Applied Physiology}, 110(3):756--763.
+
+\bibitem[Garcia-Uceda et~al., 2021]{garciauceda2021}
+Garcia-Uceda, A., Selvan, R., Saghir, Z., Tiddens, H. A. W.~M., and de~Bruijne, M. (2021).
+\newblock Automatic airway segmentation from computed tomography using robust and efficient {3-D} convolutional neural networks.
+\newblock {\em Scientific Reports}, 11:16001.
+
+\bibitem[Geronzi et~al., 2024]{geronzi2024}
+Geronzi, L., Fanni, B.~M., De~Jong, B., Roest, G., Kenjeres, S., Celi, S., and Biancolini, M.~E. (2024).
+\newblock A parametric {3D} model of human airways for particle drug delivery and deposition.
+\newblock {\em Fluids}, 9:27.
+
+\bibitem[Glorot and Bengio, 2010]{glorot2010}
+Glorot, X. and Bengio, Y. (2010).
+\newblock Understanding the difficulty of training deep feedforward neural networks.
+\newblock In {\em International Conference on Artificial Intelligence and Statistics (AISTATS)}.
+
+\bibitem[Gropp et~al., 2020]{gropp2020}
+Gropp, A., Yariv, L., Haim, N., Atzmon, M., and Lipman, Y. (2020).
+\newblock Implicit geometric regularization for learning shapes.
+\newblock In {\em International Conference on Machine Learning (ICML)}.
+
+\bibitem[Ha et~al., 2017]{ha2017}
+Ha, D., Dai, A.~M., and Le, Q.~V. (2017).
+\newblock {HyperNetworks}.
+\newblock In {\em International Conference on Learning Representations (ICLR)}.
+
+\bibitem[Hasegawa et~al., 2006]{hasegawa2006airflow}
+Hasegawa, M., Nasuhara, Y., Onodera, Y., Makita, H., Nagai, K., Fuke, S., Ito, Y., Betsuyaku, T., and Nishimura, M. (2006).
+\newblock Airflow limitation and airway dimensions in chronic obstructive pulmonary disease.
+\newblock {\em American Journal of Respiratory and Critical Care Medicine}, 173(12):1309--1315.
+
+\bibitem[Heged{\H{u}}s et~al., 2004]{hegedus2004}
+Heged{\H{u}}s, C.~J., Bal{\'a}sh{\'a}zy, I., and Farkas, {\'A}. (2004).
+\newblock Detailed mathematical description of the geometry of airway bifurcations.
+\newblock {\em Respiratory Physiology \& Neurobiology}, 141(1):99--114.
+
+\bibitem[Higgins et~al., 2017]{higgins2017}
+Higgins, I., Matthey, L., Pal, A., Burgess, C., Glorot, X., Botvinick, M., Mohamed, S., and Lerchner, A. (2017).
+\newblock beta-{VAE}: Learning basic visual concepts with a constrained variational framework.
+\newblock In {\em International Conference on Learning Representations (ICLR)}.
+
+\bibitem[Ho et~al., 2024]{ho2024}
+Ho, T.~T., Tran, M.~T., Cui, X., et~al. (2024).
+\newblock Human-airway surface mesh smoothing based on graph convolutional neural networks.
+\newblock {\em Computer Methods and Programs in Biomedicine}, 246:108061.
+
+\bibitem[Horsfield, 1986]{horsfield1986}
+Horsfield, K. (1986).
+\newblock Morphometry of airways.
+\newblock In {\em Handbook of Physiology, The Respiratory System {III}}, pages 75--87. American Physiological Society.
+
+\bibitem[Horsfield et~al., 1971]{horsfield1971models}
+Horsfield, K., Dart, G., Olson, D.~E., Filley, G.~F., and Cumming, G. (1971).
+\newblock Models of the human bronchial tree.
+\newblock {\em Journal of Applied Physiology}, 31(2):207--217.
+
+\bibitem[Ilegbusi et~al., 2023]{ilegbusi2023}
+Ilegbusi, O.~J., Islam, A., and Santhanam, A.~P. (2023).
+\newblock Computational modelling of airflow in distal airways using hybrid lung model.
+\newblock {\em Mathematical and Computer Modelling of Dynamical Systems}, 29:186--207.
+
+\bibitem[Ioffe and Szegedy, 2015]{ioffe2015}
+Ioffe, S. and Szegedy, C. (2015).
+\newblock Batch normalization: Accelerating deep network training by reducing internal covariate shift.
+\newblock In {\em International Conference on Machine Learning (ICML)}.
+
+\bibitem[Kaftan et~al., 2006]{kaftan2006novel}
+Kaftan, J.~N., Kiraly, A.~P., Naidich, D.~P., and Novak, C.~L. (2006).
+\newblock A novel multi-purpose tree and path matching algorithm with application to airway trees.
+\newblock In {\em SPIE Medical Imaging}, volume 6143, pages 215--224.
+
+\bibitem[Kaji et~al., 2024]{kaji2024airway}
+Kaji, S., Tanabe, N., Maetani, T., Shiraishi, Y., Sakamoto, R., Oguma, T., Suzuki, K., Terada, K., Fukui, M., Muro, S., Sato, S., and Hirai, T. (2024).
+\newblock Quantification of airway structures by persistent homology.
+\newblock {\em IEEE Transactions on Medical Imaging}, 43(8):2758--2768.
+
+\bibitem[Kamiya et~al., 1974]{kamiya1974}
+Kamiya, A., Togawa, T., and Yamamoto, A. (1974).
+\newblock Theoretical relationship between the optimal models of the vascular tree.
+\newblock {\em Bulletin of Mathematical Biology}, 36(3):311--323.
+
+\bibitem[Kingma and Ba, 2015]{kingma2015}
+Kingma, D.~P. and Ba, J. (2015).
+\newblock Adam: A method for stochastic optimization.
+\newblock In {\em International Conference on Learning Representations (ICLR)}.
+
+\bibitem[Kingma and Welling, 2014]{kingma2014}
+Kingma, D.~P. and Welling, M. (2014).
+\newblock Auto-encoding variational {Bayes}.
+\newblock In {\em International Conference on Learning Representations (ICLR)}.
+
+\bibitem[Kirby et~al., 2018]{kirby2018tac}
+Kirby, M. et~al. (2018).
+\newblock Total airway count on computed tomography and the risk of chronic obstructive pulmonary disease progression. {Findings} from a population-based study.
+\newblock {\em American Journal of Respiratory and Critical Care Medicine}, 197(1):56--65.
+
+\bibitem[Kitaoka et~al., 2002]{kitaoka2002automated}
+Kitaoka, H., Park, Y., Tschirren, J., Reinhardt, J.~M., Sonka, M., McLennan, G., and Hoffman, E.~A. (2002).
+\newblock Automated nomenclature labeling of the bronchial tree in {3D-CT} lung images.
+\newblock In {\em Medical Image Computing and Computer-Assisted Intervention (MICCAI)}, pages 1--11.
+
+\bibitem[Kitaoka et~al., 1999]{kitaoka1999}
+Kitaoka, H., Takaki, R., and Suki, B. (1999).
+\newblock A three-dimensional model of the human airway tree.
+\newblock {\em Journal of Applied Physiology}, 87(6):2207--2217.
+
+\bibitem[Lauria et~al., 2022]{lauria2022}
+Lauria, M., Singhrao, K., Stiehl, B., et~al. (2022).
+\newblock Automatic triangulated mesh generation of pulmonary airways from segmented lung {3DCT}s for computational fluid dynamics.
+\newblock {\em International Journal of Computer Assisted Radiology and Surgery}, 17:185--197.
+
+\bibitem[Lee et~al., 1994]{lee1994}
+Lee, T.-C., Kashyap, R.~L., and Chu, C.-N. (1994).
+\newblock Building skeleton models via {3-D} medial surface axis thinning algorithms.
+\newblock {\em CVGIP: Graphical Models and Image Processing}, 56(6):462--478.
+
+\bibitem[Lin et~al., 2013]{lin2013}
+Lin, C.-L., Tawhai, M.~H., and Hoffman, E.~A. (2013).
+\newblock Multiscale image-based modeling and simulation of gas flow and particle transport in the human lungs.
+\newblock {\em Wiley Interdisciplinary Reviews: Systems Biology and Medicine}, 5:643--655.
+
+\bibitem[Lin et~al., 2009]{lin2009}
+Lin, C.-L., Tawhai, M.~H., McLennan, G., and Hoffman, E.~A. (2009).
+\newblock Multiscale simulation of gas flow in subject-specific models of the human lung.
+\newblock {\em IEEE Engineering in Medicine and Biology Magazine}, 28(3):25--33.
+
+\bibitem[Lorensen and Cline, 1987]{lorensen1987}
+Lorensen, W.~E. and Cline, H.~E. (1987).
+\newblock Marching cubes: A high resolution {3D} surface construction algorithm.
+\newblock {\em ACM SIGGRAPH Computer Graphics}, 21(4):163--169.
+
+\bibitem[Maetani et~al., 2023]{maetani2023dysanapsis}
+Maetani, T. et~al. (2023).
+\newblock Physiological impacts of computed tomography airway dysanapsis, fractal dimension, and branch count in asymptomatic never smokers.
+\newblock {\em Journal of Applied Physiology}, 134(1):20--27.
+
+\bibitem[Marchandise et~al., 2013]{marchandise2013}
+Marchandise, E., Geuzaine, C., and Remacle, J.-F. (2013).
+\newblock Cardiovascular and lung mesh generation based on centerlines.
+\newblock {\em International Journal for Numerical Methods in Biomedical Engineering}, 29(6):655--682.
 
 \bibitem[Mattes et~al., 2003]{mattes2003petct}
 Mattes, D., Haynor, D.~R., Vesselle, H., Lewellen, T.~K., and Eubank, W. (2003).
 \newblock {PET-CT} image registration in the chest using free-form deformations.
 \newblock {\em IEEE Transactions on Medical Imaging}, 22(1):120--128.
 
+\bibitem[Metzen et~al., 2009]{metzen2009matching}
+Metzen, J.~H., Kr{\"o}ger, T., Schenk, A., Zidowitz, S., Peitgen, H.-O., and Jiang, X. (2009).
+\newblock Matching of anatomical tree structures for registration of medical images.
+\newblock {\em Image and Vision Computing}, 27:923--933.
+
+\bibitem[Miyawaki et~al., 2017]{miyawaki2017automatic}
+Miyawaki, S., Tawhai, M.~H., Hoffman, E.~A., Wenzel, S.~E., and Lin, C.-L. (2017).
+\newblock Automatic construction of subject-specific human airway geometry including trifurcations based on a {CT}-segmented airway skeleton and surface.
+\newblock {\em Biomechanics and Modeling in Mechanobiology}, 16(2):583--596.
+
+\bibitem[Montesantos et~al., 2013]{montesantos2013}
+Montesantos, S., Katz, I., Fleming, J., Majoral, C., Pichelin, M., Dubau, C., et~al. (2013).
+\newblock Airway morphology from high resolution computed tomography in healthy subjects and patients with moderate persistent asthma.
+\newblock {\em The Anatomical Record}, 296(6):852--866.
+
+\bibitem[Montesantos et~al., 2016]{montesantos2016}
+Montesantos, S., Katz, I., Pichelin, M., and Caillibotte, G. (2016).
+\newblock The creation and statistical evaluation of a deterministic model of the human bronchial tree from {HRCT} images.
+\newblock {\em PLoS ONE}, 11(12):e0168026.
+
+\bibitem[Museth, 2013]{museth2013}
+Museth, K. (2013).
+\newblock {VDB}: High-resolution sparse volumes with dynamic topology.
+\newblock {\em ACM Transactions on Graphics}, 32(3):27:1--27:22.
+
+\bibitem[Nakamura et~al., 2008]{nakamura2008}
+Nakamura, M., Wada, S., Miki, T., Shimada, Y., Suda, Y., and Tamura, G. (2008).
+\newblock Automated segmentation and morphometric analysis of the human airway tree from multidetector {CT} images.
+\newblock {\em The Journal of Physiological Sciences}, 58:493--498.
+
+\bibitem[Nakano et~al., 2000]{nakano2000airway}
+Nakano, Y., Muro, S., Sakai, H., Hirai, T., Chin, K., Tsukino, M., Nishimura, K., Itoh, H., Par{\'e}, P.~D., Hogg, J.~C., and Mishima, M. (2000).
+\newblock Computed tomographic measurements of airway dimensions and emphysema in smokers. {Correlation} with lung function.
+\newblock {\em American Journal of Respiratory and Critical Care Medicine}, 162(3):1102--1108.
+
 \bibitem[Nan et~al., 2024]{nan2024aiib23}
 Nan, Y., Xing, X., Wang, S., Tang, Z., et~al. (2024).
 \newblock Hunting imaging biomarkers in pulmonary fibrosis: Benchmarks of the {AIIB23} challenge.
 \newblock {\em Medical Image Analysis}, 97:103253.
+
+\bibitem[Nousias et~al., 2020]{nousias2020avatree}
+Nousias, S., Zacharaki, E.~I., and Moustakas, K. (2020).
+\newblock {AVATREE}: An open-source computational modelling framework modelling anatomically valid airway tree conformations.
+\newblock {\em PLOS ONE}, 15(4):e0230259.
+
+\bibitem[Odena et~al., 2016]{odena2016}
+Odena, A., Dumoulin, V., and Olah, C. (2016).
+\newblock Deconvolution and checkerboard artifacts.
+\newblock {\em Distill}.
+
+\bibitem[Oguma et~al., 2015]{oguma2015irregularity}
+Oguma, T. et~al. (2015).
+\newblock Longitudinal shape irregularity of airway lumen assessed by {CT} in patients with bronchial asthma and {COPD}.
+\newblock {\em Thorax}, 70(8):719--724.
+
+\bibitem[Ortiz-Puerta et~al., 2022]{ortizpuerta2022}
+Ortiz-Puerta, D., Cox, A., and Hurtado, D.~E. (2022).
+\newblock Snakes isogeometric analysis ({SIGA}): Towards accurate and flexible geometrical models of the respiratory airways.
+\newblock {\em Computer Methods in Applied Mechanics and Engineering}, 394:114841.
+
+\bibitem[Pal{\'a}gyi et~al., 2006]{palagyi2006}
+Pal{\'a}gyi, K., Tschirren, J., Hoffman, E.~A., and Sonka, M. (2006).
+\newblock Quantitative analysis of pulmonary airway tree structures.
+\newblock {\em Computers in Biology and Medicine}, 36(9):974--996.
+
+\bibitem[Park et~al., 2019]{park2019}
+Park, J.~J., Florence, P., Straub, J., Newcombe, R., and Lovegrove, S. (2019).
+\newblock {DeepSDF}: Learning continuous signed distance functions for shape representation.
+\newblock In {\em IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}.
+
+\bibitem[Patel et~al., 2008]{patel2008pi10}
+Patel, B.~D., Coxson, H.~O., Pillai, S.~G., et~al. (2008).
+\newblock Airway wall thickening and emphysema show independent familial aggregation in chronic obstructive pulmonary disease.
+\newblock {\em American Journal of Respiratory and Critical Care Medicine}, 178(5):500--505.
+
+\bibitem[Pennati et~al., 2024]{pennati2024modeling}
+Pennati, F., Aliboni, L., and Aliverti, A. (2024).
+\newblock Modeling realistic geometries in human intrathoracic airways.
+\newblock {\em Diagnostics}, 14(17):1979.
+
+\bibitem[Prabhakar et~al., 2025]{prabhakar2025semantic}
+Prabhakar, C., Shit, S., Amiranashvili, T., Li, H.~B., and Menze, B. (2025).
+\newblock Semantically consistent discrete diffusion for {3D} biological graph modeling.
+\newblock In {\em Medical Image Computing and Computer-Assisted Intervention (MICCAI)}, pages 594--604. Springer.
+
+\bibitem[Prabhakar et~al., 2024]{prabhakar2024vesselgraph}
+Prabhakar, C., Shit, S., Musio, F., Yang, K., Amiranashvili, T., Paetzold, J.~C., Li, H.~B., and Menze, B. (2024).
+\newblock {3D} vessel graph generation using denoising diffusion.
+\newblock In {\em Medical Image Computing and Computer-Assisted Intervention (MICCAI)}, pages 3--13. Springer.
+
+\bibitem[Prabhakar et~al., 2026]{prabhakar2026vaesselsparse}
+Prabhakar, C., Wittmann, B., B{\"u}schl, P., Li, H.~B., Menze, B., and Shit, S. (2026).
+\newblock Sparse representation learning for vessels.
+\newblock {\em arXiv preprint arXiv:2605.01382}.
+
+\bibitem[Qi et~al., 2017]{qi2017}
+Qi, C.~R., Yi, L., Su, H., and Guibas, L.~J. (2017).
+\newblock {PointNet++}: Deep hierarchical feature learning on point sets in a metric space.
+\newblock In {\em Advances in Neural Information Processing Systems (NeurIPS)}.
+
+\bibitem[Ren et~al., 2024]{ren2024}
+Ren, X., Huang, J., Zeng, X., Museth, K., Fidler, S., and Williams, F. (2024).
+\newblock {XCube}: Large-scale {3D} generative modeling using sparse voxel hierarchies.
+\newblock In {\em IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}.
+
+\bibitem[Rossi et~al., 2021]{rossi2021}
+Rossi, E., Kenlay, H., Gorinova, M.~I., Chamberlain, B.~P., Dong, X., and Bronstein, M.~M. (2021).
+\newblock On the unreasonable effectiveness of feature propagation in learning on graphs with missing node features.
+\newblock {\em arXiv preprint arXiv:2111.12128}.
+
+\bibitem[Shit et~al., 2021]{shit2021}
+Shit, S., Paetzold, J.~C., Sekuboyina, A., Ezhov, I., Unger, A., Zhylka, A., Pluim, J. P.~W., Bauer, U., and Menze, B.~H. (2021).
+\newblock {clDice} -- a novel topology-preserving loss function for tubular structure segmentation.
+\newblock In {\em IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}.
+
+\bibitem[Sitzmann et~al., 2020]{sitzmann2020}
+Sitzmann, V., Martel, J., Bergman, A., Lindell, D., and Wetzstein, G. (2020).
+\newblock Implicit neural representations with periodic activation functions.
+\newblock In {\em Advances in Neural Information Processing Systems (NeurIPS)}.
+
+\bibitem[Smith et~al., 2020]{smith2020dysanapsis}
+Smith, B.~M. et~al. (2020).
+\newblock Association of dysanapsis with chronic obstructive pulmonary disease among older adults.
+\newblock {\em JAMA}, 323(22):2268.
+
+\bibitem[S{\o}rensen et~al., 2011]{sorensen2011dissimilarity}
+S{\o}rensen, L., Lo, P., Dirksen, A., Petersen, J., and de~Bruijne, M. (2011).
+\newblock Dissimilarity-based classification of anatomical tree structures.
+\newblock In {\em Information Processing in Medical Imaging (IPMI)}, Lecture Notes in Computer Science, pages 475--485.
+
+\bibitem[Sutskever et~al., 2013]{sutskever2013}
+Sutskever, I., Martens, J., Dahl, G., and Hinton, G. (2013).
+\newblock On the importance of initialization and momentum in deep learning.
+\newblock In {\em International Conference on Machine Learning (ICML)}.
+
+\bibitem[Tawhai et~al., 2011]{tawhai2011}
+Tawhai, M., Clark, A., Donovan, G., and Burrowes, K. (2011).
+\newblock Computational modeling of airway and pulmonary vascular structure and function: Development of a ``{Lung Physiome}''.
+\newblock {\em Critical Reviews in Biomedical Engineering}, 39(4).
+
+\bibitem[Tawhai et~al., 2009]{tawhai2009}
+Tawhai, M.~H., Hoffman, E.~A., and Lin, C.-L. (2009).
+\newblock The lung physiome: merging imaging-based measures with predictive computational models.
+\newblock {\em Wiley Interdisciplinary Reviews: Systems Biology and Medicine}, 1(1):61--72.
+
+\bibitem[Tawhai et~al., 2004]{tawhai2004}
+Tawhai, M.~H., Hunter, P., Tschirren, J., Reinhardt, J., McLennan, G., and Hoffman, E.~A. (2004).
+\newblock {CT}-based geometry analysis and finite element models of the human and ovine bronchial tree.
+\newblock {\em Journal of Applied Physiology}, 97(6):2310--2321.
+
+\bibitem[Tawhai et~al., 2000]{tawhai2000}
+Tawhai, M.~H., Pullan, A.~J., and Hunter, P.~J. (2000).
+\newblock Generation of an anatomically based three-dimensional model of the conducting airways.
+\newblock {\em Annals of Biomedical Engineering}, 28(7):793--802.
 
 \bibitem[Th{\'e}venaz et~al., 1998]{thevenaz1998pyramid}
 Th{\'e}venaz, P., Ruttimann, U.~E., and Unser, M. (1998).
 \newblock A pyramid approach to subpixel registration based on intensity.
 \newblock {\em IEEE Transactions on Image Processing}, 7(1):27--41.
 
+\bibitem[Tschirren et~al., 2005]{tschirren2005matching}
+Tschirren, J., McLennan, G., Pal{\'a}gyi, K., Hoffman, E.~A., and Sonka, M. (2005).
+\newblock Matching and anatomical labeling of human airway tree.
+\newblock {\em IEEE Transactions on Medical Imaging}, 24(12):1540--1547.
+
 \bibitem[Tustison et~al., 2021]{tustison2021antsx}
 Tustison, N.~J., Cook, P.~A., Holbrook, A.~J., Johnson, H.~J., Muschelli, J., Devenyi, G.~A., et~al. (2021).
 \newblock The {ANTsX} ecosystem for quantitative biological and medical imaging.
 \newblock {\em Scientific Reports}, 11:9068.
 
-\bibitem[Yoo et~al., 2003]{yoo2003slurm}
-Yoo, A.~B., Jette, M.~A., and Grondona, M. (2003).
-\newblock {SLURM}: Simple {Linux} utility for resource management.
-\newblock In {\em Job Scheduling Strategies for Parallel Processing (JSSPP 2003)}, volume 2862 of {\em Lecture Notes in Computer Science}, pages 44--60. Springer.
+\bibitem[Ulyanov et~al., 2016]{ulyanov2016}
+Ulyanov, D., Vedaldi, A., and Lempitsky, V. (2016).
+\newblock Instance normalization: The missing ingredient for fast stylization.
+\newblock {\em arXiv preprint arXiv:1607.08022}.
+
+\bibitem[van Ginneken et~al., 2008]{vanginneken2008robust}
+van Ginneken, B., Baggerman, W., and van Rikxoort, E. (2008).
+\newblock Robust segmentation and anatomical labeling of the airway tree from thoracic {CT} scans.
+\newblock In {\em Medical Image Computing and Computer-Assisted Intervention (MICCAI)}, pages 219--226.
+
+\bibitem[Veli{\v{c}}kovi{\'c} et~al., 2018]{velickovic2018}
+Veli{\v{c}}kovi{\'c}, P., Cucurull, G., Casanova, A., Romero, A., Li{\`o}, P., and Bengio, Y. (2018).
+\newblock Graph attention networks.
+\newblock In {\em International Conference on Learning Representations (ICLR)}.
+
+\bibitem[Wang et~al., 1992]{wang1992}
+Wang, C., Bassingthwaighte, J., and Weissman, L. (1992).
+\newblock Bifurcating distributive system using {Monte Carlo} method.
+\newblock {\em Mathematical and Computer Modelling}, 16(3):91--98.
+
+\bibitem[Weng et~al., 2026]{weng2026topofield}
+Weng, Z., Yang, J., Xie, K., Zhou, B., and Cai, W. (2026).
+\newblock Learning topology-aware implicit field for unified pulmonary tree modeling with incomplete topological supervision.
+\newblock {\em arXiv preprint arXiv:2602.02186}.
+
+\bibitem[Xie et~al., 2025]{xie2025}
+Xie, K., Yang, J., Wei, D., Weng, Z., and Fua, P. (2025).
+\newblock Efficient anatomical labeling of pulmonary tree structures via deep point-graph representation-based implicit fields.
+\newblock {\em Medical Image Analysis}, 99:103367.
+
+\bibitem[Yeh and Schum, 1980]{yeh1980models}
+Yeh, H.~C. and Schum, G.~M. (1980).
+\newblock Models of human lung airways and their application to inhaled particle deposition.
+\newblock {\em Bulletin of Mathematical Biology}, 42(3):461--480.
+
+\bibitem[Zhang et~al., 2025]{zhang2025airmorph}
+Zhang, M., Li, C., Xie, F., Liu, Y., Zhang, H., Wu, J., Zhang, C., Yang, J., Sun, J., Yang, G.-Z., and Gu, Y. (2025).
+\newblock {AirMorph}: Topology-preserving deep learning for pulmonary airway analysis.
+\newblock {\em arXiv preprint arXiv:2412.11039}.
 
 \bibitem[Zhang et~al., 2023]{zhang2023atm22}
 Zhang, M., Wu, Y., Zhang, H., Qin, Y., Zheng, H., et~al. (2023).
 \newblock Multi-site, multi-domain airway tree modeling.
 \newblock {\em Medical Image Analysis}, 90:102957.
+
+\bibitem[Zhang et~al., 2024]{zhang2024}
+Zhang, M., Zhang, H., You, X., Yang, G.-Z., and Gu, Y. (2024).
+\newblock Implicit representation embraces challenging attributes of pulmonary airway tree structures.
+\newblock In {\em Medical Image Computing and Computer Assisted Intervention (MICCAI)}, volume 15001 of {\em Lecture Notes in Computer Science}, pages 546--556. Springer.
+
+\bibitem[Zhao et~al., 2021]{zhao2021}
+Zhao, H., Jiang, L., Jia, J., Torr, P. H.~S., and Koltun, V. (2021).
+\newblock Point transformer.
+\newblock In {\em IEEE/CVF International Conference on Computer Vision (ICCV)}.
+
+\bibitem[Zhao et~al., 2009]{zhao2009}
+Zhao, X., Ju, Y., Liu, C., Li, J., Huang, M., Sun, J., and Wang, T. (2009).
+\newblock Bronchial anatomy of left lung: a study of multi-detector row {CT}.
+\newblock {\em Surgical and Radiologic Anatomy}, 31(2):85--91.
 
 \end{thebibliography}

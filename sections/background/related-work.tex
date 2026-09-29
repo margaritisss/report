@@ -1,0 +1,363 @@
+% Related work -- prior work grouped by scope, roughly oldest first within each group.
+% Subsection of "Background", pulled in by sections/02-background.tex.
+
+\subsection{Related work}                % prior work on airway geometry, segmentation, CFD, encoding, labelling, morphology
+\label{sec:related}                      % \secref{sec:related}
+
+% ==============================================================================
+\subsubsection{Geometric models of the airway tree}  % morphometry, generation, casts, CT-based and hybrid models
+\label{sec:related_geometry}             % \secref{sec:related_geometry}
+
+\paragraph{Morphometry and idealized models.}  % from lung casts to mathematical descriptions
+Early airway models are based on idealized morphometry rather than on individual anatomy.
+Casts of human lungs were used to study branching patterns and the relation between airway
+lengths and diameters \cite{horsfield1986}, and \citet{horsfield1971models} and
+\citet{yeh1980models} proposed asymmetric models of the human bronchial tree.
+\citet{kamiya1974} related airway diameter to branching angles, and \citet{wang1992} examined
+deterministic bifurcating distributive systems with a Monte Carlo method.
+\citet{kitaoka1999} proposed a 3D model of the human airway tree in which the branching
+pattern is driven by a diameter--flow relationship within an organ boundary, relating
+branching angle to flow rate and airway length to diameter. \citet{hegedus2004} gave a
+detailed mathematical description of airway bifurcation geometry and used it to generate
+surface models of idealized bifurcations, and \citet{florens2010} presented an anatomical and
+functional model of the tracheobronchial tree. \citet{tawhai2011} reviewed computational
+models of airway and pulmonary vascular structure and function towards a ``Lung Physiome''.
+
+% \citet{varner2017computational} reviewed computational approaches to airway branching
+% morphogenesis in the mammalian lung, grouping them into three classes: geometric,
+% reaction--diffusion, and continuum mechanical models. Geometric models, inspired by
+% Mandelbrot's fractal theory, show that simple recursive rules can generate space-filling,
+% lung-like trees that match morphometric data, but they do not explain the biological
+% mechanisms behind these rules. Physical models, including viscous fingering, buckling driven
+% by constrained epithelial growth, and apical constriction, show that mechanical forces can
+% also determine where branches form. The authors argue that each framework captures only part
+% of the process, and that future models should combine biochemical and mechanical cues and be
+% grounded in quantitative experimental data from embryonic lungs.
+
+\paragraph{Algorithmic generation of airway trees.}  % volume filling and L-systems
+Building on the Monte Carlo approach of \citet{wang1992}, \citet{tawhai2000} introduced a
+volume-filling algorithm that grows a bifurcating tree inside each lung lobe.
+\citet{davoodi2016} generated the human bronchial tree with a Lindenmayer system, and
+\citet{abbasi2021} extended it to a stochastic parametric L-system with parallel growth of
+bronchopulmonary segments. \citet{geronzi2024} proposed a parametric 3D model of human
+airways for particle drug delivery and deposition.
+
+% \paragraph{Lung casts and digital reference models.}  % physical replicas
+% \citet{clinkenbeard2002} built hollow airway replicas of the first five generations using
+% rapid prototyping. \citet{schmidt2004} created a digital reference model of the bronchial tree
+% (17 generations) by segmenting a CT scan of a rubber lung cast, and \citet{lizal2012} derived
+% realistic and semi-realistic airway geometries up to the seventh bifurcation from it.
+
+\paragraph{Subject-specific models from CT.}  % CT-resolved airways, often extended algorithmically
+Subject-specific airway trees can be extracted from CT images. \citet{palagyi2006} developed
+the skeletonization used to obtain a 1D tree from a segmented airway, and
+\citet{nakamura2008} presented automated segmentation and morphometric analysis of the airway
+tree from multidetector CT. \citet{tawhai2004} combined CT-based geometry analysis with finite
+element models of the human and ovine bronchial tree, using their volume-filling algorithm to
+extend the CT-resolved tree to the terminal bronchioles, guided by the resolved airways and
+the lobar boundaries. \citet{lin2009} and \citet{tawhai2009} combined CT-based central airways
+with such artificial airways to build subject-specific models from the glottis to the
+terminal bronchioles for CFD, but their pipeline required manual intervention to construct
+trifurcations; \citet{lin2013} later reviewed multiscale image-based modeling of gas flow and
+particle transport in the lungs. \citet{montesantos2013} reported HRCT-based airway
+morphometry in healthy subjects and asthmatic patients, and \citet{montesantos2016} presented
+an algorithm for an individualized 3D deterministic model of the human bronchial tree from
+HRCT images, which they evaluated statistically. \citet{bordas2015} developed a pipeline for
+patient-based complete conducting airway models of healthy and asthmatic subjects, covering
+CT acquisition, lung, lobar and airway segmentation, centerline extraction, and algorithmic
+generation of the distal airways beyond the CT-resolved tree.
+
+Trifurcations are a frequent source of difficulty for these models, although they are common
+in real airway trees. \citet{boyden1949} studied bronchopulmonary segments in 50 subjects and
+reported a trifurcation at the right upper lobe bronchus in 46\% of them, and
+\citet{zhao2009} examined the left-lung bronchial anatomy of 216 subjects with multi-detector
+CT and found trifurcations at the left upper division bronchus and the left lower lobar
+bronchus in 23\% and 18\% of subjects, respectively.
+
+\citet{miyawaki2017automatic} proposed a centerline-based method that automatically
+constructs subject-specific three-dimensional models of the human airways from a CT-segmented
+airway skeleton and surface. Their approach systematically identifies and classifies
+trifurcations, distinguishing true trifurcations from double bifurcations and fork-type from
+tripod-type configurations, and uses dedicated geometric templates to reconstruct them. The
+method produces models of increasing realism (straight-centerline, curved-centerline, and
+fitted-surface), can be extended beyond CT resolution to the terminal bronchioles, and
+partitions the geometry branch by branch, which facilitates automatic mesh generation for
+computational fluid dynamics (CFD). Applied to 16 healthy and 16 severe asthmatic subjects,
+the fitted-surface models achieved an average surface error of about 11\% of the image voxel
+size, and an aerosol deposition simulation showed branch-wise deposition efficiencies within
+5\% of those obtained with a CT-based model.
+
+\citet{nousias2020avatree} presented AVATREE for generating
+anatomically valid patient-specific airway tree models from CT scans. Their pipeline first
+segments the lungs and the visible central airways and extracts the airway centerline as a
+graph. It then extends the tree beyond the generations visible in the image using a
+space-filling algorithm which splits the lung volume with PCA based planes. From the extended
+centerline they reconstruct a 3D airway surface suitable for CFD simulations using Poisson
+surface reconstruction. The framework also produces spatial probability maps of airway
+generations overlaid on the CT images. It can simulate broncho-constriction as seen in asthma
+and COPD, through Laplacian mesh contraction. The authors validated the generated trees
+against published morphometric data comparing Strahler and Horsfield orders, branch lengths,
+diameters and branching angles.
+
+\paragraph{Meshing and hybrid models.}   % from segmented geometry to simulation-ready meshes
+\citet{marchandise2013} proposed an automatic method to build and mesh tubular geometries,
+including trifurcations, for cardiovascular and lung applications. However, it takes a surface
+as input and is not centerline based, so the mesh patches are not linked to branches with
+anatomical data. \citet{lauria2022} developed an automatic method to generate CFD compliant
+triangulated meshes from segmented airways, \citet{ortizpuerta2022} introduced Snakes
+Isogeometric Analysis based on NURBS for healthy and COPD airway trees and \citet{ho2024}
+smoothed airway surface meshes with graph convolutional neural networks. Following the same
+idea as \citet{bordas2015}, \citet{agujetas2020} and \citet{ilegbusi2023} built hybrid models
+that couple image derived upper airways with idealized lower airways for CFD.
+
+\citet{pennati2024modeling} presented a comprehensive review of geometrical models of the
+human intrathoracic airways tracing their evolution from the early idealized mathematical
+models of the 1960s such as the symmetric Weibel model and the asymmetric Horsfield model,
+to modern image-based, patient-specific reconstructions derived from CT and to a lesser
+extent. The authors surveyed airway segmentation strategies ranging from traditional
+region-growing and knowledge-based methods to machine learning and deep learning approaches
+such as 3D U-Net architectures and outlined the pipeline required to obtain CFD compliant
+meshes including centerline extraction, surface smoothing and mesh generation. They also
+discussed hybrid models that combine CT-resolved central airways with algorithmically
+generated distal trees and reviewed applications in inter-subject variability studies,
+diagnosis, surgical planning, drug delivery and environmental exposure. Finally, they
+identified key open challenges including missing small airways in segmentation, limited
+validation on pathological scans and the need for robust, automated mesh generation suitable
+for clinical use.
+
+% % ==============================================================================
+% \subsubsection{Airway segmentation and benchmarks}  % extracting the tree from CT and MRI
+% \label{sec:related_segmentation}         % \secref{sec:related_segmentation}
+
+% \paragraph{Traditional methods.}         % region growing, rules, morphology, tubes
+% Early methods segmented the airway tree from CT by region growing \cite{mori1995}, later
+% combined with rule-based and knowledge-based strategies exploiting the relation between
+% airways and vessels \cite{sonka1996}, fuzzy logic \cite{park1998}, mathematical morphology
+% and topology \cite{pisupati1996,fan2000}, tube detection \cite{bauer2009tube} and gradient
+% vector flow \cite{bauer2009gvf}. \citet{lo2009} extracted airway trees via locally optimal
+% paths, and \citet{irving2011} segmented obstructed airway branches using airway topology and
+% statistical shape analysis. \citet{smistad2014} introduced a GPU-accelerated segmentation and
+% centerline extraction framework for tubular structures, and later the FAST framework for
+% heterogeneous medical image computing and visualization \cite{smistad2015}. \citet{pu2012}
+% reviewed CT-based identification and analysis of human airways.
+
+% \paragraph{Machine learning and deep learning.}  % voxel classification to CNNs
+% Voxel-classification approaches with kNN classifiers \cite{lo2008,lo2010} and AdaBoost with
+% minimum spanning trees \cite{inoue2013} reduced leakage and improved the detection of small
+% branches. Deep learning approaches include CNN-based leak detection \cite{charbonnier2017},
+% 2.5D CNNs \cite{yun2019} and 3D U-Net architectures \cite{garciauceda2021}, as well as
+% freeze-and-grow propagation combined with deep learning \cite{nadeem2021}, tubule-sensitive
+% CNNs \cite{qin2021}, bronchiole-sensitive networks with attention distillation
+% \cite{qin2020}, context scale fusion \cite{qin2020airwaynet}, and neural networks with linear
+% programming \cite{zhao2019}. \citet{tan2022} reviewed the segmentation of lung airways with
+% deep learning.
+
+% \paragraph{Benchmarks and datasets.}     % public data for training and comparison
+% The EXACT'09 challenge \cite{lo2009exact09,lo2012exact} compared fifteen airway extraction
+% algorithms on a common set of CT scans. More recent datasets provide larger benchmarks: ATM'22
+% \cite{zhang2023atm22}, AIIB23 \cite{nan2024aiib23} and AeroPath \cite{stoverud2023aeropath}
+% cover multi-site data, fibrotic lung disease and challenging pathology, respectively. ATM'22
+% and AIIB23 are the datasets used in this work (\secref{sec:datasets}).
+
+% \paragraph{MRI-based reconstruction.}    % airways without ionising radiation
+% \citet{lewis2005} and \citet{peterson2011} used hyperpolarized $^3$He MRI to measure airway
+% diameters and reconstruct the airway tree in three dimensions, \citet{wang2004} proposed
+% scale-based fuzzy connectedness for 3D airway segmentation on hyperpolarized gas MRI, and
+% \citet{genkin2024} segmented airways from the trachea to the tertiary bronchi with ultrashort
+% echo time MRI in pediatric patients.
+
+% ==============================================================================
+% \subsubsection{Airway geometries for flow simulation}  % CFD and particle deposition
+% \label{sec:related_cfd}                  % \secref{sec:related_cfd}
+
+% \paragraph{Idealized and early computational models.}  % geometry built from morphometric models
+% The idealized models of \citet{horsfield1971models} and \citet{yeh1980models} were used by
+% \citet{vanertbruggen2005} and \citet{tian2011sip} to build centerline-based 3D airway
+% geometries for CFD and particle deposition. These models are not subject-specific and do not
+% include trifurcations. \citet{gemci2008} and \citet{walters2011} also built computational
+% airway models for airflow simulation, but without an automatic construction procedure, and
+% \citet{jiang2020} proposed a voxel image-based airflow simulation with automatic detection of
+% the airway outlets.
+
+% \paragraph{Patient-specific CFD and particle deposition.}  % CT-based geometries in simulation
+% CT-based patient-specific airway geometries have been used for CFD studies of airflow,
+% including steady inspiration in reconstructed proximal airway trees \cite{vial2005}, flow
+% analysis in the lower airways with patient-specific boundary conditions \cite{debacker2008},
+% bifurcating flow in a CT-scanned airway \cite{luo2008}, airflow with subject-specific boundary
+% conditions \cite{yin2010}, and airflow and particle transport in generations three to six
+% \cite{srivastav2011}. \citet{swan2012} modelled the topographic distribution of ventilation in
+% healthy lungs. Other works address aerosol distribution in a CT-based airway model
+% \cite{miyawaki2012}, pharmaceutical aerosol deposition validated against in vivo data
+% \cite{tian2015}, static versus dynamic imaging for particle transport
+% \cite{miyawaki2016static}, large-scale CFD of airflow and particle deposition \cite{soni2013},
+% and direct numerical simulation of particle-laden flow in an airway bifurcation
+% \cite{stylianou2016}. \citet{kolanjiyil2016} developed a computationally efficient
+% whole-lung-airway model for particle transport and deposition. Studies of obstructive
+% conditions and further flow effects include normal versus obstructed airways \cite{sul2014},
+% dynamic flow in normal and asthmatic lungs \cite{kim2015}, the turbulent laryngeal jet
+% \cite{lin2007}, 4DCT-based breathing lung models \cite{miyawaki2016dynamic}, and airflow in
+% the acinar region \cite{kumar2009}. \citet{nousias2016} and \citet{lalas2017} simulated
+% broncho-constriction through geometry contraction of CT-extracted airways and used it to
+% assess substance deposition in obstructed lungs.
+
+% ==============================================================================
+\subsubsection{Representation learning and generative models of vascular trees}  % encoding / synthesis
+\label{sec:related_representation}       % \secref{sec:related_representation}
+
+Data-driven approaches have recently emerged as an alternative to rule-based (fractal and
+space-filling) methods for synthesizing 3D vascular geometry. \citet{feldman2023vesselvae}
+proposed VesselVAE, a recursive variational neural network (RvNN) that encodes vessels as
+binary trees where each node stores a centerline point and its radius. The encoder
+recursively aggregates the tree into a low-dimensional latent space while the decoder
+reconstructs node attributes and predicts through a node classifier, whether each node
+branches. New vessels are obtained by sampling the latent space and converting the generated
+centerlines into surface meshes. Trained on the IntrA dataset the method produced samples
+whose radius, length and tortuosity distributions closely match real data. However, it
+assumes circular cross-sections and has difficulty scaling to deep trees. To overcome these
+limitations, the same group introduced VesselGPT \cite{feldman2025vesselgpt}, which treats
+vascular trees as sequences of nodes obtained through a preorder traversal. A VQ-VAE first
+learns a discrete vocabulary of node embeddings and a GPT-2 model is then trained to generate
+vessels autoregressively over these tokens. Instead of a single radius each cross-section is
+represented with a B-spline which preserves non-circular shapes such as aneurysms. The final
+mesh is extracted from a signed distance field using marching cubes. Evaluated on the
+Aneurisk dataset, VesselGPT generates deeper and more detailed vascular trees than previous
+recursive and diffusion-based approaches. Graph-based generation has also been explored:
+\citet{prabhakar2024vesselgraph,prabhakar2025semantic} proposed two-stage discrete diffusion
+models that generate simplified metric graphs of vessels and airways.
+
+Learning compact representations of vascular structures has recently gained attention with
+approaches differing mainly in how the vessel geometry is represented.
+\citet{batten2025vetta} proposed VeTTA, a two-stage Transformer-based autoencoder that encodes
+vessel trees into a single vector representation. In the first stage a Vessel Autoencoder
+embeds individual vessel segments described by centerline points and radii lifted to
+sinusoidal Fourier features into compact latent codes. In the second stage a Vessel Tree
+Autoencoder encodes the full set of tree edges into a global latent vector which is decoded
+recursively with a slot-based Transformer decoder that guarantees a topologically valid tree.
+Evaluated on a synthetic 2D tree dataset and a 3D coronary artery dataset, VeTTA outperformed
+3D convolutional autoencoders in reconstruction accuracy required less GPU memory and
+produced smooth, topologically consistent latent interpolations. However, it is restricted to
+tree-structured data with at most two children per node.
+
+In contrast, \citet{prabhakar2026vaesselsparse} proposed VAEsselSparse a variational
+autoencoder that operates directly on high-resolution organ-level binary vessel segmentation
+maps without assuming a tree structure. By combining sparse 3D convolutions with sparse
+windowed self-attention their model exploits the inherent sparsity of vascular masks and
+achieves an $8\times8\times8$ spatial compression while preserving vessel connectivity.
+VAEsselSparse outperformed a dense VAE and MedVAE on topology-aware metrics such as clDice and
+Betti number errors. The authors further showed that the learned latent space supports
+downstream tasks including aneurysm/stenosis classification, circle of Willis subtype
+classification and the generation of realistic vessel structures with a flow-matching model
+trained in the latent space.
+
+% ==============================================================================
+\subsubsection{Branch matching and anatomical labeling of airway trees}  % correspondence and labels
+\label{sec:related_labeling}             % \secref{sec:related_labeling}
+
+Registration, branch matching and branch labeling of airway trees have been studied for over
+a decade. Several successful methods are based on association graphs where branch matchings
+are induced by maximal cliques of a graph combining information from two trees
+\cite{kitaoka2002automated,tschirren2005matching,metzen2009matching};
+\citet{tschirren2005matching} reported a labeling success rate of 97\%.
+\citet{vanginneken2008robust} labeled airway branches recursively starting at the trachea
+as part of the segmentation process assigning labels from radius, orientation and
+bifurcation angle (90\% success rate); this approach is vulnerable to differences in tree
+topology. \citet{kaftan2006novel} matched tree paths rather than branches which avoids
+topological differences but discards the information stored in the tree structure and does
+not yield branch labels. \citet{bulow2006point} matched airway branches using only branch
+shape without connectivity information (69\% or 40\% success rate depending on the features
+used).
+
+In contrast to these methods which focus on either topology or branch geometry
+\citet{feragen2011airway} proposed a geodesic tree-shape model for anatomical labeling of
+airway branches that treats tree topology and branch geometry jointly. Each airway centerline
+tree is represented as a combinatorial tree whose edges carry landmark points sampled along
+the branches. Trees of different sizes and topologies are embedded in a common Euclidean
+space and different representations of the same shape are identified giving a quotient
+space equipped with the Quotient Euclidean Distance (QED). In this space any two trees are
+connected by a shortest deformation (geodesic) that can change the tree topology along the
+way. Since computing exact geodesics is NP-hard, the authors approximate them by limiting the
+number of topological changes in each lobar subtree. Branch correspondences obtained from the
+geodesics between an unlabeled tree and a set of expert-labeled trees are combined through
+majority voting to assign anatomical labels. 
+% Evaluated in a leave-one-out setting on the 20
+% scans of the EXACT'09 test set \cite{lo2009exact09}, segmented with the voxel-classification
+% method of \citet{lo2010}, the method correctly labeled 83\% of the branches on average,
+% excluding one outlier case with missing upper lobes. 
+\citet{feragen2012hierarchical} later
+turned these geodesic distances into a hierarchical labeling scheme: a new airway tree is
+labeled from the root toward the periphery by matching it against a set of manually labeled
+training trees.
+
+\citet{weng2026topofield} proposed TopoField, a topology-aware implicit modeling framework for
+repairing incomplete pulmonary trees (airways, arteries, and veins) extracted from CT scans.
+The pulmonary tree is represented by sparse surface and skeleton point clouds which are fused
+through a surface-to-skeleton cross-attention module and projected onto a triplane implicit
+field that can be queried at arbitrary spatial locations. To avoid the need for annotated
+breakpoints the authors introduce TopoBreak a strategy that synthetically adds
+disconnections to already-incomplete trees and trains the network to recover them providing
+weak supervision for topology repair. On top of the shared implicit field, task-specific
+decoders jointly perform tree repair, anatomical labeling and lung segment reconstruction in
+a single forward pass. 
+% This approach achieves accurate results on the Lung3D+ benchmark while
+% running in about one second per case, roughly two orders of magnitude faster than previous
+% implicit graph-based pipelines.
+
+% ==============================================================================
+\subsubsection{Morphological and topological analysis of airway trees}  % quantifying and comparing shape
+\label{sec:related_morphology}           % \secref{sec:related_morphology}
+
+\paragraph{Local airway geometry.}       % wall thickness and lumen shape
+% Automatic extraction of the airway tree from CT is a prerequisite for morphological analysis
+% (\secref{sec:related_segmentation}).
+Early quantitative work focused on local airway
+geometry. \citet{nakano2000airway} related the wall area percent of a segmental bronchus and
+the extent of emphysema to lung function in smokers, and \citet{hasegawa2006airflow} extended
+such measurements across airway generations using multiplanar reconstruction.
+\citet{patel2008pi10} used Pi10, a standardized measure of airway wall thickness, to show that
+wall thickening and emphysema aggregate independently in families. \citet{oguma2015irregularity}
+quantified the irregularity of the lumen radius along a single airway path and found it
+higher in COPD than in healthy subjects and asthma.
+
+\paragraph{Global metrics of the tree.}  % one number per tree
+Several global metrics have been derived from the segmented tree. \citet{kirby2018tac}
+introduced the total airway count (TAC) and showed that fewer visible branches predict COPD
+progression. \citet{bodduluri2018afd} characterized the complexity of the tree by its fractal
+dimension and linked lower values to morbidity and mortality in COPD, and later proposed the
+airway surface-area-to-volume ratio as a marker of airway remodeling associated with airflow
+limitation \cite{bodduluri2021sav}. \citet{smith2020dysanapsis} defined the airway-to-lung
+size ratio (dysanapsis) and showed that a smaller ratio is associated with COPD risk, while
+\citet{maetani2023dysanapsis} studied the physiological effects of this ratio, fractal
+dimension, and branch count in healthy never smokers.
+
+\paragraph{Statistics on tree shapes.}   % comparing whole trees, including topology
+\citet{feragen2011means} modeled anatomical trees as points in a space of tree-like shapes
+that captures both branch geometry and topological structure, and studied how to compute mean
+trees in this space, with airway trees as the application. \citet{sorensen2011dissimilarity}
+represented airway trees as sets of attributed branches, matched the branches across
+subjects and classified COPD using a dissimilarity-based embedding with a $k$-NN classifier.
+\citet{feragen2013geometric} proposed a family of geometric tree kernels for comparing
+anatomical trees whose branches carry vector-valued attributes such as branch shape, radius
+or airway wall area percentage. Unlike classical graph and tree kernels which rely on
+discrete node labels their path-based (all-pairs and root-path) and pointcloud kernels
+incorporate continuous geometric information while remaining efficient enough to scale to
+datasets of nearly 10{,}000 trees. Applying these kernels to airway trees segmented from
+low-dose CT scans of 1966 subjects they used kernel-based two-sample tests to show that
+airway trees of COPD patients and healthy individuals follow significantly different
+distributions. They also showed using SVM classification that geometry-aware kernels
+outperform average airway wall area percentage measures and state of the art graph kernels
+such as the shortest path and Weisfeiler - Lehman kernels in detecting COPD.
+
+\paragraph{Topological descriptors.}     % persistent homology
+\citet{belchi2018topology} applied persistent homology to the airway tree using height as the
+filtration and showed that the resulting ``upwards complexity'' correlates with COPD
+severity. \citet{kaji2024airway} proposed two morphological metrics based on persistent homology to
+quantify tubular structures in chest CT images and applied them to the airway trees of
+patients with chronic obstructive pulmonary disease (COPD). They computed 0-dimensional
+persistent homology under two distance based filtrations. The first, the geodesic distance
+from the carina yields \emph{treeH$_0$}, which describes the complexity of the branching
+structure. The second the distance from the lumen centerline yields \emph{radialH$_0$},
+which captures irregularities of the luminal surface in the central (1st to 5th generation)
+airways. On three cohorts acquired with different scanners and reconstruction kernels, both
+metrics were higher in COPD patients than in non-COPD smokers. In addition, radialH$_0$
+predicted longitudinal FEV$_1$ decline independently of conventional CT measures such as
+emphysema extent (LAA\%), airway-to-lung size ratio, and total airway count.

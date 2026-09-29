@@ -1,0 +1,282 @@
+% Implicit encoding (DGCI) -- subsection of "Encoding", pulled in by sections/05-encoding.tex.
+% Red \TODO{...} marks replace the [square-bracket] placeholders of the original draft.
+
+\subsection[Implicit encoding]{Implicit Neural Representation of Airway Trees}
+\label{sec:implicit}                     % \secref{sec:implicit}
+\label{sec:dgci}                         % same place, name used in the draft
+
+The voxel-based models of \secref{sec:vae} and \secref{sec:ae} did not produce
+satisfactory reconstructions. We therefore trained an implicit model, the Deep Geometric
+Correspondence Implicit (DGCI) network of \citet{zhang2024}. This model gave the best
+reconstructions of all the architectures we tested, and its learned latent codes are the
+representation used for the clustering in \secref{sec:clustering}.
+
+% ------------------------------------------------------------------------------
+\subsubsection{Motivation}               % why an implicit representation
+\label{sec:dgci_motivation}              % \secref{sec:dgci_motivation}
+
+\citet{zhang2024} point out that airway annotations are made slice by slice in CT image
+stacks, so the reconstructed shape is inevitably limited by the resolution of the discrete
+voxels. The image contrast also degrades as the bronchi become thinner. As a result,
+voxel-based airway trees tend to be coarse and affected by spike-like noise, and CNN-based
+methods, which also work in the discrete voxel space, suffer from the same problems as well
+as from breakages in the tree \cite{zhang2024}.
+
+Implicit neural representations (INRs) address this by using coordinate-based neural
+networks to parameterize a shape in continuous physical space instead of on a voxel grid.
+They are therefore not bounded by the CT grid resolution, and they yield smoother,
+high-fidelity shapes with fewer spike-like artifacts \cite{zhang2024}. Earlier INRs such as
+DeepSDF \cite{park2019} focus only on surface reconstruction and do not capture topological
+correspondence between shapes of the same category. DGCI is built on the hypothesis that all
+airway trees share a common topology, since they are all single connected tree structures,
+and it uses this shared structure to constrain the learned feature space of the training
+shapes \cite{zhang2024}.
+
+% ------------------------------------------------------------------------------
+\subsubsection{Model architecture}       % neural SDF, encoder-decoder, hypernetworks
+\label{sec:dgci_architecture}            % \secref{sec:dgci_architecture}
+
+\paragraph{Neural signed distance field.}  % the implicit function F
+Following DeepSDF \cite{park2019}, each airway tree is represented as a signed distance field
+(SDF) in continuous space. A neural field function $\mathcal{F}$ takes a physical coordinate
+$\mathbf{p} \in \mathbb{R}^3$ together with an instance-specific latent code
+$\boldsymbol{\alpha}_i \in \mathbb{R}^K$ and predicts the signed distance $s$ of that point
+to the surface of the $i$-th airway tree:
+\begin{equation}
+  \mathcal{F}(\mathbf{p}; \boldsymbol{\alpha}_i) : \mathbb{R}^{3+K} \to s \in \mathbb{R}.
+  \label{eq:dgci_sdf}                    % the neural SDF mapping
+\end{equation}
+The airway surface is the zero level set of $\mathcal{F}$.
+
+\paragraph{Deep correspondence flow.}    % instance space <-> shared space
+To model airways in continuous space while also exploiting the topological features shared
+across cases, DGCI builds a reversible correspondence flow between an \emph{instance space},
+specific to each airway tree, and a \emph{shared space}, common to all trees
+(Figure~\ref{fig:dgci_arch}). This flow is implemented by an implicit encoder--decoder,
+called DGCI-ED, in which both the encoder $E$ and the decoder $D$ are multilayer perceptrons
+(MLPs) \cite{zhang2024}. The encoder is driven by a shared latent code $\boldsymbol{\beta}$,
+common to all instances, and the decoder by the instance-specific code
+$\boldsymbol{\alpha}_i$.
+
+\paragraph{Hypernetworks.}               % how the latent codes set the weights
+The latent codes do not enter the MLPs as ordinary inputs. Instead, following the
+hypernetwork design \cite{ha2017,sitzmann2020}, $\boldsymbol{\alpha}_i$ and
+$\boldsymbol{\beta}$ drive two separate hypernetworks, $\phi_{\boldsymbol{\alpha}_i}$ and
+$\phi_{\boldsymbol{\beta}}$. Each hypernetwork is itself a set of MLPs, and each of these
+MLPs generates the weights of one fully connected layer of the target
+network \cite{zhang2024}. $\phi_{\boldsymbol{\alpha}_i}$ generates the weights of the decoder
+$D$ and of the SDF function $\mathcal{F}$; $\phi_{\boldsymbol{\beta}}$ generates the weights
+of the encoder $E$. The encoder--decoder can thus be written as
+$\text{DGCI-ED} = D_{\phi_{\boldsymbol{\alpha}_i}} \circ E_{\phi_{\boldsymbol{\beta}}}$.
+
+\paragraph{Forward pass.}                % instance -> shared -> instance
+Since $E_{\phi_{\boldsymbol{\beta}}}$ is controlled by a code shared by every instance, it
+forces the model to learn the topological features common to all airway trees. It takes the
+physical coordinates together with the SDF values produced by $\mathcal{F}$ and encodes this
+geometric information into an intermediate latent feature
+$\mathbf{z}_i$ \cite{zhang2024}:
+\begin{equation}
+  E_{\phi_{\boldsymbol{\beta}}}\big(\mathbf{p},
+      \mathcal{F}_{\phi_{\boldsymbol{\alpha}_i}}(\mathbf{p})\big)
+  \to \mathbf{z}_i \in \mathbb{R}^K.
+  \label{eq:dgci_enc}                    % encoding into the shared space
+\end{equation}
+This establishes the correspondence from the instance space to the shared space. The
+instance-specific decoder $D_{\phi_{\boldsymbol{\alpha}_i}}$ then maps $\mathbf{z}_i$ back to
+the physical instance space, and $\mathcal{F}$ is applied to obtain the final SDF value. The
+complete model is
+\begin{equation}
+  \begin{split}
+    \mathcal{F}\big(\text{DGCI-ED}(\mathbf{p}; \boldsymbol{\alpha}_i, \boldsymbol{\beta})\big)
+    &= \mathcal{F}_{\phi_{\boldsymbol{\alpha}_i}}\Big(D_{\phi_{\boldsymbol{\alpha}_i}} \circ
+       E_{\phi_{\boldsymbol{\beta}}}\big(\mathbf{p},
+       \mathcal{F}_{\phi_{\boldsymbol{\alpha}_i}}(\mathbf{p})\big)\Big) \\
+    &\to s \in \mathbb{R}.
+  \end{split}
+  \label{eq:dgci_full}                   % full DGCI forward pass (split to fit the page)
+\end{equation}
+For brevity, we write $\mathcal{F}(\mathbf{p}; \boldsymbol{\alpha}_i, \boldsymbol{\beta})$
+for this full model below.
+
+\paragraph{Network sizes.}               % layer counts and dimensions
+Following \citet{zhang2024}, the encoder $E_{\phi_{\boldsymbol{\beta}}}$ has
+\TODO{three} hidden layers, the decoder $D_{\phi_{\boldsymbol{\alpha}_i}}$ has \TODO{two},
+and the SDF function $\mathcal{F}$ has \TODO{four}. The weights of every fully connected layer
+in these three networks are generated by hypernetworks with \TODO{three} hidden layers. The
+latent codes $\boldsymbol{\alpha}_i$ and $\boldsymbol{\beta}$, the hidden features and the
+intermediate features all have dimension $K = \TODO{128}$.
+
+\begin{figure}[htbp]                     % placeholder for the DGCI architecture diagram
+  \centering                             % center the figure
+  % \includegraphics[width=\textwidth]{figures/dgci_architecture.png}  % uncomment with your file
+  \fbox{\parbox[c][4cm][c]{0.9\textwidth}{\centering [DGCI architecture figure]}}  % remove once image added
+  \caption{Architecture of the Deep Geometric Correspondence Implicit (DGCI) network,
+           adapted from \citet{zhang2024}. Coordinates and the instance code
+           $\boldsymbol{\alpha}_i$ pass through $\mathcal{F}$ and the shared encoder $E$ to
+           the intermediate feature $\mathbf{z}_i$, which the instance decoder $D$ and
+           $\mathcal{F}$ map back to an SDF value $s$.}
+  \label{fig:dgci_arch}                  % referenced as Figure~\ref{fig:dgci_arch}
+\end{figure}
+
+% ------------------------------------------------------------------------------
+\subsubsection{Loss function}            % SDF value, geometry, latent reg., correspondence
+\label{sec:dgci_loss}                    % \secref{sec:dgci_loss}
+
+\citet{zhang2024} note that the L1 loss on SDF values used by DeepSDF \cite{park2019} is not
+enough to model fine airway structures with high fidelity. Following the implicit geometric
+regularization of \citet{gropp2020}, DGCI adds two geometric constraints: the gradient of
+$\mathcal{F}$ at surface points should align with the ground-truth surface normals, and the
+gradient should have unit norm everywhere (the Eikonal constraint). The SDF loss therefore
+has two parts, $\mathcal{L}_{\mathrm{sdf}} = \mathcal{L}_{\mathrm{sdf\text{-}val}} +
+\mathcal{L}_{\mathrm{sdf\text{-}geo}}$, which supervise the values and the geometry of the
+predicted SDF respectively:
+\begin{equation}
+  \mathcal{L}_{\mathrm{sdf\text{-}val}} = \sum_i \Big(
+  \omega_s \sum_{\mathbf{p} \in \Omega_i}
+      \big|\mathcal{F}(\mathbf{p}; \boldsymbol{\alpha}_i, \boldsymbol{\beta}) - s'\big|
+  + \omega_\varphi \sum_{\mathbf{p} \in \Omega_i \setminus S_i}
+      \varphi\big(\mathcal{F}(\mathbf{p}; \boldsymbol{\alpha}_i, \boldsymbol{\beta})\big)
+  \Big),
+  \label{eq:dgci_val}                    % SDF value term
+\end{equation}
+\begin{equation}
+  \begin{split}
+    \mathcal{L}_{\mathrm{sdf\text{-}geo}} = \sum_i \Big(
+    &\omega_n \sum_{\mathbf{p} \in S_i}
+        \big(1 - S_{\cos}(\nabla\mathcal{F}(\mathbf{p}; \boldsymbol{\alpha}_i,
+        \boldsymbol{\beta}), \mathbf{n}')\big) \\
+    &+ \omega_{\mathrm{Eik}} \sum_{\mathbf{p} \in \Omega_i}
+        \big|\,\|\nabla\mathcal{F}(\mathbf{p}; \boldsymbol{\alpha}_i,
+        \boldsymbol{\beta})\|_2 - 1\big|
+    \Big).
+  \end{split}
+  \label{eq:dgci_geo}                    % normal consistency + Eikonal term (split to fit)
+\end{equation}
+Here $\Omega_i$ is the whole space and $S_i$ the surface of the $i$-th instance, $s'$ and
+$\mathbf{n}'$ are the ground-truth SDF values and surface normals, and $S_{\cos}$ is the
+cosine similarity. Equation~\eqref{eq:dgci_val} supervises the SDF regression directly and,
+through $\varphi(s) = \exp(-\delta |s|)$ with $\delta \gg 1$, penalizes points off the surface
+whose predicted SDF is close to zero. Equation~\eqref{eq:dgci_geo} enforces consistency with
+the surface normals and constrains the gradient magnitude according to the Eikonal
+equation \cite{zhang2024}.
+
+Two regularization terms act on the latent codes,
+$\mathcal{L}_{\mathrm{reg}} = \mathcal{L}_{\mathrm{intra\text{-}reg}} +
+\mathcal{L}_{\mathrm{inter\text{-}reg}}$:
+\begin{equation}
+  \mathcal{L}_{\mathrm{intra\text{-}reg}} = \omega_{\mathrm{intra}}
+      \Big(\sum_i \|\boldsymbol{\alpha}_i\|_2^2 + \|\boldsymbol{\beta}\|_2^2\Big),
+  \qquad
+  \mathcal{L}_{\mathrm{inter\text{-}reg}} = \omega_{\mathrm{inter}}
+      \sum_i \|\boldsymbol{\alpha}_i - \boldsymbol{\beta}\|_2^2.
+  \label{eq:dgci_reg}                    % latent code regularization
+\end{equation}
+The intra-regularization constrains the instance codes and the shared code separately, while
+the inter-regularization keeps each instance code close to the shared code \cite{zhang2024}.
+Finally, a correspondence loss ensures that the deep correspondence flow is accurate, i.e.\
+that decoding the intermediate feature returns the original surface coordinates:
+\begin{equation}
+  \mathcal{L}_{\mathrm{cor}} = \sum_i \Big( \omega_{\mathrm{cor}} \sum_{\mathbf{p} \in S_i}
+      \big\|\mathbf{p} - D_{\phi_{\boldsymbol{\alpha}_i}}(\mathbf{z}_i)\big\|_2^2 \Big).
+  \label{eq:dgci_cor}                    % correspondence accuracy term
+\end{equation}
+The total objective is
+\begin{equation}
+  \mathcal{L}_{\mathrm{total}} = \mathcal{L}_{\mathrm{sdf}} + \mathcal{L}_{\mathrm{reg}}
+  + \mathcal{L}_{\mathrm{cor}}.
+  \label{eq:dgci_total}                  % full DGCI loss
+\end{equation}
+Following \citet{zhang2024}, we set $\omega_s$, $\omega_\varphi$, $\omega_n$ and
+$\omega_{\mathrm{Eik}}$ to \TODO{$3\times10^3$, $5\times10^2$, $10^2$ and $5\times10^1$},
+$\omega_{\mathrm{intra}}$ and $\omega_{\mathrm{inter}}$ to \TODO{$10^6$ and $10^2$}, and
+$\omega_{\mathrm{cor}}$ to \TODO{$5\times10^4$}.
+
+% ------------------------------------------------------------------------------
+\subsubsection{Data preparation and training}  % SDF sampling, optimizer, schedule
+\label{sec:dgci_training}                % \secref{sec:dgci_training}
+
+Since the airway annotations are given as 3D volumes, we first extracted each airway surface
+with Marching Cubes \cite{lorensen1987} and then prepared normalized SDF samples following
+DeepSDF \cite{park2019}, as done by \citet{zhang2024}. Our dataset of \TODO{N} airway trees
+was split into \TODO{$N_{\mathrm{train}}$} training, \TODO{$N_{\mathrm{val}}$} validation
+and \TODO{$N_{\mathrm{test}}$} test cases.
+
+In each iteration, \TODO{4,000} surface points and \TODO{4,000} free-space points were
+randomly sampled per shape. The model was trained for \TODO{500} epochs with the Adam
+optimizer \cite{kingma2015}, a learning rate of \TODO{$10^{-4}$} and a batch size of
+\TODO{16}, on \TODO{GPU}. \TODO{Describe how latent codes for validation and test cases were
+obtained, e.g.\ by optimizing $\boldsymbol{\alpha}_i$ with the network weights frozen.} The
+training and validation losses are shown in Figure~\ref{fig:dgci_curves}.
+
+After training, each airway tree is represented by its instance latent code
+$\boldsymbol{\alpha}_i \in \mathbb{R}^{\TODO{128}}$. These codes are the features used for
+clustering in \secref{sec:clustering}.
+
+\begin{figure}[htbp]                     % placeholder for DGCI training curves
+  \centering                             % center the figure
+  % \includegraphics[width=\textwidth]{figures/dgci_training_curves.png}  % uncomment with your file
+  \fbox{\parbox[c][4cm][c]{0.9\textwidth}{\centering [DGCI training and validation loss curves]}}
+  \caption{Training and validation losses of the DGCI model: \TODO{total loss and the
+           individual terms $\mathcal{L}_{\mathrm{sdf}}$, $\mathcal{L}_{\mathrm{reg}}$ and
+           $\mathcal{L}_{\mathrm{cor}}$}.}
+  \label{fig:dgci_curves}                % referenced as Figure~\ref{fig:dgci_curves}
+\end{figure}
+
+% ------------------------------------------------------------------------------
+\subsubsection{Evaluation metrics}       % continuous-space and voxel-space metrics
+\label{sec:dgci_metrics}                 % \secref{sec:dgci_metrics}
+
+We follow the evaluation protocol of \citet{zhang2024}, which measures shape quality both in
+continuous space, on the mesh extracted from the predicted SDF, and in discrete voxel space.
+
+\paragraph{Continuous space.}            % non-manifold counts on the mesh
+Smoothness and connectivity of the reconstructed mesh are measured by counting non-manifold
+(NM) elements. NM-V counts the vertices connected to three or more non-coplanar faces, NM-E
+counts the edges shared by three or more faces, and NM-F counts the faces arranged in a way
+that prevents a closed, continuous body from being formed. Fewer non-manifold elements
+indicate better connectivity and smoothness \cite{zhang2024}.
+
+\paragraph{Discrete space.}              % topology metrics on the voxelized result
+To compute voxel-based metrics, the reconstructed surface is mapped back to the image
+coordinate system through the inverse of the image-to-physical transform, and a hole-filling
+algorithm is applied to obtain a dense volume \cite{zhang2024}. On this volume we compute the
+tree length detected rate (TD) and the branch detected rate (BD), defined in
+Eq.~\eqref{eq:td_bd}, and the Dice coefficient, which measure the topological completeness and correctness of the
+reconstruction \cite{zhang2024}.
+
+% ------------------------------------------------------------------------------
+\subsubsection{Results}                  % quantitative and qualitative results
+\label{sec:dgci_results}                 % \secref{sec:dgci_results}
+
+Table~\ref{tab:dgci_results} reports the metrics on the \TODO{validation and test} sets, and
+Figure~\ref{fig:dgci_recon} shows examples of reconstructed airway trees. DGCI produced the
+best reconstructions of all the models we trained. \TODO{Describe the main observations,
+e.g.\ preservation of fine distal branches, connectivity of the tree, smoothness of the
+surface.}
+
+\begin{table}[htbp]                      % DGCI quantitative results
+  \centering                             % center the table
+  \small                                 % slightly smaller font so the table fits
+  \caption{Reconstruction results of the DGCI model, reported as mean $\pm$ standard
+           deviation. Red cells are still to be filled in.}
+  \label{tab:dgci_results}               % referenced as Table~\ref{tab:dgci_results}
+  \begin{tabular}{lcccccc}               % set name + 6 metrics
+    \toprule
+    & \multicolumn{3}{c}{Continuous space} & \multicolumn{3}{c}{Discrete space} \\
+    \cmidrule(lr){2-4} \cmidrule(lr){5-7}  % group underlines (lr = trim ends)
+    Set & NM-V $\downarrow$ & NM-E $\downarrow$ & NM-F $\downarrow$
+        & TD (\%) $\uparrow$ & BD (\%) $\uparrow$ & Dice (\%) $\uparrow$ \\
+    \midrule
+    Validation & \TODO{?} & \TODO{?} & \TODO{?} & \TODO{?} & \TODO{?} & \TODO{?} \\
+    Test       & \TODO{?} & \TODO{?} & \TODO{?} & \TODO{?} & \TODO{?} & \TODO{?} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{figure}[htbp]                     % placeholder for DGCI reconstructions
+  \centering                             % center the figure
+  % \includegraphics[width=\textwidth]{figures/dgci_reconstructions.png}  % uncomment with your file
+  \fbox{\parbox[c][4cm][c]{0.9\textwidth}{\centering [Original vs.\ DGCI-reconstructed airway trees]}}
+  \caption{Ground-truth airway trees and their reconstructions by the DGCI model.}
+  \label{fig:dgci_recon}                 % referenced as Figure~\ref{fig:dgci_recon}
+\end{figure}

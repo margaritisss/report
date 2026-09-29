@@ -5,8 +5,8 @@
 %
 % Structure:
 %   Title page > Executive Summary > Acknowledgements (optional)
-%   > Table of Contents > Introduction > Datasets > Registration (Template construction, Affine registration)
-%   > Encoding > Labelling > Morphological Metrics > Clustering
+%   > Table of Contents > Introduction > Background > Datasets > Registration (Template construction, Affine registration)
+%   > Encoding (VAE, Autoencoders, Implicit) > Labelling > Morphological Metrics > Clustering
 %   > Conclusions and Recommendations > Appendices > List of References
 % Length target: 5-10 pages, about 3000 words (appendices not counted).
 % =====================================================================
@@ -32,6 +32,7 @@
 % ---------------------------------------------------------------- main text
 \clearpage                       % main text starts on a new page
 \input{sections/02-introduction}
+\input{sections/02-background}            % Background: Data representation + Related work
 \input{sections/03-dataset}
 \input{sections/04-registration}          % Registration: Template construction + Affine registration
 \input{sections/05-encoding}
