@@ -21,19 +21,17 @@ groupwise normalization} (SyGN) \cite{avants2010sygn}. The registration of
 individual airway trees to the finished template is described separately in
 \secref{sec:affine}.
 
-\paragraph{Sources of the method description.}  % reader knows which claim comes from where
-The description combines three sources. (i)~The pairwise deformable registration
-algorithm, Symmetric Normalization (SyN), was introduced by
-\citet{avants2008syn} (\secref{sec:syn}). (ii)~The groupwise
-template-construction strategy, SyGN, was introduced by \citet{avants2010sygn}
-(\secref{sec:sygn}). (iii)~The template initialisation, the appearance
-update, the parameter defaults and the order of operations are properties of the
-ANTsPy implementation (\texttt{ants.registration} and
-\texttt{ants.build\_template}) \cite{tustison2021antsx}; where the implementation
-differs from the published algorithms, this is stated explicitly. Both methods
-were developed and validated on T1-weighted brain MRI (cortical labelling in
-elderly and neurodegenerative brains, and hippocampus segmentation in epilepsy,
-respectively); neither was evaluated on airway segmentations.
+% \paragraph{Sources of the method description.}  % reader knows which claim comes from where
+% The description combines three sources. (i)~The pairwise deformable registration
+% algorithm Symmetric Normalization (SyN), (ii) the groupwise
+% template-construction strategy, SyGN, were both introduced by \citet{avants2010sygn} and (iii) the template initialisation, the appearance
+% update the parameter defaults and the order of operations are properties of the
+% ANTsPy implementation (\texttt{ants.registration} and
+% \texttt{ants.build\_template}) \cite{tustison2021antsx}; where the implementation
+% differs from the published algorithms, this is stated explicitly. Both methods
+% were developed and validated on T1-weighted brain MRI (cortical labelling in
+% elderly and neurodegenerative brains, and hippocampus segmentation in epilepsy,
+% respectively); neither was evaluated on airway segmentations.
 
 % ==============================================================================
 \subsubsection{Input data and image geometry}
@@ -41,29 +39,30 @@ respectively); neither was evaluated on airway segmentations.
 
 \paragraph{Selection of the input volumes.}  % what went into build_template
 Eight airway segmentation volumes were used: four drawn at random from ATM'22 and
-four from AIIB23 (\secref{sec:datasets}). The draw used Python's
-pseudo-random generator without a fixed seed, so the selected subset is not
-reproducible from the code alone; the file names were recorded in the run log
-and are listed in Table~\ref{tab:template_inputs}.
-\begin{table}[htbp]              % the 8 volumes given to ants.build_template
-  \centering                     % centre the table
-  \caption{Airway segmentations used to build the template, in input order.}
-  \label{tab:template_inputs}    % referenced in "Selection of the input volumes"
-  \begin{tabular}{clll}          % order, dataset, file name
-    \toprule
-    Order & Dataset & File name \\
-    \midrule
-    1 & ATM'22 & \TODO{file name} \\
-    2 & ATM'22 & \TODO{file name} \\
-    3 & ATM'22 & \TODO{file name} \\
-    4 & ATM'22 & \TODO{file name} \\
-    5 & AIIB23 & \TODO{file name} \\
-    6 & AIIB23 & \TODO{file name} \\
-    7 & AIIB23 & \TODO{file name} \\
-    8 & AIIB23 & \TODO{file name} \\
-    \bottomrule
-  \end{tabular}
-\end{table}
+four from AIIB23.
+%  The draw used Python's
+% pseudo-random generator without a fixed seed, so the selected subset is not
+% reproducible from the code alone; the file names were recorded in the run log
+% and are listed in Table~\ref{tab:template_inputs}.
+% \begin{table}[htbp]              % the 8 volumes given to ants.build_template
+%   \centering                     % centre the table
+%   \caption{Airway segmentations used to build the template, in input order.}
+%   \label{tab:template_inputs}    % referenced in "Selection of the input volumes"
+%   \begin{tabular}{clll}          % order, dataset, file name
+%     \toprule
+%     Order & Dataset & File name \\
+%     \midrule
+%     1 & ATM'22 & \TODO{file name} \\
+%     2 & ATM'22 & \TODO{file name} \\
+%     3 & ATM'22 & \TODO{file name} \\
+%     4 & ATM'22 & \TODO{file name} \\
+%     5 & AIIB23 & \TODO{file name} \\
+%     6 & AIIB23 & \TODO{file name} \\
+%     7 & AIIB23 & \TODO{file name} \\
+%     8 & AIIB23 & \TODO{file name} \\
+%     \bottomrule
+%   \end{tabular}
+% \end{table}
 % TODO: fill in the 8 file names from the run log,
 % TODO: or set `seed` in run_template_registration.py and report it here.
 The volumes were passed to \texttt{ants.build\_template} in the order ATM'22
@@ -72,7 +71,7 @@ volume defines the voxel grid of the template (see \emph{Initialisation} in
 \secref{sec:sygn}).
 
 \paragraph{Representation in physical space.}  % voxel index vs physical coordinate
-Each airway tree is a three-dimensional NIfTI image: a discrete voxel array
+Each airway tree is a three-dimensional NIfTI image, a discrete voxel array
 together with spatial metadata that positions the array in physical space. A
 voxel is identified by a discrete index $\mathbf{i}=(i_x,i_y,i_z)^T$, whereas its
 anatomical location is a continuous physical coordinate
@@ -88,7 +87,7 @@ $\mathbf{x}=(x,y,z)^T$, related by
   \label{eq:index_to_physical}   % voxel index -> physical coordinate
 \end{equation}
 where $\mathbf{o}$ is the image origin, $s_x,s_y,s_z$ are the voxel spacings and
-$\mathbf{D}$ is the direction matrix of the voxel axes; in NIfTI terminology these
+$\mathbf{D}$ is the direction matrix of the voxel axes, in NIfTI terminology these
 are encoded by the spatial affine in the image header. ANTs is built on ITK, in
 which registration is performed in \emph{physical coordinates}, and ANTsPy
 converts the NIfTI geometry into the ITK representation of origin, spacing and
@@ -97,7 +96,7 @@ airway segmentations are therefore taken into account when their structures are
 put into correspondence. The NIfTI affine defines the \emph{initial coordinate
 system of each image}; it is not itself a registration.
 
-\paragraph{Warping convention.}  % direction of the maps used in all equations below
+  % direction of the maps used in all equations below
 An image $I$ is treated as a function of physical position, and a transformation
 is applied by composition. If $T$ is the fixed image (the template) and $I$ the
 moving image, the warped image is defined on the domain of $T$:

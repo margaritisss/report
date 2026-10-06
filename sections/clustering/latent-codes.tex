@@ -1,0 +1,27 @@
+% % Input of the clustering: the DGCI latent codes. Subsection of "Clustering".
+
+% \subsection{Input: the latent codes}     % what is clustered
+% \label{sec:clust_input}                  % \secref{sec:clust_input}
+
+% After training, every airway tree $i$ is represented by its instance latent code
+% $\boldsymbol{\alpha}_i \in \mathbb{R}^{128}$ (\secref{sec:dgci_training}). Stacking the codes of
+% the $N = 419$ trees gives the data matrix $X \in \mathbb{R}^{419 \times 128}$, whose rows
+% $\mathbf{x}_i = \boldsymbol{\alpha}_i$ are the points to cluster. All distances below are
+% Euclidean distances between these codes.
+
+% \paragraph{Active dimensions}            % not every latent dimension carries information
+% Not every latent dimension is used by the model: the regularization of the latent codes
+% (Eq.~\eqref{eq:dgci_reg}) pulls them towards the shared code, so dimensions that do not help the
+% reconstruction stay almost constant across trees. To measure how much each dimension varies, we
+% use its median absolute deviation (MAD), a spread measure that is not driven by a few outlying
+% shapes,
+% \begin{equation}
+%   \mathrm{MAD}_j = \operatorname{median}_i \big|\, x_{ij} - \operatorname{median}_k x_{kj} \,\big|,
+%   \qquad j = 1, \dots, 128.
+%   \label{eq:mad}                         % robust spread of latent dimension j
+% \end{equation}
+% Sorted on a logarithmic scale, the MAD values show a clear gap between active and nearly
+% constant dimensions; with a threshold of $3 \times 10^{-4}$ placed in this gap, about 45
+% dimensions are active. \TODO{State which input was used for each method: all 128 dimensions,
+% or only the active ones. In the notebooks, agglomerative clustering uses all 128; in the
+% K-means notebook the final assignment \texttt{codes\_active = enc\_output} also selects all 128.}

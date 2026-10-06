@@ -1,0 +1,187 @@
+\documentclass{article}
+\usepackage[a4paper,landscape,margin=1.5cm]{geometry} % wide tables need landscape
+\usepackage[table]{xcolor}  % [table] loads colortbl for \cellcolor
+\usepackage{booktabs}       % \toprule, \midrule, \bottomrule
+\usepackage{graphicx}       % \resizebox
+\usepackage{amsmath}        % \text inside math
+
+% Shading colours: red = cluster mean above overall mean, blue = below
+\definecolor{hiRed}{HTML}{E8606A}
+\definecolor{loBlue}{HTML}{5B8FE0}
+
+% Legend dot colours (match the dashboard)
+\definecolor{dotA}{HTML}{2F7FF7}
+\definecolor{dotB}{HTML}{B5410F}
+\definecolor{dotC}{HTML}{1ED69A}
+\definecolor{dotD}{HTML}{F2B21B}
+
+% Style for the small grey statistics lines
+\newcommand{\stat}{\scriptsize\color{black!60}}
+
+\newcommand{\topgap}{\rule{0pt}{3ex}}     % invisible strut: space above the mean
+\newcommand{\botgap}{\rule[-1.2ex]{0pt}{0pt}} % invisible strut: space below the SD line
+\renewcommand{\arraystretch}{1.0}  % struts handle the spacing
+\setlength{\aboverulesep}{0pt}     % let \cellcolor touch the rules (no white gaps)
+\setlength{\belowrulesep}{0pt}
+
+\begin{document}
+
+
+
+\begin{table}[htbp]
+\centering
+\caption{Cluster statistics: K-means, unregistered.}
+\label{tab:unreg-kmeans}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrr|r}
+\toprule
+\topgap\textbf{Metric} & \textcolor{dotA}{\textbullet}\,\textbf{Cluster 0 (n=140)} & \textcolor{dotB}{\textbullet}\,\textbf{Cluster 1 (n=107)} & \textcolor{dotC}{\textbullet}\,\textbf{Cluster 2 (n=172)} & \textbf{All}\botgap \\
+\midrule
+\topgap\textbf{divergence} & \cellcolor{loBlue!2}\topgap\textbf{0.3799} & \cellcolor{loBlue!14}\topgap\textbf{0.3645} & \cellcolor{hiRed!10}\topgap\textbf{0.3955} & \topgap\textbf{0.3824} \\
+ & \cellcolor{loBlue!2}\stat SD 0.05221 $\cdot$ $\sigma^2$ 0.002726\botgap & \cellcolor{loBlue!14}\stat SD 0.05863 $\cdot$ $\sigma^2$ 0.003437\botgap & \cellcolor{hiRed!10}\stat SD 0.0451 $\cdot$ $\sigma^2$ 0.002034\botgap & \stat SD 0.05258 $\cdot$ $\sigma^2$ 0.002764\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{length} & \cellcolor{loBlue!3}\topgap\textbf{52.02} & \cellcolor{loBlue!19}\topgap\textbf{48.82} & \cellcolor{hiRed!14}\topgap\textbf{55.39} & \topgap\textbf{52.58} \\
+ & \cellcolor{loBlue!3}\stat SD 7.471 $\cdot$ $\sigma^2$ 55.82\botgap & \cellcolor{loBlue!19}\stat SD 9.631 $\cdot$ $\sigma^2$ 92.77\botgap & \cellcolor{hiRed!14}\stat SD 6.287 $\cdot$ $\sigma^2$ 39.53\botgap & \stat SD 8.077 $\cdot$ $\sigma^2$ 65.23\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{complexity} & \cellcolor{loBlue!6}\topgap\textbf{0.7748} & \cellcolor{loBlue!11}\topgap\textbf{0.7643} & \cellcolor{hiRed!12}\topgap\textbf{0.811} & \topgap\textbf{0.787} \\
+ & \cellcolor{loBlue!6}\stat SD 0.08176 $\cdot$ $\sigma^2$ 0.006685\botgap & \cellcolor{loBlue!11}\stat SD 0.1027 $\cdot$ $\sigma^2$ 0.01055\botgap & \cellcolor{hiRed!12}\stat SD 0.06113 $\cdot$ $\sigma^2$ 0.003737\botgap & \stat SD 0.08274 $\cdot$ $\sigma^2$ 0.006845\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{tortuosity} & \cellcolor{hiRed!11}\topgap\textbf{0.6253} & \cellcolor{loBlue!31}\topgap\textbf{0.6029} & \cellcolor{hiRed!10}\topgap\textbf{0.6247} & \topgap\textbf{0.6193} \\
+ & \cellcolor{hiRed!11}\stat SD 0.01658 $\cdot$ $\sigma^2$ $2.75{\times}10^{-4}$\botgap & \cellcolor{loBlue!31}\stat SD 0.02305 $\cdot$ $\sigma^2$ $5.31{\times}10^{-4}$\botgap & \cellcolor{hiRed!10}\stat SD 0.01793 $\cdot$ $\sigma^2$ $3.21{\times}10^{-4}$\botgap & \stat SD 0.02123 $\cdot$ $\sigma^2$ $4.51{\times}10^{-4}$\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{stenosis} & \cellcolor{loBlue!7}\topgap\textbf{0.3748} & \cellcolor{hiRed!10}\topgap\textbf{0.3882} & \cellcolor{loBlue!1}\topgap\textbf{0.3799} & \topgap\textbf{0.3803} \\
+ & \cellcolor{loBlue!7}\stat SD 0.03389 $\cdot$ $\sigma^2$ 0.001149\botgap & \cellcolor{hiRed!10}\stat SD 0.03415 $\cdot$ $\sigma^2$ 0.001166\botgap & \cellcolor{loBlue!1}\stat SD 0.0248 $\cdot$ $\sigma^2$ $6.15{\times}10^{-4}$\botgap & \stat SD 0.03091 $\cdot$ $\sigma^2$ $9.55{\times}10^{-4}$\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{ectasia} & \cellcolor{hiRed!1}\topgap\textbf{0.754} & \cellcolor{loBlue!28}\topgap\textbf{0.7433} & \cellcolor{hiRed!16}\topgap\textbf{0.7597} & \topgap\textbf{0.7536} \\
+ & \cellcolor{hiRed!1}\stat SD 0.01499 $\cdot$ $\sigma^2$ $2.25{\times}10^{-4}$\botgap & \cellcolor{loBlue!28}\stat SD 0.01407 $\cdot$ $\sigma^2$ $1.98{\times}10^{-4}$\botgap & \cellcolor{hiRed!16}\stat SD 0.01118 $\cdot$ $\sigma^2$ $1.25{\times}10^{-4}$\botgap & \stat SD 0.01478 $\cdot$ $\sigma^2$ $2.18{\times}10^{-4}$\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{n\_branches} & \cellcolor{loBlue!9}\topgap\textbf{217} & \topgap\textbf{234.6} & \cellcolor{hiRed!7}\topgap\textbf{250} & \topgap\textbf{235} \\
+ & \cellcolor{loBlue!9}\stat SD 78.65 $\cdot$ $\sigma^2$ 6186\botgap & \stat SD 101.7 $\cdot$ $\sigma^2$ 10330\botgap & \cellcolor{hiRed!7}\stat SD 69.41 $\cdot$ $\sigma^2$ 4817\botgap & \stat SD 82.76 $\cdot$ $\sigma^2$ 6850\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{max\_generation} & \cellcolor{loBlue!6}\topgap\textbf{10.99} & \cellcolor{hiRed!2}\topgap\textbf{11.3} & \cellcolor{hiRed!4}\topgap\textbf{11.36} & \topgap\textbf{11.22} \\
+ & \cellcolor{loBlue!6}\stat SD 1.476 $\cdot$ $\sigma^2$ 2.18\botgap & \cellcolor{hiRed!2}\stat SD 1.829 $\cdot$ $\sigma^2$ 3.344\botgap & \cellcolor{hiRed!4}\stat SD 1.279 $\cdot$ $\sigma^2$ 1.635\botgap & \stat SD 1.506 $\cdot$ $\sigma^2$ 2.269\botgap \\
+\bottomrule
+\end{tabular}}
+\par\smallskip\footnotesize Shading: $d=(\bar{x}_{\text{cluster}}-\bar{x}_{\text{all}})/s_{\text{all}}$, clipped at $|d|=1$; red = above overall mean, blue = below.
+\end{table}
+
+\clearpage
+
+\begin{table}[htbp]
+\centering
+\caption{Cluster statistics: Agglomerative clustering, unregistered.}
+\label{tab:unreg-agglo}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrr|r}
+\toprule
+\topgap\textbf{Metric} & \textcolor{dotA}{\textbullet}\,\textbf{Cluster 0 (n=187)} & \textcolor{dotB}{\textbullet}\,\textbf{Cluster 1 (n=112)} & \textcolor{dotC}{\textbullet}\,\textbf{Cluster 2 (n=68)} & \textcolor{dotD}{\textbullet}\,\textbf{Cluster 3 (n=52)} & \textbf{All}\botgap \\
+\midrule
+\topgap\textbf{divergence} & \topgap\textbf{0.3824} & \cellcolor{hiRed!15}\topgap\textbf{0.4018} & \cellcolor{loBlue!19}\topgap\textbf{0.3579} & \cellcolor{loBlue!8}\topgap\textbf{0.3724} & \topgap\textbf{0.3824} \\
+ & \stat SD 0.05107 $\cdot$ $\sigma^2$ 0.002608\botgap & \cellcolor{hiRed!15}\stat SD 0.03565 $\cdot$ $\sigma^2$ 0.001271\botgap & \cellcolor{loBlue!19}\stat SD 0.06208 $\cdot$ $\sigma^2$ 0.003854\botgap & \cellcolor{loBlue!8}\stat SD 0.05986 $\cdot$ $\sigma^2$ 0.003583\botgap & \stat SD 0.05258 $\cdot$ $\sigma^2$ 0.002764\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{length} & \cellcolor{hiRed!1}\topgap\textbf{52.82} & \cellcolor{hiRed!18}\topgap\textbf{56.15} & \cellcolor{loBlue!21}\topgap\textbf{48.37} & \cellcolor{loBlue!15}\topgap\textbf{49.58} & \topgap\textbf{52.58} \\
+ & \cellcolor{hiRed!1}\stat SD 6.997 $\cdot$ $\sigma^2$ 48.95\botgap & \cellcolor{hiRed!18}\stat SD 5.685 $\cdot$ $\sigma^2$ 32.32\botgap & \cellcolor{loBlue!21}\stat SD 10.15 $\cdot$ $\sigma^2$ 103.1\botgap & \cellcolor{loBlue!15}\stat SD 9.452 $\cdot$ $\sigma^2$ 89.34\botgap & \stat SD 8.077 $\cdot$ $\sigma^2$ 65.23\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{complexity} & \cellcolor{hiRed!1}\topgap\textbf{0.79} & \cellcolor{hiRed!15}\topgap\textbf{0.8175} & \cellcolor{loBlue!16}\topgap\textbf{0.7535} & \cellcolor{loBlue!16}\topgap\textbf{0.754} & \topgap\textbf{0.787} \\
+ & \cellcolor{hiRed!1}\stat SD 0.07292 $\cdot$ $\sigma^2$ 0.005317\botgap & \cellcolor{hiRed!15}\stat SD 0.05175 $\cdot$ $\sigma^2$ 0.002678\botgap & \cellcolor{loBlue!16}\stat SD 0.1084 $\cdot$ $\sigma^2$ 0.01175\botgap & \cellcolor{loBlue!16}\stat SD 0.1037 $\cdot$ $\sigma^2$ 0.01076\botgap & \stat SD 0.08274 $\cdot$ $\sigma^2$ 0.006845\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{tortuosity} & \cellcolor{loBlue!2}\topgap\textbf{0.6185} & \cellcolor{hiRed!14}\topgap\textbf{0.6265} & \cellcolor{loBlue!23}\topgap\textbf{0.607} & \cellcolor{hiRed!7}\topgap\textbf{0.623} & \topgap\textbf{0.6193} \\
+ & \cellcolor{loBlue!2}\stat SD 0.02183 $\cdot$ $\sigma^2$ $4.76{\times}10^{-4}$\botgap & \cellcolor{hiRed!14}\stat SD 0.01584 $\cdot$ $\sigma^2$ $2.51{\times}10^{-4}$\botgap & \cellcolor{loBlue!23}\stat SD 0.02483 $\cdot$ $\sigma^2$ $6.17{\times}10^{-4}$\botgap & \cellcolor{hiRed!7}\stat SD 0.01636 $\cdot$ $\sigma^2$ $2.68{\times}10^{-4}$\botgap & \stat SD 0.02123 $\cdot$ $\sigma^2$ $4.51{\times}10^{-4}$\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{stenosis} & \cellcolor{hiRed!2}\topgap\textbf{0.3816} & \cellcolor{loBlue!1}\topgap\textbf{0.3796} & \cellcolor{hiRed!3}\topgap\textbf{0.3829} & \cellcolor{loBlue!8}\topgap\textbf{0.3739} & \topgap\textbf{0.3803} \\
+ & \cellcolor{hiRed!2}\stat SD 0.0283 $\cdot$ $\sigma^2$ $8.01{\times}10^{-4}$\botgap & \cellcolor{loBlue!1}\stat SD 0.02333 $\cdot$ $\sigma^2$ $5.44{\times}10^{-4}$\botgap & \cellcolor{hiRed!3}\stat SD 0.04191 $\cdot$ $\sigma^2$ 0.001756\botgap & \cellcolor{loBlue!8}\stat SD 0.03687 $\cdot$ $\sigma^2$ 0.001359\botgap & \stat SD 0.03091 $\cdot$ $\sigma^2$ $9.55{\times}10^{-4}$\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{ectasia} & \cellcolor{loBlue!4}\topgap\textbf{0.7522} & \cellcolor{hiRed!19}\topgap\textbf{0.7605} & \cellcolor{loBlue!15}\topgap\textbf{0.7481} & \cellcolor{loBlue!7}\topgap\textbf{0.7509} & \topgap\textbf{0.7536} \\
+ & \cellcolor{loBlue!4}\stat SD 0.01548 $\cdot$ $\sigma^2$ $2.4{\times}10^{-4}$\botgap & \cellcolor{hiRed!19}\stat SD 0.009722 $\cdot$ $\sigma^2$ $9.45{\times}10^{-5}$\botgap & \cellcolor{loBlue!15}\stat SD 0.01402 $\cdot$ $\sigma^2$ $1.96{\times}10^{-4}$\botgap & \cellcolor{loBlue!7}\stat SD 0.01706 $\cdot$ $\sigma^2$ $2.91{\times}10^{-4}$\botgap & \stat SD 0.01478 $\cdot$ $\sigma^2$ $2.18{\times}10^{-4}$\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{n\_branches} & \topgap\textbf{236} & \cellcolor{hiRed!9}\topgap\textbf{253.1} & \cellcolor{loBlue!6}\topgap\textbf{222.9} & \cellcolor{loBlue!13}\topgap\textbf{208.4} & \topgap\textbf{235} \\
+ & \stat SD 81.53 $\cdot$ $\sigma^2$ 6648\botgap & \cellcolor{hiRed!9}\stat SD 58.7 $\cdot$ $\sigma^2$ 3445\botgap & \cellcolor{loBlue!6}\stat SD 104.7 $\cdot$ $\sigma^2$ 10960\botgap & \cellcolor{loBlue!13}\stat SD 91.41 $\cdot$ $\sigma^2$ 8356\botgap & \stat SD 82.76 $\cdot$ $\sigma^2$ 6850\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{max\_generation} & \cellcolor{hiRed!2}\topgap\textbf{11.29} & \cellcolor{hiRed!6}\topgap\textbf{11.44} & \cellcolor{hiRed!1}\topgap\textbf{11.25} & \cellcolor{loBlue!20}\topgap\textbf{10.48} & \topgap\textbf{11.22} \\
+ & \cellcolor{hiRed!2}\stat SD 1.489 $\cdot$ $\sigma^2$ 2.217\botgap & \cellcolor{hiRed!6}\stat SD 1.129 $\cdot$ $\sigma^2$ 1.275\botgap & \cellcolor{hiRed!1}\stat SD 1.872 $\cdot$ $\sigma^2$ 3.504\botgap & \cellcolor{loBlue!20}\stat SD 1.565 $\cdot$ $\sigma^2$ 2.451\botgap & \stat SD 1.506 $\cdot$ $\sigma^2$ 2.269\botgap \\
+\bottomrule
+\end{tabular}}
+\par\smallskip\footnotesize Shading: $d=(\bar{x}_{\text{cluster}}-\bar{x}_{\text{all}})/s_{\text{all}}$, clipped at $|d|=1$; red = above overall mean, blue = below.
+\end{table}
+
+\clearpage
+
+\begin{table}[htbp]
+\centering
+\caption{Cluster statistics: K-means, registered.}
+\label{tab:reg-kmeans}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrr|r}
+\toprule
+\topgap\textbf{Metric} & \textcolor{dotA}{\textbullet}\,\textbf{Cluster 0 (n=151)} & \textcolor{dotB}{\textbullet}\,\textbf{Cluster 1 (n=200)} & \textcolor{dotC}{\textbullet}\,\textbf{Cluster 2 (n=68)} & \textbf{All}\botgap \\
+\midrule
+\topgap\textbf{divergence} & \cellcolor{hiRed!16}\topgap\textbf{0.4032} & \cellcolor{loBlue!11}\topgap\textbf{0.3676} & \cellcolor{loBlue!2}\topgap\textbf{0.3794} & \topgap\textbf{0.3824} \\
+ & \cellcolor{hiRed!16}\stat SD 0.0438 $\cdot$ $\sigma^2$ 0.001918\botgap & \cellcolor{loBlue!11}\stat SD 0.0522 $\cdot$ $\sigma^2$ 0.002725\botgap & \cellcolor{loBlue!2}\stat SD 0.05677 $\cdot$ $\sigma^2$ 0.003222\botgap & \stat SD 0.05258 $\cdot$ $\sigma^2$ 0.002764\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{length} & \cellcolor{hiRed!18}\topgap\textbf{56.19} & \cellcolor{loBlue!14}\topgap\textbf{49.78} & \cellcolor{hiRed!1}\topgap\textbf{52.85} & \topgap\textbf{52.58} \\
+ & \cellcolor{hiRed!18}\stat SD 6.06 $\cdot$ $\sigma^2$ 36.73\botgap & \cellcolor{loBlue!14}\stat SD 8.307 $\cdot$ $\sigma^2$ 69\botgap & \cellcolor{hiRed!1}\stat SD 8.182 $\cdot$ $\sigma^2$ 66.94\botgap & \stat SD 8.077 $\cdot$ $\sigma^2$ 65.23\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{complexity} & \cellcolor{hiRed!16}\topgap\textbf{0.821} & \cellcolor{loBlue!12}\topgap\textbf{0.7613} & \topgap\textbf{0.7869} & \topgap\textbf{0.787} \\
+ & \cellcolor{hiRed!16}\stat SD 0.06085 $\cdot$ $\sigma^2$ 0.003703\botgap & \cellcolor{loBlue!12}\stat SD 0.08631 $\cdot$ $\sigma^2$ 0.00745\botgap & \stat SD 0.08787 $\cdot$ $\sigma^2$ 0.007722\botgap & \stat SD 0.08274 $\cdot$ $\sigma^2$ 0.006845\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{tortuosity} & \cellcolor{hiRed!5}\topgap\textbf{0.622} & \cellcolor{hiRed!1}\topgap\textbf{0.6197} & \cellcolor{loBlue!13}\topgap\textbf{0.6124} & \topgap\textbf{0.6193} \\
+ & \cellcolor{hiRed!5}\stat SD 0.01903 $\cdot$ $\sigma^2$ $3.62{\times}10^{-4}$\botgap & \cellcolor{hiRed!1}\stat SD 0.02246 $\cdot$ $\sigma^2$ $5.04{\times}10^{-4}$\botgap & \cellcolor{loBlue!13}\stat SD 0.02094 $\cdot$ $\sigma^2$ $4.39{\times}10^{-4}$\botgap & \stat SD 0.02123 $\cdot$ $\sigma^2$ $4.51{\times}10^{-4}$\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{stenosis} & \topgap\textbf{0.38} & \cellcolor{loBlue!4}\topgap\textbf{0.3772} & \cellcolor{hiRed!13}\topgap\textbf{0.3902} & \topgap\textbf{0.3803} \\
+ & \stat SD 0.02613 $\cdot$ $\sigma^2$ $6.83{\times}10^{-4}$\botgap & \cellcolor{loBlue!4}\stat SD 0.03422 $\cdot$ $\sigma^2$ 0.001171\botgap & \cellcolor{hiRed!13}\stat SD 0.02871 $\cdot$ $\sigma^2$ $8.24{\times}10^{-4}$\botgap & \stat SD 0.03091 $\cdot$ $\sigma^2$ $9.55{\times}10^{-4}$\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{ectasia} & \cellcolor{hiRed!14}\topgap\textbf{0.7589} & \cellcolor{loBlue!7}\topgap\textbf{0.751} & \cellcolor{loBlue!11}\topgap\textbf{0.7494} & \topgap\textbf{0.7536} \\
+ & \cellcolor{hiRed!14}\stat SD 0.01328 $\cdot$ $\sigma^2$ $1.76{\times}10^{-4}$\botgap & \cellcolor{loBlue!7}\stat SD 0.01537 $\cdot$ $\sigma^2$ $2.36{\times}10^{-4}$\botgap & \cellcolor{loBlue!11}\stat SD 0.01278 $\cdot$ $\sigma^2$ $1.63{\times}10^{-4}$\botgap & \stat SD 0.01478 $\cdot$ $\sigma^2$ $2.18{\times}10^{-4}$\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{n\_branches} & \cellcolor{hiRed!14}\topgap\textbf{263.8} & \cellcolor{loBlue!11}\topgap\textbf{212.9} & \cellcolor{hiRed!1}\topgap\textbf{236.4} & \topgap\textbf{235} \\
+ & \cellcolor{hiRed!14}\stat SD 74.84 $\cdot$ $\sigma^2$ 5601\botgap & \cellcolor{loBlue!11}\stat SD 77.67 $\cdot$ $\sigma^2$ 6032\botgap & \cellcolor{hiRed!1}\stat SD 94.54 $\cdot$ $\sigma^2$ 8938\botgap & \stat SD 82.76 $\cdot$ $\sigma^2$ 6850\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{max\_generation} & \cellcolor{hiRed!8}\topgap\textbf{11.53} & \cellcolor{loBlue!7}\topgap\textbf{10.96} & \cellcolor{hiRed!2}\topgap\textbf{11.31} & \topgap\textbf{11.22} \\
+ & \cellcolor{hiRed!8}\stat SD 1.356 $\cdot$ $\sigma^2$ 1.837\botgap & \cellcolor{loBlue!7}\stat SD 1.49 $\cdot$ $\sigma^2$ 2.219\botgap & \cellcolor{hiRed!2}\stat SD 1.739 $\cdot$ $\sigma^2$ 3.023\botgap & \stat SD 1.506 $\cdot$ $\sigma^2$ 2.269\botgap \\
+\bottomrule
+\end{tabular}}
+\par\smallskip\footnotesize Shading: $d=(\bar{x}_{\text{cluster}}-\bar{x}_{\text{all}})/s_{\text{all}}$, clipped at $|d|=1$; red = above overall mean, blue = below.
+\end{table}
+
+\clearpage
+
+\begin{table}[htbp]
+\centering
+\caption{Cluster statistics: Agglomerative clustering, registered.}
+\label{tab:reg-agglo}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{lrrrr|r}
+\toprule
+\topgap\textbf{Metric} & \textcolor{dotA}{\textbullet}\,\textbf{Cluster 0 (n=325)} & \textcolor{dotB}{\textbullet}\,\textbf{Cluster 1 (n=74)} & \textcolor{dotC}{\textbullet}\,\textbf{Cluster 2 (n=13)} & \textcolor{dotD}{\textbullet}\,\textbf{Cluster 3 (n=7)} & \textbf{All}\botgap \\
+\midrule
+\topgap\textbf{divergence} & \cellcolor{loBlue!3}\topgap\textbf{0.3789} & \cellcolor{hiRed!8}\topgap\textbf{0.3931} & \cellcolor{hiRed!2}\topgap\textbf{0.3854} & \cellcolor{hiRed!32}\topgap\textbf{0.4242} & \topgap\textbf{0.3824} \\
+ & \cellcolor{loBlue!3}\stat SD 0.05366 $\cdot$ $\sigma^2$ 0.002879\botgap & \cellcolor{hiRed!8}\stat SD 0.04695 $\cdot$ $\sigma^2$ 0.002205\botgap & \cellcolor{hiRed!2}\stat SD 0.04919 $\cdot$ $\sigma^2$ 0.00242\botgap & \cellcolor{hiRed!32}\stat SD 0.03629 $\cdot$ $\sigma^2$ 0.001317\botgap & \stat SD 0.05258 $\cdot$ $\sigma^2$ 0.002764\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{length} & \cellcolor{loBlue!2}\topgap\textbf{52.27} & \cellcolor{hiRed!4}\topgap\textbf{53.34} & \cellcolor{loBlue!1}\topgap\textbf{52.42} & \cellcolor{hiRed!35}\topgap\textbf{59.61} & \topgap\textbf{52.58} \\
+ & \cellcolor{loBlue!2}\stat SD 8.174 $\cdot$ $\sigma^2$ 66.82\botgap & \cellcolor{hiRed!4}\stat SD 6.939 $\cdot$ $\sigma^2$ 48.15\botgap & \cellcolor{loBlue!1}\stat SD 11.04 $\cdot$ $\sigma^2$ 121.9\botgap & \cellcolor{hiRed!35}\stat SD 6.027 $\cdot$ $\sigma^2$ 36.33\botgap & \stat SD 8.077 $\cdot$ $\sigma^2$ 65.23\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{complexity} & \cellcolor{loBlue!2}\topgap\textbf{0.7822} & \cellcolor{hiRed!8}\topgap\textbf{0.8042} & \cellcolor{loBlue!8}\topgap\textbf{0.7707} & \cellcolor{hiRed!35}\topgap\textbf{0.8591} & \topgap\textbf{0.787} \\
+ & \cellcolor{loBlue!2}\stat SD 0.08453 $\cdot$ $\sigma^2$ 0.007145\botgap & \cellcolor{hiRed!8}\stat SD 0.06708 $\cdot$ $\sigma^2$ 0.004499\botgap & \cellcolor{loBlue!8}\stat SD 0.1059 $\cdot$ $\sigma^2$ 0.01121\botgap & \cellcolor{hiRed!35}\stat SD 0.04858 $\cdot$ $\sigma^2$ 0.00236\botgap & \stat SD 0.08274 $\cdot$ $\sigma^2$ 0.006845\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{tortuosity} & \topgap\textbf{0.6195} & \cellcolor{loBlue!3}\topgap\textbf{0.6177} & \cellcolor{hiRed!8}\topgap\textbf{0.6235} & \cellcolor{hiRed!3}\topgap\textbf{0.621} & \topgap\textbf{0.6193} \\
+ & \stat SD 0.02139 $\cdot$ $\sigma^2$ $4.58{\times}10^{-4}$\botgap & \cellcolor{loBlue!3}\stat SD 0.02139 $\cdot$ $\sigma^2$ $4.57{\times}10^{-4}$\botgap & \cellcolor{hiRed!8}\stat SD 0.0197 $\cdot$ $\sigma^2$ $3.88{\times}10^{-4}$\botgap & \cellcolor{hiRed!3}\stat SD 0.01674 $\cdot$ $\sigma^2$ $2.8{\times}10^{-4}$\botgap & \stat SD 0.02123 $\cdot$ $\sigma^2$ $4.51{\times}10^{-4}$\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{stenosis} & \topgap\textbf{0.3802} & \cellcolor{loBlue!1}\topgap\textbf{0.3797} & \cellcolor{loBlue!2}\topgap\textbf{0.3789} & \cellcolor{hiRed!17}\topgap\textbf{0.3937} & \topgap\textbf{0.3803} \\
+ & \stat SD 0.03151 $\cdot$ $\sigma^2$ $9.93{\times}10^{-4}$\botgap & \cellcolor{loBlue!1}\stat SD 0.02922 $\cdot$ $\sigma^2$ $8.54{\times}10^{-4}$\botgap & \cellcolor{loBlue!2}\stat SD 0.03077 $\cdot$ $\sigma^2$ $9.47{\times}10^{-4}$\botgap & \cellcolor{hiRed!17}\stat SD 0.02064 $\cdot$ $\sigma^2$ $4.26{\times}10^{-4}$\botgap & \stat SD 0.03091 $\cdot$ $\sigma^2$ $9.55{\times}10^{-4}$\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{ectasia} & \cellcolor{loBlue!1}\topgap\textbf{0.7532} & \cellcolor{hiRed!1}\topgap\textbf{0.7541} & \cellcolor{hiRed!4}\topgap\textbf{0.755} & \cellcolor{hiRed!31}\topgap\textbf{0.765} & \topgap\textbf{0.7536} \\
+ & \cellcolor{loBlue!1}\stat SD 0.01518 $\cdot$ $\sigma^2$ $2.3{\times}10^{-4}$\botgap & \cellcolor{hiRed!1}\stat SD 0.01261 $\cdot$ $\sigma^2$ $1.59{\times}10^{-4}$\botgap & \cellcolor{hiRed!4}\stat SD 0.0177 $\cdot$ $\sigma^2$ $3.13{\times}10^{-4}$\botgap & \cellcolor{hiRed!31}\stat SD 0.006023 $\cdot$ $\sigma^2$ $3.63{\times}10^{-5}$\botgap & \stat SD 0.01478 $\cdot$ $\sigma^2$ $2.18{\times}10^{-4}$\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{n\_branches} & \cellcolor{loBlue!2}\topgap\textbf{230.4} & \cellcolor{hiRed!8}\topgap\textbf{252} & \cellcolor{loBlue!7}\topgap\textbf{220.5} & \cellcolor{hiRed!31}\topgap\textbf{299.3} & \topgap\textbf{235} \\
+ & \cellcolor{loBlue!2}\stat SD 84.18 $\cdot$ $\sigma^2$ 7087\botgap & \cellcolor{hiRed!8}\stat SD 71.89 $\cdot$ $\sigma^2$ 5167\botgap & \cellcolor{loBlue!7}\stat SD 83.75 $\cdot$ $\sigma^2$ 7013\botgap & \cellcolor{hiRed!31}\stat SD 87.31 $\cdot$ $\sigma^2$ 7624\botgap & \stat SD 82.76 $\cdot$ $\sigma^2$ 6850\botgap \\
+\arrayrulecolor{black!20}\hline\arrayrulecolor{black}
+\topgap\textbf{max\_generation} & \cellcolor{loBlue!1}\topgap\textbf{11.19} & \cellcolor{hiRed!4}\topgap\textbf{11.38} & \cellcolor{loBlue!6}\topgap\textbf{11} & \cellcolor{hiRed!9}\topgap\textbf{11.57} & \topgap\textbf{11.22} \\
+ & \cellcolor{loBlue!1}\stat SD 1.541 $\cdot$ $\sigma^2$ 2.375\botgap & \cellcolor{hiRed!4}\stat SD 1.372 $\cdot$ $\sigma^2$ 1.882\botgap & \cellcolor{loBlue!6}\stat SD 1.528 $\cdot$ $\sigma^2$ 2.333\botgap & \cellcolor{hiRed!9}\stat SD 1.272 $\cdot$ $\sigma^2$ 1.619\botgap & \stat SD 1.506 $\cdot$ $\sigma^2$ 2.269\botgap \\
+\bottomrule
+\end{tabular}}
+\par\smallskip\footnotesize Shading: $d=(\bar{x}_{\text{cluster}}-\bar{x}_{\text{all}})/s_{\text{all}}$, clipped at $|d|=1$; red = above overall mean, blue = below.
+\end{table}
+
+\clearpage
+
+\end{document}

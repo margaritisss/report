@@ -1,0 +1,38 @@
+% K-means. Subsection of "Clustering".
+
+\subsection{K-means}
+\label{sec:clust_kmeans}
+
+Unlike agglomerative clustering, K-means directly partitions the trees into a fixed number $K$ of
+clusters. Each cluster $c$ is represented by its centroid $\boldsymbol{\mu}_c$, and the
+partition is chosen to minimize the \emph{inertia}, the total squared distance of the trees to
+the centroid of their cluster:
+\begin{equation}
+  J = \sum_{i=1}^{N} \big\|\mathbf{x}_i - \boldsymbol{\mu}_{c(i)}\big\|_2^2 ,
+  \label{eq:kmeans}
+\end{equation}
+where $c(i)$ is the cluster of tree $i$. Lloyd's algorithm \cite{lloyd1982} alternates two
+steps: every tree is assigned to its nearest centroid, then every centroid is moved to the mean
+of the trees assigned to it. Neither step can increase $J$, so the algorithm converges, but only
+to a local minimum that depends on the initial centroids. We therefore initialize the centroids
+with k-means++ \cite{arthur2007kmeanspp}, which spreads them out by picking distant trees with
+higher probability, and keep the best of 20 runs with different initializations (scikit-learn
+implementation \cite{pedregosa2011sklearn}). Because each tree joins its nearest centroid, the
+borders between clusters are flat hyperplanes: K-means works best for compact, roughly
+spherical clusters.
+
+\paragraph{Choosing the number of clusters}
+K-means requires the number of clusters $K$ to be specified in advance. We therefore evaluated
+$K=2,\dots,10$ for each airway-tree representation. For each candidate $K$, K-means was fitted
+to the 256-dimensional latent codes using k-means++ initialization with 20 restarts, retaining
+the solution with the lowest inertia. Two criteria were then evaluated: the inertia, which
+measures the within-cluster sum of squared distances, and the silhouette coefficient
+\cite{rousseeuw1987silhouettes}, which measures how well each tree is separated from the other
+clusters. The mean silhouette was used to assess the separation of the resulting partition.
+\begin{equation}
+  s(i) = \frac{b(i) - a(i)}{\max\{a(i),\, b(i)\}} \in [-1, 1].
+  \label{eq:silhouette}
+\end{equation}
+The analysis identified $K=3$ as the preferred number of clusters for both the registered and
+unregistered airway-tree representations. The final K-means analysis was therefore performed
+with three clusters for both representations.

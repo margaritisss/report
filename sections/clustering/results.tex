@@ -1,0 +1,119 @@
+% Results of the clustering -- placeholders for figures, tables and interpretation.
+% Replace each \figplaceholder by \includegraphics and each \hint by your own text.
+
+\subsection{Results}                     % what the clustering found
+\label{sec:clust_results}                % \secref{sec:clust_results}
+
+\subsubsection{Agglomerative clustering}  % dendrogram, elbow, projections
+\label{sec:clust_results_agglo}
+
+\begin{figure}[htbp]                     % dendrogram + elbow curve
+  \centering
+  \figplaceholder[5cm]{Dendrogram of the Ward clustering (last 30 merges), with the cut line}
+  \par\medskip
+  \figplaceholder[4cm]{Average intra-cluster distance $D_{\mathrm{avg}}(k)$ and its relative reduction}
+  \caption{Agglomerative clustering of the latent codes. Top: dendrogram, cut at $k^{*}$
+           clusters (dashed line). Bottom: average intra-cluster distance as a function of the
+           number of clusters (Eq.~\eqref{eq:davg}) and its relative reduction
+           (Eq.~\eqref{eq:kstar}).}
+  \label{fig:clust_agglo}
+\end{figure}
+
+\hint{Interpret: how many clusters are suggested, how clear is the largest drop compared with the
+next candidates, and what are the cluster sizes? Does the dendrogram show well-separated
+branches, or merges at similar heights?}
+
+\begin{figure}[htbp]                     % the three projections, coloured by Ward cluster
+  \centering
+  \figplaceholder[4.5cm]{Kernel PCA \quad|\quad t-SNE \quad|\quad UMAP, coloured by Ward cluster}
+  \caption{Latent codes projected with kernel PCA, t-SNE (perplexity \TODO{value}) and UMAP
+           (\texttt{n\_neighbors} \TODO{value}), coloured by agglomerative cluster.}
+  \label{fig:clust_agglo_proj}
+\end{figure}
+
+\hint{Interpret: are the clusters separated in all three projections, only in some, or in none?
+Is the picture stable over the parameter sweep?}
+
+\subsubsection{K-means and kernel K-means}  % choice of K, agreement between methods
+\label{sec:clust_results_kmeans}
+
+\begin{figure}[htbp]                     % elbow + silhouette for both methods
+  \centering
+  \figplaceholder[4cm]{K-means and kernel K-means: inertia (elbow) and mean silhouette for $K = 2, \dots, 10$}
+  \caption{Choice of the number of clusters for K-means and kernel K-means: inertia
+           (Eq.~\eqref{eq:kmeans}) and mean silhouette (Eq.~\eqref{eq:silhouette}).}
+  \label{fig:clust_kmeans_k}
+\end{figure}
+
+\begin{table}[htbp]                      % agreement between the partitions
+  \centering
+  \small
+  \caption{Agreement between partitions, measured with the adjusted Rand index (1 = same
+           partition, 0 = chance level).}
+  \label{tab:clust_ari}
+  \begin{tabular}{llc}
+    \toprule
+    Comparison                                   & Latent codes          & ARI \\
+    \midrule
+    Agglomerative ($K=4$) vs K-means ($K=3$)     & unregistered          & \TODO{?} \\
+    Agglomerative ($K=4$) vs K-means ($K=3$)     & registered            & \TODO{?} \\
+    K-means: unregistered vs registered          & --                    & \TODO{?} \\
+    Agglomerative: unregistered vs registered    & --                    & \TODO{?} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\hint{Interpret: which $K$ do the elbow and the silhouette suggest, and do they agree? How much do
+the two methods, and the two sets of codes, agree (Table~\ref{tab:clust_ari})? Report the robustness checks of
+\secref{sec:clust_kmeans}: seed stability (mean ARI), sensitivity to $\gamma$, and the silhouette
+of the real data compared with the no-cluster Gaussian baseline.}
+
+\subsubsection{Morphological characterization of the clusters}  % what distinguishes the groups
+\label{sec:clust_results_morph}
+
+For every tree, the six descriptors of \secref{sec:morphometrics} are averaged over its branches
+and complemented with two whole-tree counts, the number of branches and the deepest generation.
+Comparing these eight values between clusters shows what distinguishes the groups, and colouring
+the projections by each value shows whether the latent space is organized along these
+anatomical properties.
+
+\begin{figure}[htbp]                     % projections coloured by metric
+  \centering
+  \figplaceholder[5cm]{Projections coloured by each of the 8 metrics}
+  \caption{UMAP projection of the latent codes coloured by the mean value of each
+           morphological descriptor and by the two tree counts.}
+  \label{fig:clust_metric_proj}
+\end{figure}
+
+\begin{figure}[htbp]                     % box plots per cluster
+  \centering
+  \figplaceholder[5cm]{Box plots of the 8 metrics per cluster}
+  \caption{Distribution of the eight metrics in each cluster.}
+  \label{fig:clust_boxplots}
+\end{figure}
+
+Tables~\ref{tab:unreg-kmeans} to~\ref{tab:reg-agglo} give, for each method and each set of
+latent codes, the distribution of the eight metrics within every cluster: mean, standard deviation
+and variance, median and interquartile range. The shading of each cell shows the standardized
+difference between the cluster mean and the mean over all 419 trees,
+\begin{equation}
+  d = \frac{\bar{x}_{\text{cluster}} - \bar{x}_{\text{all}}}{s_{\text{all}}} ,
+  \label{eq:cluster_d}                   % effect size used for the shading
+\end{equation}
+where $s_{\text{all}}$ is the standard deviation over all trees: red cells lie above the overall
+mean, blue cells below, and darker cells further from it. Expressing the difference in units of
+the overall spread makes metrics with very different scales comparable, from tortuosity values
+around 0.6 to branch counts above 200. Whether a metric differs significantly between the
+clusters can be tested with a Kruskal--Wallis test \cite{kruskal1952}, which compares the
+distributions without assuming normality. \TODO{Add the Kruskal--Wallis $p$-values per metric,
+e.g.\ as one sentence per table or as an extra column.}
+
+\input{sections/clustering/cluster-tables}  % the four landscape tables
+
+\hint{Interpret: which metrics separate the clusters most (darkest cells), and in which
+direction? Can the clusters be described in anatomical terms, e.g.\ longer, more complex and
+more branched trees against shorter, simpler ones? Compare unregistered and registered codes:
+does registration change which properties drive the clusters? Note also the cluster sizes: with
+registered codes, agglomerative clustering produces two very small clusters (13 and 7 trees)
+next to one of 325 trees. Do the metric-coloured projections show gradients that follow the
+clusters, or that cut across them?}

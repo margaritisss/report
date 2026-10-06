@@ -1,5 +1,43 @@
-\section{Clustering}             % grouping the data using the features above
-\label{sec:clustering}           % \secref{sec:clustering} -- used by the Encoding section
+% Clustering -- parent section; each part is a subsection in its own file.
 
-\hint{Describe the clustering method, its inputs and parameters (e.g.\ number of
-clusters), how the result was evaluated, and what the clusters show.}
+\section{Clustering}                     % phenotype discovery in the latent space
+\label{sec:clustering}                   % \secref{sec:clustering} -- used by Encoding and Morphological Metrics
+
+The implicit model of represents every airway tree by a latent code. If
+groups of trees with a similar shape exist, they should appear as groups of nearby codes. Following
+the phenotype-discovery approach of \citet{norouzi2024volpam}, who cluster the latent codes of a
+3D autoencoder to find imaging phenotypes without any labels, we cluster the latent codes of the
+airway trees with two families of methods: agglomerative hierarchical clustering and K-means,
+the latter also in a kernel version. The groups found are then visualized with three
+projections of the latent space and characterized with the morphological descriptors of
+\secref{sec:morphometrics} (Figure~\ref{fig:clustering_pipeline}).
+
+\begin{figure}[htbp]                     % the clustering pipeline at a glance
+  \centering                             % center the diagram
+  \begin{tikzpicture}[
+      node distance=5mm and 5mm,                         % vertical and horizontal gaps
+      box/.style={draw, rounded corners=2pt, align=center, text width=3.5cm,
+                  inner sep=4pt, font={\small\hyphenpenalty=10000}},  % one box per step, no hyphens
+      arr/.style={-{Stealth[length=2mm]}}]               % arrow style
+    \node[box] (codes) {Latent codes\\$\boldsymbol{\alpha}_i \in \mathbb{R}^{256}$, 419 trees};
+    \node[box, right=of codes] (clus) {Clustering\\Agglomerative\\K-means, kernel K-means};
+    \node[box, right=of clus, text width=2.5cm] (lab) {Cluster label\\for every tree};
+    \node[box, above right=2mm and 5mm of lab] (proj) {Projections\\kernel PCA, t-SNE,\\UMAP};
+    \node[box, below right=2mm and 5mm of lab] (morph) {Characterization\\morphological descriptors};
+    \draw[arr] (codes) -- (clus);                         % codes are clustered
+    \draw[arr] (clus) -- (lab);                           % clustering gives labels
+    \draw[arr] (lab.east) -- (proj.west);                 % labels coloured in the projections
+    \draw[arr] (lab.east) -- (morph.west);                % labels compared with the descriptors
+  \end{tikzpicture}
+  \caption{Clustering pipeline. The latent codes are clustered in their full space; the
+           projections are only used to look at the result, and the morphological descriptors
+           to describe what distinguishes the clusters.}
+  \label{fig:clustering_pipeline}        % referenced as Figure~\ref{fig:clustering_pipeline}
+\end{figure}
+
+% \input{sections/clustering/latent-codes}   % Subsection "Input: the latent codes"
+\input{sections/clustering/agglomerative}  % Subsection "Agglomerative hierarchical clustering"
+\input{sections/clustering/kmeans}         % Subsection "K-means and kernel K-means"
+\input{sections/clustering/projections}    % Subsection "Visualizing the latent space"
+\input{sections/clustering/results}        % Subsection "Results" (placeholders)
+% \FloatBarrier                              % all clustering figures before the next section

@@ -5,3 +5,23 @@
 \newcommand{\TODO}[1]{\textbf{\textcolor{red}{[TODO: #1]}}}  % visible placeholder, red in the PDF
 \newcommand{\secref}[1]{Section~``\nameref{#1}''}  % sections are unnumbered: cite them by title
 \addto\captionsenglish{\renewcommand{\contentsname}{Table of Contents}}  % babel-safe rename
+\makeatletter
+\newcommand{\tocpage}{%                  % table of contents with "Table of Contents" in every page header
+  \markboth{\contentsname}{}%            % header text, set before the list starts
+  \begingroup\let\@mkboth\@gobbletwo%    % stop LaTeX from replacing it with CAPITALS
+  \tableofcontents\endgroup}             % the list itself
+\makeatother
+\newcommand{\figplaceholder}[2][4cm]{%   % grey box standing in for a figure: [height]{what goes here}
+  \fbox{\parbox[c][#1][c]{0.9\textwidth}{\centering\color{tpgrey}[#2]}}}
+% ---- per-cluster statistics tables (sections/clustering/cluster-tables.tex)
+\definecolor{hiRed}{HTML}{E8606A}        % cluster mean above the overall mean
+\definecolor{loBlue}{HTML}{5B8FE0}       % cluster mean below the overall mean
+\definecolor{dotA}{HTML}{2F7FF7}         % cluster 0 legend dot (same colours as the projections)
+\definecolor{dotB}{HTML}{B5410F}         % cluster 1
+\definecolor{dotC}{HTML}{1ED69A}         % cluster 2
+\definecolor{dotD}{HTML}{F2B21B}         % cluster 3
+\newcommand{\stat}{\scriptsize\color{black!60}}  % small grey statistics lines inside a cell
+\newcommand{\clustertablesetup}{%        % spacing for these tables only (local to the table)
+  \renewcommand{\arraystretch}{1.15}%    % a little vertical breathing room
+  \setlength{\aboverulesep}{0pt}%        % shaded cells touch the rules, no white gaps
+  \setlength{\belowrulesep}{0pt}}

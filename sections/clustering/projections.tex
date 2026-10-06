@@ -1,0 +1,115 @@
+% Projections used to look at the latent space. Subsection of "Clustering".
+
+\subsection{Visualizing the latent space}  % kernel PCA, t-SNE, UMAP
+\label{sec:clust_projections}            % \secref{sec:clust_projections}
+
+The latent codes are represented in a 256-dimensional space and therefore cannot be directly
+visualized. We project them to two and three dimensions using three complementary dimensionality-
+reduction methods and colour the resulting embeddings according to cluster membership or
+morphological descriptors.
+% The projections are used only for viewing: all clusters are computed in the full latent space and no projection preserves all
+% distances, so a separation that appears in a projection, or the lack of one, has to be read with
+% care. 
+The three methods distort the data in different ways, which is why we compare them.
+
+\paragraph{Kernel PCA}                   % linear PCA in the RBF feature space
+Principal component analysis (PCA) finds the orthogonal directions of largest variance; kernel PCA
+\cite{scholkopf1998kpca} does the same in the feature space of a kernel. With the RBF kernel of
+Eq.~\eqref{eq:rbf} and the same median-rule $\gamma$ as kernel K-means, it shows the space in
+which kernel K-means operates. The kernel matrix $K$ is first centred,
+$\tilde{K} = H K H$ with $H = I - \frac{1}{N}\mathbf{1}\mathbf{1}^{\top}$, and decomposed as
+$\tilde{K}\mathbf{v}_m = \lambda_m \mathbf{v}_m$. The coordinate of tree $i$ on the $m$-th
+component is $\sqrt{\lambda_m}\, v_{m,i}$, and the share of kernel variance kept by a view with
+$d$ components is $\sum_{m \le d} \lambda_m / \sum_m \lambda_m$. 
+% Kernel PCA is deterministic and
+% keeps the global layout of the data, but it only shows the few directions of largest variance.
+% % \TODO{Report the kernel variance shown in 2D and in 3D (printed by the notebook).}
+
+\paragraph{t-SNE}                        % neighbourhood probabilities, KL divergence
+t-distributed stochastic neighbour embedding (t-SNE) \cite{vandermaaten2008tsne} preserves
+neighbourhoods rather than distances. For every tree $i$, it turns distances into probabilities
+of picking tree $j$ as a neighbour,
+\begin{equation}
+  p_{j|i} = \frac{\exp\!\big(-\|\mathbf{x}_i - \mathbf{x}_j\|^2 / 2\sigma_i^2\big)}
+                 {\sum_{k \neq i} \exp\!\big(-\|\mathbf{x}_i - \mathbf{x}_k\|^2 / 2\sigma_i^2\big)} ,
+  \label{eq:tsne_p}                      % neighbour probabilities in the latent space
+\end{equation}
+where the width $\sigma_i$ is chosen so that the distribution has a given \emph{perplexity},
+roughly the effective number of neighbours. In the projection, similarities $q_{ij}$ follow a
+heavy-tailed Student-$t$ distribution, $q_{ij} \propto (1 + \|\mathbf{y}_i - \mathbf{y}_j\|^2)^{-1}$,
+and the points $\mathbf{y}_i$ are moved by gradient descent to minimize the Kullback--Leibler
+divergence between the symmetrized $p_{ij}$ and $q_{ij}$. The heavy tail lets dissimilar trees
+drift apart, which gives well-separated groups, but the sizes of the groups and the distances
+between them are not meaningful. We ran t-SNE with PCA initialization and 1000 iterations, for
+perplexities from 5 to 50 in steps of 5.
+
+\paragraph{UMAP}
+Uniform Manifold Approximation and Projection (UMAP) \cite{mcinnes2018umap} is a nonlinear
+dimensionality-reduction method that seeks to preserve the neighbourhood structure of the
+high-dimensional data in a lower-dimensional representation. Given the latent codes
+$\mathbf{x}_1,\ldots,\mathbf{x}_N$, UMAP first identifies the nearest neighbours of each
+observation using the Euclidean distance. These neighbourhood relationships are represented by
+a weighted graph.
+
+For each tree $i$, UMAP determines a local connectivity distance $\rho_i$, corresponding to the
+distance to the closest neighbour, and a local scale parameter $\sigma_i$. The membership strength
+of the connection between tree $i$ and one of its neighbours $j$ is defined as
+\begin{equation}
+    w_{ij} =
+    \begin{cases}
+        1, & d(\mathbf{x}_i,\mathbf{x}_j) \leq \rho_i,\\[4pt]
+        \exp\!\left(
+        -\dfrac{d(\mathbf{x}_i,\mathbf{x}_j)-\rho_i}{\sigma_i}
+        \right),
+        & d(\mathbf{x}_i,\mathbf{x}_j) > \rho_i,
+    \end{cases}
+    \label{eq:umap_weight}
+\end{equation}
+where $d(\mathbf{x}_i,\mathbf{x}_j)$ denotes the Euclidean distance between two latent codes.
+Thus, nearby observations receive a high connection strength, while more distant neighbours have
+smaller weights. The local scales are chosen so that the graph adapts to the density of the data
+around each observation.
+
+UMAP then seeks a low-dimensional representation
+$\mathbf{y}_1,\ldots,\mathbf{y}_N$ whose neighbourhood structure reproduces that of the original
+graph. In the low-dimensional space, the strength of an association between two observations is
+modelled by
+\begin{equation}
+    \tilde{w}_{ij}
+    =
+    \frac{1}
+    {1+a\|\mathbf{y}_i-\mathbf{y}_j\|_2^{2b}},
+    \label{eq:umap_lowdim}
+\end{equation}
+where $a$ and $b$ determine the shape of the low-dimensional decay function. The embedding is
+obtained by minimizing the cross-entropy between the high- and low-dimensional fuzzy graphs:
+\begin{equation}
+    \mathcal{L}_{\mathrm{UMAP}}
+    =
+    -\sum_{i,j}
+    \left[
+        w_{ij}\log(\tilde{w}_{ij})
+        +
+        (1-w_{ij})\log(1-\tilde{w}_{ij})
+    \right].
+    \label{eq:umap_loss}
+\end{equation}
+Minimizing this objective attracts observations that are strongly connected in the original
+latent space and repels observations that have weak or no connections. The resulting embedding
+therefore preserves neighbourhood relationships rather than the exact pairwise distances of the
+original space.
+
+The scale of the neighbourhood structure is controlled by the number of neighbours considered for
+each observation. Small values emphasize local structure, whereas larger values allow broader
+relationships to influence the embedding. A minimum-distance parameter further controls how
+closely neighbouring observations can be placed in the low-dimensional space.
+
+In our experiments, UMAP was applied directly to the 256-dimensional latent representations using
+Euclidean distance and the default minimum-distance value. The neighbourhood size was varied
+from 5 to 55 in increments of 5, and both two- and three-dimensional embeddings were generated.
+
+% \paragraph{Parameter sweeps}             % trust what is stable across settings
+% Because t-SNE and UMAP depend on their parameters and on the random initialization (fixed with a
+% seed), we computed them over the whole range of perplexities and neighbour counts, in 2D and 3D.
+% A grouping that appears for every setting reflects the data; one that appears for a single
+% setting is more likely an artefact of the projection.

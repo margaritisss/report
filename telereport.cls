@@ -33,6 +33,8 @@
 \definecolor{tpred}{HTML}{BF1238}                 % Télécom Paris red (tp-red)
 \definecolor{tpgrey}{gray}{0.30}                  % luma(30%) (tp-grey)
 \definecolor{tpmail}{gray}{0.39}                  % luma(100) used for e-mails
+\definecolor{lightgrey}{HTML}{E6E6E6}             % light grey for tertiary numbering
+\definecolor{softgrey}{HTML}{F2F2F2}              % soft grey fill for capsule numbering
 
 % ---------------------------------------------------------------- translations
 \newcommand{\tp@abstractname}{Abstract}           % English defaults...
@@ -134,10 +136,50 @@
   \tp@barette\ifnum#1>1\hspace{0.2em}\tp@barette\fi\ifnum#1>2\hspace{0.2em}\tp@barette\fi%
   \hspace{0.3em}%                                 % gap before the heading text
 }
+% ---------------------------------------------------------------- section-number styles
+% Public selector (set this in main.tex):
+%   \sectionnumberstyle{circle}
+%   \sectionnumberstyle{capsule}
+% The three vertical Télécom Paris bars remain unchanged.
+
+\newcommand{\tp@sectionnumbercircle}[2]{%
+  \ifnum#1=1
+    \tikz[baseline=(n.base)]{\node[draw=tpred,line width=0.8pt,circle,minimum size=0.62cm,font=\bfseries\large,inner sep=0pt] (n) {#2};}%
+  \else\ifnum#1=2
+    \tikz[baseline=(n.base)]{\node[draw=tpgrey,line width=0.55pt,circle,minimum size=0.48cm,font=\bfseries\small,text=tpgrey,inner sep=0pt] (n) {#2};}%
+  \else
+    \tikz[baseline=(n.base)]{\node[draw=lightgrey,line width=0.5pt,circle,minimum size=0.39cm,font=\bfseries\scriptsize,text=tpgrey,inner sep=0pt] (n) {#2};}%
+  \fi\fi
+}
+
+\newcommand{\tp@sectionnumbercapsule}[2]{%
+  \ifnum#1=1
+    \tikz[baseline=(n.base)]{\node[fill=softgrey,draw=tpred,line width=0.7pt,rounded corners=7pt,inner xsep=8pt,inner ysep=3pt,font=\bfseries\large] (n) {#2};}%
+  \else\ifnum#1=2
+    \tikz[baseline=(n.base)]{\node[fill=softgrey,draw=tpgrey,line width=0.55pt,rounded corners=6pt,inner xsep=6pt,inner ysep=2.4pt,font=\bfseries\small,text=tpgrey] (n) {#2};}%
+  \else
+    \tikz[baseline=(n.base)]{\node[fill=white,draw=lightgrey,line width=0.5pt,rounded corners=5pt,inner xsep=4.5pt,inner ysep=1.8pt,font=\bfseries\small,text=tpgrey] (n) {#2};}%
+  \fi\fi
+}
+
+\newcommand{\tp@sectionnumber}{\tp@sectionnumbercircle} % default
+\newcommand{\sectionnumberstyle}[1]{%
+  \ifstrequal{#1}{circle}{%
+    \renewcommand{\tp@sectionnumber}{\tp@sectionnumbercircle}%
+  }{%
+    \ifstrequal{#1}{capsule}{%
+      \renewcommand{\tp@sectionnumber}{\tp@sectionnumbercapsule}%
+    }{%
+      \PackageError{telereport}{Unknown section number style `#1'}%
+        {Use \string\sectionnumberstyle{circle} or \string\sectionnumberstyle{capsule}.}%
+    }%
+  }%
+}
+
 \newcommand{\tp@semibold}{\bfseries}  % template asks for semibold; Helvetica only has bold
-\titleformat{\section}{\Large\tp@semibold}{\tp@barettes{1}\thesection}{0.5em}{}
-\titleformat{\subsection}{\large\tp@semibold}{\tp@barettes{2}\thesubsection}{0.5em}{}
-\titleformat{\subsubsection}{\normalsize\tp@semibold}{\tp@barettes{3}\thesubsubsection}{0.5em}{}
+\titleformat{\section}{\Large\tp@semibold}{\tp@barettes{1}\tp@sectionnumber{1}{\thesection}}{0.5em}{}
+\titleformat{\subsection}{\large\tp@semibold}{\tp@barettes{2}\tp@sectionnumber{2}{\thesubsection}}{0.5em}{}
+\titleformat{\subsubsection}{\normalsize\tp@semibold}{\tp@barettes{3}\tp@sectionnumber{3}{\thesubsubsection}}{0.5em}{}
 % titlesec drops the label when unnumbered, so keep the bars in a "before code" instead:
 \titleformat{name=\section,numberless}{\Large\tp@semibold}{}{0pt}{\tp@barettes{1}}
 \titleformat{name=\subsection,numberless}{\large\tp@semibold}{}{0pt}{\tp@barettes{2}}
@@ -145,7 +187,7 @@
 \titlespacing*{\section}{0pt}{1.25em}{1em}        % above: 1.25em, below: 1em
 \titlespacing*{\subsection}{0pt}{1.25em}{1em}     % same for every level
 \titlespacing*{\subsubsection}{0pt}{1.25em}{1em}
-\setcounter{secnumdepth}{0}                       % Typst template has no numbers; set 3 to enable
+\setcounter{secnumdepth}{3}                       % enable section, subsection, and subsubsection numbering
 
 % ---------------------------------------------------------------- cover page
 \renewcommand{\maketitle}{%

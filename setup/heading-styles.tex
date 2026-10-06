@@ -1,0 +1,64 @@
+% ------------------------------------------------------------------ heading number styles
+% Numbers for \section, \subsection and \subsubsection, drawn between the barettes and the title.
+% Choose one in main.tex with
+%     \setheadingstyle{<name>}
+% Styles: none, plain, red, divider, pill, outline, badge, underline, editorial.
+% \section* (Executive Summary, ...) stays unnumbered with every style.
+
+\makeatletter
+
+% ---- building blocks
+\newcommand{\tp@hnum}[1]{#1}             % how a number is drawn (redefined by each style)
+\newcommand{\tp@hsep}{0.55em}            % space between the number and the title
+\newcommand{\tp@htri}[2]{%               % tricolour rule: #1 width, #2 thickness (grey | black | red)
+  {\color{tpgrey}\rule{\dimexpr#1/3\relax}{#2}}%  % first third
+  {\color{black}\rule{\dimexpr#1/3\relax}{#2}}%   % second third
+  {\color{tpred}\rule{\dimexpr#1/3\relax}{#2}}}   % last third
+\newcommand{\tp@hbox}[2]{%               % number in a small box: #1 TikZ options, #2 number
+  \tikz[baseline=(n.base)]\node[inner xsep=0.32em, inner ysep=0.14em, #1] (n) {#2};}
+
+\newcommand{\tp@applyheadings}{%         % install the chosen number look on the three levels
+  \setcounter{secnumdepth}{3}%           % number sections, subsections and subsubsections
+  \titleformat{\section}{\Large\tp@semibold}{\tp@barettes{1}\tp@hnum{\thesection}}{\tp@hsep}{}%
+  \titleformat{\subsection}{\large\tp@semibold}{\tp@barettes{2}\tp@hnum{\thesubsection}}{\tp@hsep}{}%
+  \titleformat{\subsubsection}{\normalsize\tp@semibold}{\tp@barettes{3}\tp@hnum{\thesubsubsection}}{\tp@hsep}{}}
+\newcommand{\tp@defhstyle}[2]{%          % register a style under any name
+  \expandafter\def\csname tp@hstyle@#1\endcsname{#2}}
+
+% ---- the styles
+\tp@defhstyle{none}{%                    % no numbers (the original look)
+  \setcounter{secnumdepth}{0}}
+\tp@defhstyle{plain}{%                   % number in the title's own font and colour
+  \renewcommand{\tp@hnum}[1]{##1}\renewcommand{\tp@hsep}{0.6em}\tp@applyheadings}
+\tp@defhstyle{red}{%                     % number in the report's red
+  \renewcommand{\tp@hnum}[1]{{\color{tpred}##1}}\renewcommand{\tp@hsep}{0.6em}\tp@applyheadings}
+\tp@defhstyle{divider}{%                 % grey number, thin vertical line, title
+  \renewcommand{\tp@hnum}[1]{{\color{tpgrey}##1}\hspace{0.5em}%
+    {\color{tpgrey!45}\vrule width 0.07em height 0.78em depth 0.12em}}%
+  \renewcommand{\tp@hsep}{0.5em}\tp@applyheadings}
+\tp@defhstyle{pill}{%                    % white number on a red rounded label
+  \renewcommand{\tp@hnum}[1]{\tp@hbox{fill=tpred, text=white, rounded corners=0.18em}{##1}}%
+  \renewcommand{\tp@hsep}{0.5em}\tp@applyheadings}
+\tp@defhstyle{outline}{%                 % red number in a red outlined label
+  \renewcommand{\tp@hnum}[1]{\tp@hbox{draw=tpred, line width=0.06em, text=tpred, rounded corners=0.18em}{##1}}%
+  \renewcommand{\tp@hsep}{0.5em}\tp@applyheadings}
+\tp@defhstyle{badge}{%                   % white number on a black square label
+  \renewcommand{\tp@hnum}[1]{\tp@hbox{fill=black, text=white}{##1}}%
+  \renewcommand{\tp@hsep}{0.5em}\tp@applyheadings}
+\tp@defhstyle{underline}{%               % number underlined with the tricolour rule
+  \renewcommand{\tp@hnum}[1]{\sbox\@tempboxa{##1}%
+    \vtop{\offinterlineskip\copy\@tempboxa\kern0.22em\hbox{\tp@htri{\wd\@tempboxa}{0.1em}}}}%
+  \renewcommand{\tp@hsep}{0.6em}\tp@applyheadings}
+\tp@defhstyle{editorial}{%               % light grey, regular-weight number next to the bold title
+  \renewcommand{\tp@hnum}[1]{{\color{tpgrey!60}\fontseries{m}\selectfont ##1}}%
+  \renewcommand{\tp@hsep}{0.55em}\tp@applyheadings}
+
+% ---- the switch
+\newcommand{\setheadingstyle}[1]{%       % \setheadingstyle{pill}, {red}, ...
+  \@ifundefined{tp@hstyle@#1}%           % unknown name -> clear error message
+    {\PackageError{heading-styles}{Unknown heading style '#1'}%
+      {Use none, plain, red, divider, pill, outline, badge, underline or editorial.}}%
+    {\csname tp@hstyle@#1\endcsname}}    % apply the chosen style
+\makeatother
+
+\setheadingstyle{none}                   % default = original look; main.tex can override it

@@ -1,0 +1,55 @@
+% Agglomerative hierarchical clustering (Ward). Subsection of "Clustering".
+
+\subsection{Agglomerative hierarchical clustering}  % bottom-up merging, Ward linkage
+\label{sec:clust_agglo}                  % \secref{sec:clust_agglo}
+
+% \paragraph{Principle}                    % bottom-up construction of a hierarchy
+Agglomerative clustering builds a hierarchy of nested groups from the bottom up
+\cite{norouzi2024volpam}. At the start, every tree is a cluster of its own. At each step, the two
+closest clusters are merged, and the procedure repeats until a single cluster contains all the
+trees. The sequence of merges forms a binary tree, the \emph{dendrogram}, in which the height of
+each junction shows how far apart the two merged clusters were. Cutting the dendrogram with a
+horizontal line at some height gives a partition into $K$ clusters, so one run of the algorithm
+yields the clustering for every $K$ and shows how small groups nest inside larger ones. This is
+what makes hierarchical methods attractive for discovering intrinsic groupings whose number is
+not known in advance \cite{norouzi2024volpam}.
+
+\paragraph{Linkage}                      % how "closest" is defined: Ward
+What ``closest'' means is set by the linkage. \citet{norouzi2024volpam} merge the two
+clusters whose centroids are closest. We use Ward's linkage \cite{ward1963}, which merges the
+pair of clusters whose union increases the total within-cluster sum of squares the least. For
+two clusters $A$ and $B$ with centroids $\boldsymbol{\mu}_A$ and $\boldsymbol{\mu}_B$, this
+increase is
+\begin{equation}
+  \Delta(A, B) = \frac{|A|\,|B|}{|A| + |B|}\,
+                 \big\|\boldsymbol{\mu}_A - \boldsymbol{\mu}_B\big\|_2^2 .
+  \label{eq:ward}                        % cost of merging A and B
+\end{equation}
+Like the centroid linkage, Ward's criterion compares cluster centres, but the factor in front of
+the distance penalizes merging two large clusters, so it favours compact clusters of similar
+size. Since it greedily minimizes the same within-cluster sum of squares as K-means
+(Eq.~\eqref{eq:kmeans}), the two methods can be compared directly.
+
+\paragraph{Choosing the number of clusters}  % elbow on the average intra-cluster distance
+To choose where to cut the dendrogram, we follow the elbow criterion of
+\citet{norouzi2024volpam}. For every number of clusters $k = 1, \dots, 19$, we cut the hierarchy
+into $k$ clusters and compute the average intra-cluster distance, the mean distance between two
+trees of the same cluster, averaged over the clusters:
+\begin{equation}
+  D_{\mathrm{avg}}(k) = \frac{1}{k} \sum_{l=1}^{k}
+     \frac{1}{N_l^2} \sum_{u=1}^{N_l} \sum_{v=1}^{N_l}
+     \big\|\mathbf{x}_{ul} - \mathbf{x}_{vl}\big\|_2 ,
+  \label{eq:davg}                        % mean pairwise distance inside each cluster
+\end{equation}
+where $N_l$ is the number of trees in cluster $l$ and $\mathbf{x}_{ul}$ is the code of its
+$u$-th tree. Splitting a cluster always makes its parts more compact, so $D_{\mathrm{avg}}$ tends
+to decrease with $k$. The useful information is where it drops the most: the number of
+clusters is chosen as the one with the largest relative reduction \cite{norouzi2024volpam},
+\begin{equation}
+  k^{*} = \arg\max_{k}\;
+          \frac{D_{\mathrm{avg}}(k-1) - D_{\mathrm{avg}}(k)}{D_{\mathrm{avg}}(k-1)} .
+  \label{eq:kstar}                       % largest relative drop of D_avg
+\end{equation}
+A large relative drop means that going from $k-1$ to $k$ clusters separates groups that are
+genuinely different; after that point, further splits mostly cut coherent groups into pieces.
+The elbow criterion identified $k^{\*}=4$ as the optimal number of clusters for both the registered and unregistered airway trees. Thus, in both representations, the hierarchy was cut at four clusters for the subsequent analysis.

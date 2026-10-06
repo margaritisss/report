@@ -1,0 +1,81 @@
+% ------------------------------------------------------------------ paragraph heading styles
+% Every \paragraph{...} heading in the report is drawn by ONE style, chosen in main.tex with
+%     \setparagraphstyle{<name>}
+% Styles: tricolour, tricolour-title, accent, fade, tag, spaced, flag, minimal, original.
+% Write titles WITHOUT a final full stop: the run-in styles add their own separator.
+% Colours come from the class: tpgrey, black and tpred (the footer bar).
+
+\usepackage{microtype}                   % \textls{} = letter spacing, used by the "spaced" style
+\makeatletter
+
+% ---- user setting
+\newlength{\paragraphtextgap}          % space between the tricolour underline and the text below it
+\setlength{\paragraphtextgap}{0.9em}   % default; change it in main.tex with \setlength
+
+% ---- building blocks
+\newcommand{\tp@lineunder}[1]{%        % put #1 (a line) right under the title, no extra blank line
+  \par\nointerlineskip\vspace{0.45ex}% % small fixed gap instead of a full line of spacing
+  \hbox{#1}}                            % the line itself, as a box in the vertical list
+\newcommand{\tp@tricolourrule}[2]{%      % #1 total width, #2 thickness: grey | black | red, equal thirds
+  {\color{tpgrey}\rule{\dimexpr#1/3\relax}{#2}}%  % first third
+  {\color{black}\rule{\dimexpr#1/3\relax}{#2}}%   % second third
+  {\color{tpred}\rule{\dimexpr#1/3\relax}{#2}}}   % last third
+\newcommand{\tp@miniflag}{%              % tiny footer-like flag for run-in headings
+  \raisebox{0.32ex}{\tp@tricolourrule{16pt}{2.6pt}}}  % sits at mid x-height
+\newcommand{\tp@titleunderrule}[1]{%     % title with a tricolour rule exactly as wide as the title
+  \sbox\@tempboxa{#1}%                   % measure the title
+  \vtop{\offinterlineskip\copy\@tempboxa\kern0.45ex%  % title on the baseline, small fixed gap below
+        \hbox{\tp@tricolourrule{\wd\@tempboxa}{1.2pt}}}}  % rule of the same width
+\newcommand{\tp@tagtitle}[1]{%           % title inside a light label with a red left edge
+  \tikz[baseline=(t.base)]{%             % align the label with the text baseline
+    \node[fill=tpgrey!10, inner xsep=7pt, inner ysep=3.5pt, font=\small\bfseries] (t) {#1};  % label
+    \fill[tpred] (t.north west) rectangle ([xshift=2.2pt]t.south west);}}  % red edge on the left
+\newcommand{\tp@spacedtitle}[1]{%        % letter-spaced red capitals followed by a grey line
+  {\color{tpred}\small\bfseries\textls[110]{\MakeUppercase{#1}}}%  % the title
+  \hspace{0.8em}{\color{tpgrey!45}\leaders\hrule height 2.9pt depth -2.5pt\hfill}}  % line to the margin
+
+% ---- the styles (each one redefines \paragraph with titlesec)
+\newcommand{\tp@defstyle}[2]{%        % register a style under any name, hyphens allowed
+  \expandafter\def\csname tp@pstyle@#1\endcsname{#2}}
+\tp@defstyle{tricolour}{%      % YOUR IDEA: title above a full-width tricolour line
+  \titleformat{\paragraph}[block]{\normalfont\normalsize\bfseries}{}{0pt}{}%
+    [\tp@lineunder{\tp@tricolourrule{\linewidth}{0.8pt}}]%
+  \titlespacing*{\paragraph}{0pt}{1.4em}{0.25em}}
+\tp@defstyle{tricolour-title}{% title underlined by a tricolour rule as wide as the title
+  \titleformat{\paragraph}[block]{\normalfont\normalsize\bfseries}{}{0pt}{\tp@titleunderrule}%
+  \titlespacing*{\paragraph}{0pt}{1.4em}{\paragraphtextgap}}  % gap below = the user setting
+\tp@defstyle{accent}{%         % title above a grey hairline that starts with a tricolour flag
+  \titleformat{\paragraph}[block]{\normalfont\normalsize\bfseries}{}{0pt}{}%
+    [\tp@lineunder{\rlap{\tp@tricolourrule{1.5cm}{1.6pt}}%
+     {\color{tpgrey!35}\rule[0.6pt]{\linewidth}{0.4pt}}}]%
+  \titlespacing*{\paragraph}{0pt}{1.4em}{0.25em}}
+\tp@defstyle{fade}{%           % title above a red line that fades out to the right
+  \titleformat{\paragraph}[block]{\normalfont\normalsize\bfseries}{}{0pt}{}%
+    [\tp@lineunder{\tikz{\shade[left color=tpred, right color=white]
+       (0,0) rectangle (\linewidth,1pt);}}]%
+  \titlespacing*{\paragraph}{0pt}{1.4em}{0.25em}}
+\tp@defstyle{tag}{%            % title in a small label, text below
+  \titleformat{\paragraph}[block]{\normalfont}{}{0pt}{\tp@tagtitle}%
+  \titlespacing*{\paragraph}{0pt}{1.3em}{0.6em}}
+\tp@defstyle{spaced}{%         % red spaced capitals + thin line to the right margin
+  \titleformat{\paragraph}[block]{\normalfont}{}{0pt}{\tp@spacedtitle}%
+  \titlespacing*{\paragraph}{0pt}{1.3em}{0.45em}}
+\tp@defstyle{flag}{%           % run-in: mini tricolour flag + bold title, text continues
+  \titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{}{0pt}{\tp@miniflag\hspace{0.45em}}%
+  \titlespacing*{\paragraph}{0pt}{1.1em}{0.7em}}
+\tp@defstyle{minimal}{%        % run-in: red bold title, text continues
+  \titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries\color{tpred}}{}{0pt}{}%
+  \titlespacing*{\paragraph}{0pt}{1.1em}{0.7em}}
+\tp@defstyle{original}{%      % LaTeX default look: bold run-in title with a full stop
+  \titleformat{\paragraph}[runin]{\normalfont\normalsize\bfseries}{}{0pt}{}[.]%
+  \titlespacing*{\paragraph}{0pt}{3.25ex plus 1ex minus .2ex}{1em}}
+
+% ---- the switch
+\newcommand{\setparagraphstyle}[1]{%     % \setparagraphstyle{tricolour}, {tag}, ...
+  \@ifundefined{tp@pstyle@#1}%           % unknown name -> clear error message
+    {\PackageError{paragraph-styles}{Unknown paragraph style '#1'}%
+      {Use tricolour, tricolour-title, accent, fade, tag, spaced, flag, minimal or original.}}%
+    {\csname tp@pstyle@#1\endcsname}}    % apply the chosen style
+\makeatother
+
+\setparagraphstyle{tricolour-title}      % default; main.tex can override it

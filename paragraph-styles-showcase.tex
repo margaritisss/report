@@ -1,0 +1,161 @@
+% Catalogue of \paragraph heading designs for the internship report.
+% Compile from the project root: latexmk -pdf paragraph-styles-showcase.tex
+
+\documentclass[en]{telereport}           % same class as the report: same fonts, header, footer
+\input{setup/packages}                   % booktabs, amsmath, listings...
+\input{setup/paragraph-styles}           % the styles being presented
+\usepackage{tcolorbox}                   % frames around the sample texts
+\usepackage{courier}                    % vector monospaced font for style names and code
+
+\title{Paragraph heading styles}         % shown in the header
+\shorttitle{Paragraph heading styles -- design catalogue}  % header text
+
+\newtcolorbox{sample}{%                  % a "sample page" card for each style
+  colback=white, colframe=tpgrey!25, boxrule=0.4pt, arc=0pt,
+  left=12pt, right=12pt, top=0pt, bottom=8pt,
+  before upper={\csname @minipagefalse\endcsname}}  % let headings inside the frame keep their space above
+\newcommand{\sampletext}{%               % real text from the report, identical in every card
+  \paragraph{Encoder design}
+  The encoder is a stack of 3D convolutional blocks. Each block consists of a
+  $3\times3\times3$ convolution without bias, instance normalization with learnable affine
+  parameters, and an ELU activation. Downsampling is performed with strided convolutions rather
+  than pooling, in every second layer.
+  \paragraph{Latent sampling}
+  During training, a latent vector is sampled with the reparameterization trick,
+  \[\mathbf{z} = \boldsymbol{\mu} + \exp(\log\boldsymbol{\sigma}) \odot \boldsymbol{\epsilon},
+    \qquad \boldsymbol{\epsilon} \sim \mathcal{N}(\mathbf{0}, \mathbf{I}),\]
+  and at inference time the mean is used directly, giving a deterministic encoding of each
+  airway tree.}
+\newcommand{\styleinfo}[3]{%             % one line of facts: name to type, layout, report length
+  \noindent{\small\color{tpgrey}Name:~\texttt{\textbackslash setparagraphstyle\{#1\}}%
+  \quad$\cdot$\quad Layout:~#2\quad$\cdot$\quad Report:~#3~pages}\par\smallskip}
+\newcommand{\showstyle}[5]{%             % #1 number, #2 title, #3 key, #4 layout, #5 pages ; description follows
+  \subsection*{#1\quad #2}\styleinfo{#3}{#4}{#5}}
+
+\begin{document}
+
+\section*{Paragraph heading styles}      % page 1: what this is and how to use it
+\markboth{Catalogue}{}
+
+Your report contains 101 \texttt{\textbackslash paragraph\{\ldots\}} headings. They are all
+drawn by a single style, chosen with one line in \texttt{main.tex}; the section files do not
+change. The eight designs below are built from the colours the report already uses -- grey,
+black and the red of the footer bar -- so they match the cover, the header and the section
+markers.
+
+\subsection*{How to switch}
+\begin{lstlisting}[language={[LaTeX]TeX}]
+\input{setup/paragraph-styles}   % loads all the designs
+\setparagraphstyle{tricolour}    % pick one: tricolour, tricolour-title,
+                                 % accent, fade, tag, spaced, flag,
+                                 % minimal, original
+\end{lstlisting}
+Every design was compiled on the full report: none produces errors or lines that overflow the
+margin.
+
+\subsection*{Before: the LaTeX default}  % the current look, for comparison
+\styleinfo{original}{run-in}{67}
+\setparagraphstyle{original}
+\begin{sample}\sampletext\end{sample}
+
+\subsection*{The eight designs at a glance}
+\begin{center}\small\vspace{-0.6em}
+\begin{tabular}{rllll}                   % number, name, key, layout, length
+  \toprule
+  & Design & Name & Layout & Report length \\
+  \midrule
+  1 & Tricolour line (your idea) & \texttt{tricolour}       & title above & 70 pages \\
+  2 & Tricolour underline        & \texttt{tricolour-title} & title above & 70 pages \\
+  3 & Accent line                & \texttt{accent}          & title above & 70 pages \\
+  4 & Fading line                & \texttt{fade}            & title above & 70 pages \\
+  5 & Label                      & \texttt{tag}             & title above & 69 pages \\
+  6 & Spaced capitals            & \texttt{spaced}          & title above & 69 pages \\
+  7 & Flag                       & \texttt{flag}            & run-in      & 66 pages \\
+  8 & Red title                  & \texttt{minimal}         & run-in      & 66 pages \\
+  \midrule
+  -- & LaTeX default (now)       & \texttt{original}        & run-in      & 67 pages \\
+  \bottomrule
+\end{tabular}
+\end{center}
+{\small\emph{Title above}: the heading gets its own line. \emph{Run-in}: the text continues on
+the heading's line.}
+
+\clearpage
+\showstyle{1}{Tricolour line \textnormal{\color{tpgrey}-- your idea}}{tricolour}{title above}{70}
+The title in bold, with a thin line across the full text width directly under it: grey, black
+and red in three equal parts, like the bar in the page footer.
+\setparagraphstyle{tricolour}
+\begin{sample}\sampletext\end{sample}
+
+\showstyle{2}{Tricolour underline}{tricolour-title}{title above}{70}
+The same three colours, but the line is exactly as wide as the title, so short titles get short
+lines. Lighter on the page than the full-width version.
+\setparagraphstyle{tricolour-title}
+\begin{sample}\sampletext\end{sample}
+
+\clearpage
+\showstyle{3}{Accent line}{accent}{title above}{70}
+A very light grey hairline across the page, starting with a short, thicker tricolour flag. The
+colour is concentrated in one small mark, which keeps long sections calm.
+\setparagraphstyle{accent}
+\begin{sample}\sampletext\end{sample}
+
+\showstyle{4}{Fading line}{fade}{title above}{70}
+A red line that fades out towards the right margin. The softest of the full-width designs;
+prints as a grey gradient in black and white.
+\setparagraphstyle{fade}
+\begin{sample}\sampletext\end{sample}
+
+\clearpage
+\showstyle{5}{Label}{tag}{title above}{69}
+The title sits in a small light-grey label with a red edge, like a tab in a binder. Headings
+stand out clearly when a reader scans the page.
+\setparagraphstyle{tag}
+\begin{sample}\sampletext\end{sample}
+
+\showstyle{6}{Spaced capitals}{spaced}{title above}{69}
+Small red capitals with extra letter spacing, followed by a thin grey line to the right margin.
+An editorial look, used in magazines and annual reports.
+\setparagraphstyle{spaced}
+\begin{sample}\sampletext\end{sample}
+
+\clearpage
+\showstyle{7}{Flag}{flag}{run-in}{66}
+A miniature of the footer flag in front of the bold title; the text continues on the same line.
+Keeps the report at its current length.
+\setparagraphstyle{flag}
+\begin{sample}\sampletext\end{sample}
+
+\showstyle{8}{Red title}{minimal}{run-in}{66}
+The simplest change: the title in the report's red, no full stop, text on the same line. Almost
+no extra space, clearly different from body text.
+\setparagraphstyle{minimal}
+\begin{sample}\sampletext\end{sample}
+
+\clearpage
+\section*{Notes for choosing}
+\markboth{Catalogue}{}
+
+\paragraph{Space} Designs with the title above add about one line per heading. With 101 headings
+this costs 2 to 3 pages; the run-in designs keep the report at its current length (66--67
+pages). The page counts above were measured on the full report.
+
+\paragraph{Hierarchy} Sections and subsections are marked with the vertical three-colour
+barettes. The paragraph designs use horizontal marks (lines, underlines, flags), so a reader
+never confuses a paragraph heading with a section heading.
+
+\paragraph{Printing} The tricolour, accent, flag and label designs stay readable in black and
+white, because they rely on shape as well as colour. The fading line and the red title become
+plain grey.
+
+\paragraph{Writing titles} Write titles without a final full stop, e.g.\
+\texttt{\textbackslash paragraph\{Encoder design\}}; the run-in designs add their own
+separator. The 101 titles of the report have already been updated.
+
+\paragraph{Adjusting a design} Every design is a few lines in
+\texttt{setup/paragraph-styles.tex}. Common tweaks: line thickness (\texttt{0.8pt} in
+\texttt{tricolour}), the gap under the title (\texttt{\textbackslash tp@lineunder}), or the
+colours (\texttt{tpgrey}, \texttt{black}, \texttt{tpred}, defined in the class). This page
+itself uses the \texttt{minimal} design.
+
+\end{document}

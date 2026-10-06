@@ -11,10 +11,16 @@
 % Length target: 5-10 pages, about 3000 words (appendices not counted).
 % =====================================================================
 
+\PassOptionsToPackage{table}{xcolor}  % cell shading in tables (\cellcolor); must come before the class
 \documentclass[en]{telereport}   % visual style; [en] = English captions
 
 \input{setup/packages}           % booktabs, amsmath, natbib...
 \input{setup/helpers}            % \hint, references list, TOC name
+\input{setup/paragraph-styles}   % designs for \paragraph headings
+\input{setup/heading-styles}     % numbers for sections, subsections, subsubsections
+\setheadingstyle{pill}           % or: none, plain, red, divider, outline, badge, underline, editorial
+\setparagraphstyle{tricolour-title}  % or: tricolour, accent, fade, tag, spaced, flag, minimal, original
+\setlength{\paragraphtextgap}{0.9em} % space between the underline and the text (e.g. 0.5em tighter, 1.5em looser)
 \input{setup/titlepage}          % cover-page details (name, supervisors, year...)
 
 \begin{document}
@@ -26,8 +32,7 @@
 \clearpage                       % each front-matter item on its own page
 \input{sections/01-acknowledgements}  % optional -- comment out to drop it
 \clearpage
-\tableofcontents                 % built automatically from all the \section commands
-\markboth{Table of Contents}{}   % header text for the TOC page
+\tocpage                          % table of contents (setup/helpers.tex), header on every page
 
 % ---------------------------------------------------------------- main text
 \clearpage                       % main text starts on a new page

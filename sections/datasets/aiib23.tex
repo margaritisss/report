@@ -6,8 +6,7 @@
 
 The AIIB23 dataset (Airway-Informed Quantitative CT Imaging Biomarker for
 Fibrotic Lung Disease 2023) was released as part of an official challenge held
-in conjunction with MICCAI 2023 and hosted on the CodaLab platform
-\cite{nan2024aiib23}. It is the first publicly available dataset dedicated to
+in conjunction with MICCAI 2023\cite{nan2024aiib23}. It is the first publicly available dataset dedicated to
 airway segmentation in patients with fibrotic lung disease. Earlier public
 airway datasets, such as EXACT'09, BAS and ATM'22, mainly contain scans from
 healthy subjects or from patients with common pulmonary conditions such as
@@ -72,9 +71,8 @@ experienced radiologist's annotation was retained. Annotation was performed in
 ITK-SNAP using a drawing tablet. Inter-observer agreement on airway branches
 was very high (Cohen's $\kappa = 0.937$).
 
-\paragraph{Tasks and evaluation.}  % run-in bold heading
-The challenge defines two tasks. Task~I is binary airway segmentation of the
-3D HRCT volume. It is evaluated with overlap metrics (intersection over union,
+\paragraph{Evaluation.}  % run-in bold heading
+The binary airway segmentations are evaluated with overlap metrics (intersection over union,
 IoU, and precision) and with topological metrics that are particularly
 relevant for thin tubular structures:
 \begin{itemize}  % bulleted list of the branch metrics
@@ -85,15 +83,15 @@ relevant for thin tubular structures:
         when its IoU with the corresponding ground-truth branch is at least 0.8;
   \item the airway leakage ratio (ALR) quantifies false-positive predictions.
 \end{itemize}
-The challenge's overall accuracy score is the mean of IoU, precision, DLR and
-DBR. For reference, the best-performing challenge submission reached an IoU of
-0.905, a DLR of 0.937 and a DBR of 0.905 on the test set.
+% The challenge's overall accuracy score is the mean of IoU, precision, DLR and
+% DBR. For reference, the best-performing challenge submission reached an IoU of
+% 0.905, a DLR of 0.937 and a DBR of 0.905 on the test set.
 
-% ---- OPTIONAL: keep this paragraph only if you used Task II ----
-Task~II is a binary classification problem: predicting whether a patient is
-alive or deceased 63 weeks after the first HRCT scan. The training set
-contains 59 survivors and 36 deceased patients, and the validation set is
-balanced (26/26). The test set is strongly imbalanced, with about 87\,\% of
-survivors. Performance is measured with accuracy, AUC, sensitivity,
-specificity and F1-score.
-% ---- END OPTIONAL ----
+% % ---- OPTIONAL: keep this paragraph only if you used Task II ----
+% Task~II is a binary classification problem: predicting whether a patient is
+% alive or deceased 63 weeks after the first HRCT scan. The training set
+% contains 59 survivors and 36 deceased patients, and the validation set is
+% balanced (26/26). The test set is strongly imbalanced, with about 87\,\% of
+% survivors. Performance is measured with accuracy, AUC, sensitivity,
+% specificity and F1-score.
+% % ---- END OPTIONAL ----

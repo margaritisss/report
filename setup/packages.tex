@@ -9,7 +9,10 @@
 \usepackage[round]{natbib}       % \cite{key} -> (Zhang et al., 2023), author-year style
 \bibliographystyle{apalike-nd}   % APA-like layout (local copy of apalike: keeps "n.d." in citations)
 \let\cite\citep                 % \cite{key} -> (Zhang et al., 2023); use \citet for "Zhang et al. (2023)"
-\renewcommand{\bibsection}{\section{List of References}}  % keep the guide's title + TOC entry
+\renewcommand{\bibsection}{%           % reference list heading:
+  \section*{List of References}%        %   never numbered, even when sections are
+  \addcontentsline{toc}{section}{List of References}%  %   but still listed in the table of contents
+  \markboth{List of References}{}}      %   and shown in the page header
 
 % ---- code listings (used in the Registration section)
 \usepackage{listings}            % typeset source code blocks
@@ -26,3 +29,12 @@
 
 % ---- TikZ libraries (used for the registration flowchart)
 \usetikzlibrary{positioning,fit,arrows.meta}  % node placement, grouping boxes, arrow tips
+
+% ---- monospaced font: Latin Modern Mono (vector) when installed, e.g. on Overleaf
+\IfFileExists{t1lmtt.fd}{\renewcommand{\ttdefault}{lmtt}}{}  % otherwise keep the default
+
+\usepackage{placeins}                  % \FloatBarrier: print pending figures before going on
+
+% ---- cluster statistics tables
+\usepackage{makecell}                  % multi-line table cells (\makecell)
+\usepackage{pdflscape}                 % landscape pages, shown upright in PDF viewers
