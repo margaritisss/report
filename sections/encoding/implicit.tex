@@ -24,34 +24,35 @@
 \label{sec:implicit}                     % \secref{sec:implicit}
 \label{sec:dgci}                         % old name, kept so existing references still work
 
-The voxel-based models of \secref{sec:vae} and \secref{sec:ae} did not produce
-satisfactory reconstructions. We therefore trained an implicit model: the DeepSDF
+The voxel-based models did not produce
+satisfactory reconstructions. The voxel-based models did not produce satisfactory reconstructions. 
+We therefore turned to continuous implicit neural representations, using the We therefore trained an implicit model: the DeepSDF
 auto-decoder of \citet{park2019}, optimized with the signed distance loss proposed for
 airway trees by \citet{zhang2024} instead of the original DeepSDF loss. This model gave the
-best reconstructions of all the architectures we tested, and its learned latent codes are
-the representation used for the clustering in \secref{sec:clustering}.
+best reconstructions of all the architectures we tested and its learned latent codes are
+the representation used for the clustering.
 
 % ------------------------------------------------------------------------------
-\subsubsection{Motivation}               % why an implicit representation
-\label{sec:implicit_motivation}          % \secref{sec:implicit_motivation}
-\label{sec:dgci_motivation}              % old name
+% \subsubsection{Motivation}               % why an implicit representation
+% \label{sec:implicit_motivation}          % \secref{sec:implicit_motivation}
+% \label{sec:dgci_motivation}              % old name
 
 Airway annotations are made slice by slice in CT image stacks, so the reconstructed shape is
-inevitably limited by the resolution of the discrete voxels, and the image contrast degrades
-as the bronchi become thinner. As a result, voxel-based airway trees tend to be coarse and
-affected by spike-like noise, and CNN-based methods, which also work in the discrete voxel
-space, suffer from the same problems as well as from breakages in the tree \cite{zhang2024}.
+inevitably limited by the resolution of the discrete voxels and the image contrast degrades
+as the bronchi become thinner. As a result, voxel based airway trees tend to be coarse and
+affected by spike-like noise and CNN methods which also work in the discrete voxel
+space suffer from the same problems as well as from breakages in the tree \cite{zhang2024}.
 
-Implicit neural representations (INRs) address this by using coordinate-based neural
+Implicit neural representations address this by using coordinate based neural
 networks to parameterize a shape in continuous physical space instead of on a voxel grid.
-They are therefore not bounded by the CT grid resolution, and they yield smoother shapes
+They are therefore not bounded by the CT grid resolution and they yield smoother shapes
 with fewer spike-like artifacts \cite{park2019,zhang2024}. DeepSDF \cite{park2019} learns a
-single network that represents a whole class of shapes, each shape being identified by a
-low-dimensional latent code. These codes form a compact, continuous embedding of the
-training shapes, which is what we need for clustering.
+single network that represents a whole class of shapes where each shape being identified by a
+low-dimensional latent code. These codes form a compact and continuous embedding of the
+training shapes which is what we need for clustering.
 
 However, \citet{zhang2024} observed that the loss used by DeepSDF, an L1 penalty on the
-predicted SDF values, is not sufficient to model fine airway structures with high fidelity.
+predicted SDF values is not sufficient to model fine airway structures with high fidelity.
 They proposed additional geometric constraints, derived from implicit geometric
 regularization \cite{gropp2020}, as part of their Deep Geometric Correspondence Implicit
 (DGCI) model. We kept the DeepSDF architecture and adopted only this loss
@@ -60,9 +61,9 @@ regularization \cite{gropp2020}, as part of their Deep Geometric Correspondence 
 % say so here in one sentence -- it justifies the choice of plain DeepSDF.
 
 % ------------------------------------------------------------------------------
-\subsubsection{Model}                    % auto-decoder + network
-\label{sec:implicit_architecture}        % \secref{sec:implicit_architecture}
-\label{sec:dgci_architecture}            % old name
+% \subsubsection{Model}                    % auto-decoder + network
+% \label{sec:implicit_architecture}        % \secref{sec:implicit_architecture}
+% \label{sec:dgci_architecture}            % old name
 
 \paragraph{Neural signed distance field.}  % the implicit function F
 Each airway tree is represented by its signed distance function (SDF), which gives, for any
@@ -116,8 +117,7 @@ regularization \cite{gropp2020}:
 
 \begin{figure}[htbp]                     % placeholder for the architecture diagram
   \centering                             % center the figure
-  % \includegraphics[width=\textwidth]{figures/deepsdf_architecture.png}  % uncomment with your file
-  \fbox{\parbox[c][4cm][c]{0.9\textwidth}{\centering [DeepSDF auto-decoder figure]}}  % remove once image added
+  \includegraphics[width=\textwidth]{figures/deepsdf_architecture.png}  % uncomment with your file
   \caption{The DeepSDF auto-decoder, adapted from \citet{park2019}. The latent code
            $\mathbf{z}_i \in \mathbb{R}^{256}$ of tree $i$ is concatenated with a query point
            $\mathbf{p}$ and passed through eight fully connected layers of width 512, with the
@@ -132,8 +132,6 @@ regularization \cite{gropp2020}:
 \subsubsection{Loss function}            % DGCI SDF loss + DeepSDF code regularization
 \label{sec:implicit_loss}                % \secref{sec:implicit_loss}
 \label{sec:dgci_loss}                    % old name
-
-
 
 \paragraph{Sample sets.}                 % the three kinds of points per tree
 For each tree $i$ of a mini-batch $\mathcal{B}$, three sets of points are drawn in every
@@ -258,10 +256,7 @@ $\omega_\varphi = 5\times10^2$, $\omega_n = 10^2$ and $\omega_{\mathrm{Eik}} = 5
 \label{sec:dgci_training}                % old name
 
 \paragraph{Data.}                        % meshes, normalization, samples
-Our dataset contains \TODO{N} airway trees from the AIIB23 \TODO{\cite{...}} and ATM22
-\TODO{\cite{...}} datasets, split into \TODO{$N_{\mathrm{train}}$} training,
-\TODO{$N_{\mathrm{val}}$} validation and \TODO{$N_{\mathrm{test}}$} test cases. Each airway
-surface was extracted from its binary segmentation with Marching
+Each airway surface was extracted from its binary segmentation with Marching
 Cubes \cite{lorensen1987}, and the SDF samples were prepared with the preprocessing of
 DeepSDF \cite{park2019}. Each mesh is centered on its bounding box and scaled to fit in the
 unit sphere with a margin of 3\%; the offset and scale are stored, so that predictions can
@@ -284,9 +279,8 @@ occupies only a small fraction of the normalized volume and most samples are nat
 outside. The mini-batch contains $B = 64$ trees. The decoder weights and the latent codes
 are optimized with Adam \cite{kingma2015}, with initial learning rates of $10^{-3}$ and
 $2\times10^{-3}$ respectively, both halved every 4,000 epochs. The codes are initialized
-from $\mathcal{N}(0, 1/K)$. The model was trained for \TODO{E} epochs on a single
-\TODO{NVIDIA A100 / L40S} GPU. The training losses are shown in
-Figure~\ref{fig:implicit_curves}.
+from $\mathcal{N}(0, 1/K)$. The model was trained for 5000 epochs on a single
+NVIDIA A100 GPU. 
 % [NOTE] specs.json allows 20,001 epochs; report the epoch of the checkpoint you actually used.
 
 After training, each training tree is represented by its latent code
@@ -326,8 +320,9 @@ $\mathbf{z}_i \in \mathbb{R}^{256}$. These codes are the features used for clust
 \label{sec:dgci_metrics}                 % old name
 
 We follow the evaluation protocol of \citet{zhang2024}, which measures shape quality both in
-continuous space, on the mesh extracted from the predicted SDF, and in discrete voxel space.
-Meshes are extracted with Marching Cubes on a $\TODO{256}^3$ grid in the normalized volume.
+continuous space on the mesh extracted from the predicted SDF and in discrete voxel space. 
+Meshes are extracted with Marching Cubes on a $512^3$.
+
 
 \paragraph{Continuous space.}            % non-manifold counts on the mesh
 Smoothness and connectivity of the reconstructed mesh are measured by counting non-manifold
@@ -337,10 +332,10 @@ that prevents a closed, continuous body from being formed. Fewer non-manifold el
 indicate better connectivity and smoothness \cite{zhang2024}.
 
 \paragraph{Discrete space.}              % topology metrics on the voxelized result
-To compute voxel-based metrics, the predicted SDF is evaluated directly on the voxel grid of
-the original CT image: the center of each voxel is mapped to the normalized volume with the
+To compute voxel-based metrics the predicted SDF is evaluated directly on the voxel grid of
+the original CT image, the center of each voxel is mapped to the normalized volume with the
 stored offset and scale, and the voxel is labeled as airway if the predicted SDF is negative
-\TODO{(with $2\times$ supersampling near the surface and a 50\% occupancy threshold)}. On this
+with $2\times$ supersampling near the surface and a 50\% occupancy threshold. On this
 volume we compute the tree length detected rate (TD) and the branch detected rate (BD),
 defined in Eq.~\eqref{eq:td_bd}, and the Dice coefficient, which measure the topological
 completeness and correctness of the reconstruction \cite{zhang2024}.
@@ -352,37 +347,53 @@ completeness and correctness of the reconstruction \cite{zhang2024}.
 \label{sec:implicit_results}             % \secref{sec:implicit_results}
 \label{sec:dgci_results}                 % old name
 
-Table~\ref{tab:implicit_results} reports the metrics on the \TODO{validation and test} sets,
-and Figure~\ref{fig:implicit_recon} shows examples of reconstructed airway trees. This model
-produced the best reconstructions of all the models we trained. \TODO{Describe the main
-observations, e.g.\ preservation of fine distal branches, connectivity of the tree,
-smoothness of the surface.}
+Table~\ref{tab:implicit_results} reports the metrics and Figures~\ref{fig:implicit_recon}
+and~\ref{fig:implicit_recon_} show examples of reconstructed airway trees. This model
+produced the best reconstructions of all the models we trained. The qualitative results
+show good preservation of the overall airway-tree topology and connectivity, with the
+main and intermediate bronchial branches reconstructed continuously. A substantial
+portion of the distal branching structure is also preserved, although the smallest
+terminal branches are occasionally simplified or omitted. The reconstructed airways
+exhibit smooth and continuous tubular surfaces, particularly along the larger proximal
+branches, with some local surface irregularities visible at finer scales.
 
-\begin{table}[htbp]                      % quantitative results
-  \centering                             % center the table
-  \small                                 % slightly smaller font so the table fits
+\begin{table}[htbp]
+  \centering
+  \small
   \caption{Reconstruction results of the DeepSDF model trained with the SDF loss of
            \citet{zhang2024}, reported as mean $\pm$ standard deviation.}
-  \label{tab:implicit_results}           % referenced as Table~\ref{tab:implicit_results}
-  \label{tab:dgci_results}               % old name
-  \begin{tabular}{lcccccc}               % set name + 6 metrics
+  \label{tab:implicit_results}
+  \begin{tabular}{lcccccc}
     \toprule
     & \multicolumn{3}{c}{Continuous space} & \multicolumn{3}{c}{Discrete space} \\
-    \cmidrule(lr){2-4} \cmidrule(lr){5-7}  % group underlines (lr = trim ends)
+    \cmidrule(lr){2-4} \cmidrule(lr){5-7}
     Set & NM-V $\downarrow$ & NM-E $\downarrow$ & NM-F $\downarrow$
         & TD (\%) $\uparrow$ & BD (\%) $\uparrow$ & Dice (\%) $\uparrow$ \\
     \midrule
     Validation & \TODO{?} & \TODO{?} & \TODO{?} & \TODO{?} & \TODO{?} & \TODO{?} \\
-    Test       & \TODO{?} & \TODO{?} & \TODO{?} & \TODO{?} & \TODO{?} & \TODO{?} \\
+    Test
+      & $0.0 \pm 0.0$
+      & $4.6 \pm 6.6$
+      & $235.3 \pm 170.5$
+      & $94.23 \pm 3.23$
+      & $99.11 \pm 1.38$
+      & $85.42 \pm 2.23$ \\
     \bottomrule
   \end{tabular}
 \end{table}
 
 \begin{figure}[htbp]                     % placeholder for reconstructions
   \centering                             % center the figure
-  % \includegraphics[width=\textwidth]{figures/deepsdf_reconstructions.png}  % uncomment with your file
-  \fbox{\parbox[c][4cm][c]{0.9\textwidth}{\centering [Original vs.\ reconstructed airway trees]}}  % remove once image added
-  \caption{Ground-truth airway trees and their reconstructions by the DeepSDF model.}
+  \includegraphics[width=\textwidth]{figures/AIIB23.png}  % uncomment with your file
+  \caption{Ground-truth airway trees and their reconstructions by the DeepSDF model on AIIB23 dataset.}
   \label{fig:implicit_recon}             % referenced as Figure~\ref{fig:implicit_recon}
   \label{fig:dgci_recon}                 % old name
+\end{figure}
+
+\begin{figure}[htbp]                     % placeholder for reconstructions
+  \centering                             % center the figure
+  \includegraphics[width=\textwidth]{figures/ATM22.png}  % uncomment with your file
+  \caption{Ground-truth airway trees and their reconstructions by the DeepSDF model on ATM22 dataset.}
+  \label{fig:implicit_recon_}             % referenced as Figure~\ref{fig:implicit_recon}
+  \label{fig:dgci_recon_}                 % old name
 \end{figure}

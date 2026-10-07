@@ -1,13 +1,13 @@
 # Fdb version 4
-["bibtex build/main"] 1791378054.53552 "build/main.aux" "build/main.bbl" "build/main" 1791378066.40332 0
+["bibtex build/main"] 1791399460.4928 "build/main.aux" "build/main.bbl" "build/main" 1791399473.48156 0
   "./apalike-nd.bst" 1790414590 24793 ed021ad8aa23c9b55e6eb5df6a258f11 ""
   "./references.bib" 1791366267.22499 64105 8d8391194440c95dc59ac0e2b43400a2 ""
-  "build/main.aux" 1791378066.19185 68137 8f3459758463e7d745319919f8a0ce01 "pdflatex"
+  "build/main.aux" 1791399473.25666 68058 2479033051c99e9daaa4a79d9e95e3f2 "pdflatex"
   (generated)
   "build/main.bbl"
   "build/main.blg"
   (rewritten before read)
-["pdflatex"] 1791378054.60658 "/home/marga/Desktop/report/main.tex" "build/main.pdf" "main" 1791378066.40356 0
+["pdflatex"] 1791399460.57889 "/home/marga/Desktop/report/main.tex" "build/main.pdf" "main" 1791399473.48182 0
   "/etc/texmf/web2c/texmf.cnf" 1765718204.82674 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/marga/Desktop/report/main.tex" 1791311745.91901 2915 b99532cfc48a9a1ef8dbd7ab9425eebe ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
@@ -253,10 +253,12 @@
   "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1775323130 6831128 c5f1a28ebe05f3815acae49eac0b178f ""
   "assets/Logo_Telecom_IPParis_RVB_noir_H.pdf" 1789825868.89013 14140 7af0395f571b0f40eb6e9f83240c268b ""
   "assets/Logo_Telecom_IPParis_RVB_noir_V.pdf" 1789825868.89055 12331 de377b51bd785de64378220b099d0181 ""
-  "build/main.aux" 1791378066.19185 68137 8f3459758463e7d745319919f8a0ce01 "pdflatex"
-  "build/main.bbl" 1791378054.59837 31456 c066b0f675c6da96c6d5e6ef8e8985f1 "bibtex build/main"
-  "build/main.out" 1791378066.19585 9476 39d59ff3e847ecabffa7a3c71d8b6a61 "pdflatex"
-  "build/main.toc" 1791378066.19663 10733 185171c8bec37be5742832722347ef0a "pdflatex"
+  "build/main.aux" 1791399473.25666 68058 2479033051c99e9daaa4a79d9e95e3f2 "pdflatex"
+  "build/main.bbl" 1791399460.56865 31456 c066b0f675c6da96c6d5e6ef8e8985f1 "bibtex build/main"
+  "build/main.out" 1791399473.26066 9265 5bd7e692cb31d7b5a1011ff61556fd58 "pdflatex"
+  "build/main.toc" 1791399473.26221 10564 6549dccd941081dbe655e555681f1bb3 "pdflatex"
+  "figures/AIIB23.png" 1791397235.64551 1326150 d368371e5cfe214a5bb0d81ce300c1a6 ""
+  "figures/ATM22.png" 1791397616.51124 1104798 76c386c2766b3f183caad3d2c67d17b3 ""
   "figures/ae_sparse_reconstructions.png" 1790775755.67988 458052 a6665cf0993f356278c5ffbf590b6368 ""
   "figures/airway_bronchial_alveolar_trees.jpg" 1775216251.16456 278154 54e461e2f19114c15366532d4dd8d48d ""
   "figures/airway_ct_to_complete_tree.png" 1790695809.35346 982451 12035dd81ca449e2b711b0992d9d8fa4 ""
@@ -277,6 +279,7 @@
   "figures/clustering/unreg_kmeans_kernelPCA_2d.png" 1791310996.47991 266388 785351fe19d9425218c04abc3c1a121b ""
   "figures/clustering/unreg_kmeans_tsne_2d.png" 1791308083.36894 265233 ae5d43f50cbbbdda3aa4893217e87ce2 ""
   "figures/clustering/unreg_kmeans_umap_2d.png" 1791308062.58455 271217 e5fd9331e8837c0fa5fe55b0d5c1f846 ""
+  "figures/deepsdf_architecture.png" 1791396683.26778 15348 122cfc4e054a9aa8e368d32df561ecb7 ""
   "figures/ipgn_overview.png" 1791371251.93899 6888399 95f8d357e2def82d620632f669a53597 ""
   "figures/morph_signatures_ours.png" 1791376475.72636 1192334 a1f75996dbfa7be15858f0568572ac2b ""
   "figures/morphological_metrics.png" 1791369328.91708 2143396 6b8eaada60faf080b473aa1ce70456d3 ""
@@ -294,7 +297,7 @@
   "sections/03-dataset.tex" 1789988012 480 9b706d17228677ff19b5abd7a0d75226 ""
   "sections/04-registration.tex" 1790698546.85154 698 da94be140953391d6a229bd8f8922c24 ""
   "sections/05-encoding.tex" 1790591764.39596 693 12d7e7e69454ae56dc04b1ee394f7408 ""
-  "sections/06-labelling.tex" 1791376883.50872 9829 e6e7c60b0c28f5928ed3f852e8e43212 ""
+  "sections/06-labelling.tex" 1791378226.81697 10469 830a47e27e46530d1f538910bf3748aa ""
   "sections/07-morphological-metrics.tex" 1791378049.83454 15509 6a92d5fe0090a2542bcb9ba31f8b57b7 ""
   "sections/08-clustering.tex" 1791293100.42088 3197 8025516b61229c2d5c016bdc91dd9d73 ""
   "sections/09-conclusions.tex" 1789900575 353 50f45aa5c7236c4a51d2630dfbb23c57 ""
@@ -310,7 +313,7 @@
   "sections/datasets/aiib23.tex" 1790757358.13747 5661 5d7d25696c548868aa6ee7ca19f97c12 ""
   "sections/datasets/atm22.tex" 1789992301.91416 5069 75dd492ac82067b7a342ae54bcc5f7b1 ""
   "sections/encoding/autoencoders.tex" 1791311251.72323 6530 572612c2a94d8fd828903ad4bbab6c51 ""
-  "sections/encoding/implicit.tex" 1791364523.94329 24971 3c4b72554cab76f7e465bf387ad168d8 ""
+  "sections/encoding/implicit.tex" 1791399442.04105 25011 5f094932da0c0a7e586a948a13952d22 ""
   "sections/encoding/vae.tex" 1790770160.10255 18329 b278013415b8b7e163488a2236c26474 ""
   "sections/registration/affine-registration.tex" 1790418234.98817 8269 54c507549f51a02e5eaa72d3dea92402 ""
   "sections/registration/template-construction.tex" 1790697642.46314 32972 87e3e59c6bcafb9c80d1f519f494e9c7 ""

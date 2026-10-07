@@ -18,30 +18,30 @@ segments, and one class corresponds to the extra-pulmonary structures \cite{xie2
 label 19 is the extra-pulmonary part \cite{xie2025}. The correspondence between label indices
 and segmental bronchi is given in Table~\ref{tab:ipgn_labels}.
 
-\begin{table}[htbp]
-  \centering
-  \small
-  \caption{Class labels used by the IPGN model \cite{xie2025}. Labels 1--10
-           correspond to branches located in the left lung, labels 11--18
-           to branches located in the right lung, and label 19 to
-           extra-pulmonary structures \cite{xie2025}.}
-  \label{tab:ipgn_labels}
-  \begin{tabular}{cl@{\hspace{2em}}cl}
+\begin{table}[htbp]                      % label index -> anatomical name
+  \centering                             % center the table
+  \small                                 % smaller font so two column pairs fit
+  \caption{Anatomical classes predicted by IPGN \cite{xie2025}: the 18 pulmonary segments
+           and the extra-pulmonary structures. Labels 1--10 cover the ten segments of the
+           right lung and labels 11--18 the eight segments of the left lung, where the
+           apicoposterior (1+2) and anteromedial basal (7+8) segments are merged.}
+  \label{tab:ipgn_labels}                % referenced as Table~\ref{tab:ipgn_labels}
+  \begin{tabular}{cl@{\hspace{2em}}cl}   % two (label, name) column pairs side by side
     \toprule
-    Label & Anatomical region & Label & Anatomical region \\
+    Label & Right lung & Label & Left lung \\
     \midrule
-    1  & Left lung  & 11 & Right lung \\
-    2  & Left lung  & 12 & Right lung \\
-    3  & Left lung  & 13 & Right lung \\
-    4  & Left lung  & 14 & Right lung \\
-    5  & Left lung  & 15 & Right lung \\
-    6  & Left lung  & 16 & Right lung \\
-    7  & Left lung  & 17 & Right lung \\
-    8  & Left lung  & 18 & Right lung \\
-    9  & Left lung  &    &            \\
-    10 & Left lung  &    &            \\
+    1  & Apical (S1)            & 11 & Apicoposterior (S1+2)     \\
+    2  & Posterior (S2)         & 12 & Anterior (S3)             \\
+    3  & Anterior (S3)          & 13 & Superior lingular (S4)    \\
+    4  & Lateral (S4)           & 14 & Inferior lingular (S5)    \\
+    5  & Medial (S5)            & 15 & Superior (S6)             \\
+    6  & Superior (S6)          & 16 & Anteromedial basal (S7+8) \\
+    7  & Medial basal (S7)      & 17 & Lateral basal (S9)        \\
+    8  & Anterior basal (S8)    & 18 & Posterior basal (S10)     \\
+    9  & Lateral basal (S9)     &    &                           \\
+    10 & Posterior basal (S10)  &    &                           \\
     \midrule
-    \multicolumn{4}{l}{19 \quad Extra-pulmonary structures} \\
+    \multicolumn{4}{l}{19 \quad Extra-pulmonary structures (trachea and main bronchi)} \\
     \bottomrule
   \end{tabular}
 \end{table}

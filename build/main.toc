@@ -80,60 +80,58 @@
 \contentsline {paragraph}{Encoder design.}{34}{paragraph*.51}%
 \contentsline {subsubsection}{\numberline {5.2.3}Results}{34}{subsubsection.5.2.3}%
 \contentsline {subsection}{\numberline {5.3}Implicit encoding}{34}{subsection.5.3}%
-\contentsline {subsubsection}{\numberline {5.3.1}Motivation}{34}{subsubsection.5.3.1}%
-\contentsline {subsubsection}{\numberline {5.3.2}Model}{35}{subsubsection.5.3.2}%
 \contentsline {paragraph}{Neural signed distance field.}{35}{paragraph*.52}%
-\contentsline {paragraph}{Auto-decoder.}{36}{paragraph*.53}%
+\contentsline {paragraph}{Auto-decoder.}{35}{paragraph*.53}%
 \contentsline {paragraph}{Network.}{36}{paragraph*.54}%
 \contentsline {paragraph}{Changes required by the geometric loss.}{36}{paragraph*.55}%
-\contentsline {subsubsection}{\numberline {5.3.3}Loss function}{37}{subsubsection.5.3.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}Loss function}{37}{subsubsection.5.3.1}%
 \contentsline {paragraph}{Sample sets.}{37}{paragraph*.56}%
 \contentsline {paragraph}{SDF loss.}{37}{paragraph*.57}%
 \contentsline {paragraph}{Latent code regularization.}{37}{paragraph*.58}%
 \contentsline {paragraph}{Total objective.}{38}{paragraph*.59}%
-\contentsline {subsubsection}{\numberline {5.3.4}Data preparation and training}{38}{subsubsection.5.3.4}%
+\contentsline {subsubsection}{\numberline {5.3.2}Data preparation and training}{38}{subsubsection.5.3.2}%
 \contentsline {paragraph}{Data.}{38}{paragraph*.60}%
 \contentsline {paragraph}{Training.}{38}{paragraph*.61}%
-\contentsline {subsubsection}{\numberline {5.3.5}Evaluation metrics}{39}{subsubsection.5.3.5}%
+\contentsline {subsubsection}{\numberline {5.3.3}Evaluation metrics}{38}{subsubsection.5.3.3}%
 \contentsline {paragraph}{Continuous space.}{39}{paragraph*.62}%
 \contentsline {paragraph}{Discrete space.}{39}{paragraph*.63}%
-\contentsline {subsubsection}{\numberline {5.3.6}Results}{39}{subsubsection.5.3.6}%
+\contentsline {subsubsection}{\numberline {5.3.4}Results}{39}{subsubsection.5.3.4}%
 \contentsline {section}{\numberline {6}Labelling}{39}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Task formulation}{40}{subsection.6.1}%
-\contentsline {subsection}{\numberline {6.2}Model}{40}{subsection.6.2}%
-\contentsline {paragraph}{Input representations.}{40}{paragraph*.64}%
+\contentsline {subsection}{\numberline {6.1}Task formulation}{41}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Model}{41}{subsection.6.2}%
+\contentsline {paragraph}{Input representations.}{41}{paragraph*.64}%
 \contentsline {paragraph}{Architecture.}{41}{paragraph*.65}%
-\contentsline {subsection}{\numberline {6.3}Training data and reported performance}{41}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.3}Training data and reported performance}{42}{subsection.6.3}%
 \contentsline {subsection}{\numberline {6.4}Application to our airway trees}{42}{subsection.6.4}%
 \contentsline {paragraph}{Pre-processing.}{42}{paragraph*.66}%
-\contentsline {paragraph}{Inference.}{42}{paragraph*.67}%
-\contentsline {paragraph}{Quality control.}{42}{paragraph*.68}%
-\contentsline {paragraph}{Limitations.}{42}{paragraph*.69}%
-\contentsline {section}{\numberline {7}Morphological Metrics}{42}{section.7}%
+\contentsline {paragraph}{Inference.}{43}{paragraph*.67}%
+\contentsline {paragraph}{Quality control.}{43}{paragraph*.68}%
+\contentsline {paragraph}{Limitations.}{43}{paragraph*.69}%
+\contentsline {section}{\numberline {7}Morphological Metrics}{43}{section.7}%
 \contentsline {subsection}{\numberline {7.1}Overview}{43}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Common pre-processing}{45}{subsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Branch-level descriptors}{45}{subsection.7.3}%
-\contentsline {paragraph}{Stenosis ($S$).}{45}{paragraph*.70}%
-\contentsline {paragraph}{Ectasia ($E$).}{46}{paragraph*.71}%
-\contentsline {paragraph}{Tortuosity ($T$).}{46}{paragraph*.72}%
-\contentsline {subsection}{\numberline {7.4}Subtree-level descriptors}{46}{subsection.7.4}%
+\contentsline {subsection}{\numberline {7.2}Common pre-processing}{46}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Branch-level descriptors}{46}{subsection.7.3}%
+\contentsline {paragraph}{Stenosis ($S$).}{46}{paragraph*.70}%
+\contentsline {paragraph}{Ectasia ($E$).}{47}{paragraph*.71}%
+\contentsline {paragraph}{Tortuosity ($T$).}{47}{paragraph*.72}%
+\contentsline {subsection}{\numberline {7.4}Subtree-level descriptors}{47}{subsection.7.4}%
 \contentsline {paragraph}{Length ($L$).}{47}{paragraph*.73}%
-\contentsline {paragraph}{Divergence ($D$).}{47}{paragraph*.74}%
-\contentsline {paragraph}{Complexity ($C$).}{47}{paragraph*.75}%
-\contentsline {section}{\numberline {8}Clustering}{48}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Agglomerative hierarchical clustering}{48}{subsection.8.1}%
-\contentsline {paragraph}{Linkage}{49}{paragraph*.76}%
-\contentsline {paragraph}{Choosing the number of clusters}{49}{paragraph*.77}%
-\contentsline {subsection}{\numberline {8.2}K-means}{50}{subsection.8.2}%
-\contentsline {paragraph}{Choosing the number of clusters}{50}{paragraph*.78}%
-\contentsline {subsection}{\numberline {8.3}Visualizing the latent space}{50}{subsection.8.3}%
-\contentsline {paragraph}{Kernel PCA}{50}{paragraph*.79}%
-\contentsline {paragraph}{t-SNE}{51}{paragraph*.80}%
-\contentsline {paragraph}{UMAP}{51}{paragraph*.81}%
-\contentsline {subsection}{\numberline {8.4}Results}{52}{subsection.8.4}%
-\contentsline {paragraph}{Summary matrices}{52}{paragraph*.82}%
-\contentsline {subsubsection}{\numberline {8.4.1}Morphological characterization of the clusters}{54}{subsubsection.8.4.1}%
-\contentsline {section}{\numberline {9}Conclusions and Recommendations}{61}{section.9}%
-\contentsline {subsection}{\numberline {9.1}Conclusions}{61}{subsection.9.1}%
-\contentsline {subsection}{\numberline {9.2}Recommendations}{61}{subsection.9.2}%
-\contentsline {section}{List of References}{62}{subsection.9.2}%
+\contentsline {paragraph}{Divergence ($D$).}{48}{paragraph*.74}%
+\contentsline {paragraph}{Complexity ($C$).}{48}{paragraph*.75}%
+\contentsline {section}{\numberline {8}Clustering}{49}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Agglomerative hierarchical clustering}{50}{subsection.8.1}%
+\contentsline {paragraph}{Linkage}{50}{paragraph*.76}%
+\contentsline {paragraph}{Choosing the number of clusters}{50}{paragraph*.77}%
+\contentsline {subsection}{\numberline {8.2}K-means}{51}{subsection.8.2}%
+\contentsline {paragraph}{Choosing the number of clusters}{51}{paragraph*.78}%
+\contentsline {subsection}{\numberline {8.3}Visualizing the latent space}{51}{subsection.8.3}%
+\contentsline {paragraph}{Kernel PCA}{51}{paragraph*.79}%
+\contentsline {paragraph}{t-SNE}{52}{paragraph*.80}%
+\contentsline {paragraph}{UMAP}{52}{paragraph*.81}%
+\contentsline {subsection}{\numberline {8.4}Results}{53}{subsection.8.4}%
+\contentsline {paragraph}{Summary matrices}{53}{paragraph*.82}%
+\contentsline {subsubsection}{\numberline {8.4.1}Morphological characterization of the clusters}{55}{subsubsection.8.4.1}%
+\contentsline {section}{\numberline {9}Conclusions and Recommendations}{62}{section.9}%
+\contentsline {subsection}{\numberline {9.1}Conclusions}{62}{subsection.9.1}%
+\contentsline {subsection}{\numberline {9.2}Recommendations}{62}{subsection.9.2}%
+\contentsline {section}{List of References}{63}{subsection.9.2}%
