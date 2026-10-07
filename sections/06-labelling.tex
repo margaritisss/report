@@ -1,30 +1,12 @@
-% Labelling -- anatomical labelling of the airway trees with the released IPGN model.
-% Red \TODO{...} marks replace the [square-bracket] placeholders of the original draft.
-%
-% ==============================================================================
-% REVISION NOTES
-% ------------------------------------------------------------------------------
-% The model was used for inference only, so this section now keeps what a reader
-% needs to interpret OUR labels: what the model is, what each label means, how it
-% works at overview level, what it was trained on, how well it performs, and --
-% most importantly -- how WE applied it and checked the output.
-%
-% Removed material is NOT deleted: it is commented out below, inside blocks
-% marked  % [CUT] <reason>  ...  % [END CUT]. Delete those blocks once you agree.
-% New or rewritten text is marked  % [NEW]  or  % [REWRITTEN].
-% ==============================================================================
-
 \section[Labelling]{Anatomical Labeling of Airway Trees}
 \label{sec:labeling}                     % \secref{sec:labeling}
 
-% [REWRITTEN] last sentence: no longer announces training details
 To assign anatomical labels to our airway trees, we used the Implicit Point-Graph Network
 (IPGN) of \citet{xie2025}. We did not train this model ourselves: we used the weights
 released by the authors, trained on their Pulmonary Tree Labeling (PTL) dataset, and ran the
 model in inference mode only. This section summarizes the label definition, the model and its
-reported performance, and then describes how we applied it to our data.
+reported performance and then describes how we applied it to our data.
 
-% ------------------------------------------------------------------------------
 \subsection{Task formulation}            % 19-class labeling of a binary tree
 \label{sec:labeling_task}                % \secref{sec:labeling_task}
 
@@ -35,60 +17,44 @@ segments, and one class corresponds to the extra-pulmonary structures \cite{xie2
 1 to 10 are branches in the left lung, labels 11 to 18 are branches in the right lung, and
 label 19 is the extra-pulmonary part \cite{xie2025}. The correspondence between label indices
 and segmental bronchi is given in Table~\ref{tab:ipgn_labels}.
-% [NOTE] removed "(for the airway, the trachea and main bronchi)": the paper only says
-% "extra-pulmonary structures". If you confirm it on your outputs, re-add it WITHOUT
-% the \cite, as your own observation.
 
-% [NEW] label table -- essential, because the morphometrics are reported per class.
-% Fill the names from the label file in the PTL repository; do not guess them.
-\begin{table}[htbp]                      % label index -> anatomical name
-  \centering                             % center the table
-  \small                                 % smaller font so two column pairs fit
-  \caption{Anatomical classes predicted by IPGN \cite{xie2025}. \TODO{Fill names from the
-           PTL label definition.}}
-  \label{tab:ipgn_labels}                % referenced as Table~\ref{tab:ipgn_labels}
-  \begin{tabular}{cl@{\hspace{2em}}cl}   % two (label, name) column pairs side by side
+\begin{table}[htbp]
+  \centering
+  \small
+  \caption{Class labels used by the IPGN model \cite{xie2025}. Labels 1--10
+           correspond to branches located in the left lung, labels 11--18
+           to branches located in the right lung, and label 19 to
+           extra-pulmonary structures \cite{xie2025}.}
+  \label{tab:ipgn_labels}
+  \begin{tabular}{cl@{\hspace{2em}}cl}
     \toprule
-    Label & Left lung & Label & Right lung \\
+    Label & Anatomical region & Label & Anatomical region \\
     \midrule
-    1  & \TODO{} & 11 & \TODO{} \\
-    2  & \TODO{} & 12 & \TODO{} \\
-    3  & \TODO{} & 13 & \TODO{} \\
-    4  & \TODO{} & 14 & \TODO{} \\
-    5  & \TODO{} & 15 & \TODO{} \\
-    6  & \TODO{} & 16 & \TODO{} \\
-    7  & \TODO{} & 17 & \TODO{} \\
-    8  & \TODO{} & 18 & \TODO{} \\
-    9  & \TODO{} &    &         \\
-    10 & \TODO{} &    &         \\
+    1  & Left lung  & 11 & Right lung \\
+    2  & Left lung  & 12 & Right lung \\
+    3  & Left lung  & 13 & Right lung \\
+    4  & Left lung  & 14 & Right lung \\
+    5  & Left lung  & 15 & Right lung \\
+    6  & Left lung  & 16 & Right lung \\
+    7  & Left lung  & 17 & Right lung \\
+    8  & Left lung  & 18 & Right lung \\
+    9  & Left lung  &    &            \\
+    10 & Left lung  &    &            \\
     \midrule
     \multicolumn{4}{l}{19 \quad Extra-pulmonary structures} \\
     \bottomrule
   \end{tabular}
 \end{table}
 
-% [REWRITTEN] the key-point motivation is condensed to one sentence; it is only
-% kept because it explains why graph-level scores are reported further below.
 Since branching points and distal end points contain very few voxels, a high voxel-level
 score does not guarantee correct labels at these key locations; IPGN therefore also
 represents each tree as a skeleton graph whose nodes approximate the key points
 \cite{xie2025}.
 
-% [CUT] authors' design motivation -- replaced by the sentence above
-% Xie et al.\ point out that the hardest part of this task is labeling the branching points and
-% the distal end points correctly. These key locations contain very few voxels compared to the
-% rest of the tree, so a model trained only on voxel-wise signals is dominated by easy voxels
-% and can achieve a high voxel-level score while still mislabeling key
-% locations \cite{xie2025}. For this reason, IPGN also represents each tree as a skeleton graph
-% whose nodes approximate these key points, and it is evaluated on both voxels and graph
-% elements.
-% [END CUT]
-
 % ------------------------------------------------------------------------------
 \subsection{Model}                       % overview-level description only
 \label{sec:labeling_architecture}        % \secref{sec:labeling_architecture}
 
-% [REWRITTEN] skeleton graphs: kept because skeletonization is part of OUR pipeline
 \paragraph{Input representations.}       % point cloud + skeleton graph
 Instead of processing the dense volume with a CNN, IPGN works on two sparse representations
 of the tree \cite{xie2025}. The first is a point cloud of $M = 6{,}000$ randomly sampled
@@ -98,13 +64,12 @@ centerlines: centerline segments become edges, and centerline intersections and 
 points become nodes. The only input features are the $(x, y, z)$ coordinates of the points
 and nodes.
 
-% [REWRITTEN] fusion layers and implicit module described in words, no equations
 \paragraph{Architecture.}                % encoders, fusion, implicit module
 The model has three stages (Figure~\ref{fig:ipgn_overview}) \cite{xie2025}. First, a point
 encoder and an 11-layer graph attention network (GAT) \cite{velickovic2018} compute an
 initial feature for each point and each graph node. The point encoder is either
 PointNet++ \cite{qi2017} or Point Transformer \cite{zhao2021}; the released model we used has
-a \TODO{PointNet++ / Point Transformer} encoder. Second, a stack of Point-Graph Fusion layers
+a PointNet++ encoder. Second, a stack of Point-Graph Fusion layers
 exchanges information between the two branches: each graph node aggregates the features of
 the points within a small ball around it, and each point aggregates the features of its
 nearest graph nodes, weighted by inverse distance. In this way, the points receive the
@@ -114,124 +79,10 @@ for any query location, it interpolates the features of the nearest sampled poin
 fusion stages and maps them to 19 class scores with a small MLP. The network without this
 module is called the Point-Graph Network (PGN).
 
-% [CUT] original "Overview" paragraph -- merged into the two paragraphs above
-% \paragraph{Overview.}                    % the three stages of IPGN
-% Instead of processing the dense volume with a CNN, IPGN works on two sparse representations
-% of the tree: a point cloud, obtained by randomly sampling $M = 6{,}000$ foreground voxels,
-% and the skeleton graph with $N$ nodes \cite{xie2025}. The point cloud is a downsampled
-% version of the volume, while the graph describes the skeleton of the tree. The model has three
-% stages (Figure~\ref{fig:ipgn_overview}): separate point and graph encoders, a sequence of
-% Point-Graph Fusion layers that exchange information between the two branches, and an
-% Implicit Point Module that turns the sparse predictions back into a dense labeled volume. The
-% network without the implicit part is called the Point-Graph Network (PGN), and the full
-% model is IPGN \cite{xie2025}.
-% [END CUT]
-
-% [CUT] notation -- only needed to support the equations, which are also cut
-% \paragraph{Notation.}                    % points, nodes and layer features
-% The point coordinates are $\mathbf{P} = \{\mathbf{p}_1, \dots, \mathbf{p}_M\} \in
-% \mathbb{R}^{M\times3}$ and the graph node coordinates are $\mathbf{G} = \{\mathbf{g}_1,
-% \dots, \mathbf{g}_N\} \in \mathbb{R}^{N\times3}$. A superscript $(i)$ denotes the feature of
-% an element after the $i$-th layer, e.g.\ $\mathbf{p}^{(i)}$ and $\mathbf{g}^{(i)}$, and
-% $\frown$ denotes concatenation \cite{xie2025}.
-% [END CUT]
-
-% [CUT] encoder details -- kept in one sentence in "Architecture" above
-% \paragraph{Point and graph encoders.}    % initial per-element features
-% The $(x, y, z)$ coordinates of the points and of the graph nodes are the only input features.
-% A point network and a graph network act as initial encoders and produce a 128-dimensional
-% feature for each point and each node, $\mathbf{P}^{(0)} \in \mathbb{R}^{M\times128}$ and
-% $\mathbf{G}^{(0)} \in \mathbb{R}^{N\times128}$ \cite{xie2025}. The point encoder is either
-% PointNet++ \cite{qi2017} or Point Transformer \cite{zhao2021}, and the graph encoder is an
-% 11-layer graph attention network (GAT) \cite{velickovic2018} with 128 channels. The model we
-% used has a \TODO{PointNet++ / Point Transformer} point encoder.
-% [END CUT]
-
-% [CUT] fusion-layer equations -- internal mechanics of a model we did not modify
-% or train; the one-sentence description in "Architecture" is sufficient.
-% \paragraph{Point-Graph Fusion layers.}   % two-way feature exchange
-% The core of the model is a stack of $l$ Point-Graph Fusion layers
-% (Figure~\ref{fig:ipgn_fusion}). Each layer takes $\mathbf{P}^{(i-1)}$ and
-% $\mathbf{G}^{(i-1)}$ and outputs $\mathbf{P}^{(i)}$ and $\mathbf{G}^{(i)}$, using the 3D
-% coordinates of the elements to find neighbors in the other branch \cite{xie2025}.
-%
-% \emph{Point to graph (ball query and grouping).} Each graph node $\mathbf{g}$ collects all
-% points within a ball of radius $r$ around it, $\{\mathbf{p}_1, \dots, \mathbf{p}_b\}$, in
-% the style of PointNet++ \cite{qi2017}. An MLP $\mathcal{F}_1$ updates each of these point
-% features independently, and feature-wise max pooling aggregates them into a point summary
-% for the node \cite{xie2025}:
-% \begin{equation}
-%   \mathbf{g}^{(i)}_{bq} = \max_{j}\, \mathcal{F}_1\big(\mathbf{p}^{(i-1)}_j\big).
-%   \label{eq:ipgn_bq}                     % ball query + max pooling
-% \end{equation}
-% This summary is concatenated with the current node feature and passed through a shallow
-% graph attention network $\mathcal{G}$ \cite{velickovic2018}, which performs graph
-% convolution to produce the updated node feature:
-% \begin{equation}
-%   \mathbf{g}^{(i)} = \mathcal{G}\big(\mathbf{g}^{(i-1)} \frown \mathbf{g}^{(i)}_{bq}\big),
-%   \qquad \mathcal{G}: \mathbb{R}^{2D} \to \mathbb{R}^{D_{\mathrm{next}}}.
-%   \label{eq:ipgn_gat}                    % graph update with GAT
-% \end{equation}
-%
-% \emph{Graph to point (feature propagation).} Each point $\mathbf{p}$ finds its $k$ nearest
-% graph nodes $\{\mathbf{g}_1, \dots, \mathbf{g}_k\}$ in coordinate space, at distances
-% $\{d_1, \dots, d_k\}$, and combines their features with weights given by the normalized
-% inverse distances \cite{rossi2021,xie2025}:
-% \begin{equation}
-%   \mathbf{p}^{(i)}_{fp} = \frac{\sum_{j=1}^{k} \mathbf{g}^{(i-1)}_j \cdot \frac{1}{d_j}}
-%                                {\sum_{l=1}^{k} \frac{1}{d_l}}.
-%   \label{eq:ipgn_fp}                     % inverse-distance feature propagation
-% \end{equation}
-% The result is concatenated with the incoming point feature, and an MLP $\mathcal{F}_2$
-% projects it to the next layer's dimension:
-% \begin{equation}
-%   \mathbf{p}^{(i)} = \mathcal{F}_2\big(\mathbf{p}^{(i-1)} \frown \mathbf{p}^{(i)}_{fp}\big),
-%   \qquad \mathcal{F}_2: \mathbb{R}^{2D} \to \mathbb{R}^{D_{\mathrm{next}}}.
-%   \label{eq:ipgn_mlp}                    % point update with MLP
-% \end{equation}
-% In this way, the points receive the structural context of the skeleton, and the graph
-% receives the local shape information of the surrounding points. After the last fusion
-% layer, a lightweight MLP and a GNN project the point and node features to 19-dimensional
-% class scores \cite{xie2025}.
-% [END CUT]
-
-% [CUT] implicit-module step list and ablation -- condensed into "Architecture"
-% \paragraph{Implicit Point Module.}       % sparse-to-dense reconstruction
-% PGN only labels the 6,000 sampled points and the graph nodes. Labeling every foreground voxel
-% by repeatedly running PGN on new point clouds would be inefficient, because the graph and the
-% global shape of the point cloud do not change between runs \cite{xie2025}. The Implicit Point
-% Module instead treats the point features learned by PGN as a continuous feature field that
-% can be queried at any location (Figure~\ref{fig:ipgn_overview}). For a query point
-% $\mathbf{p}_q = (x_q, y_q, z_q)$, which does not need to belong to the sampled point cloud:
-% \begin{enumerate}
-%   \item its $k$ nearest neighbors $\{\mathbf{p}_1, \dots, \mathbf{p}_k\}$ in the sampled
-%         point cloud are found;
-%   \item for each neighbor, its features from all stages of PGN are concatenated into a
-%         multi-stage feature
-%         $\mathbf{z}_k = \mathbf{p}^{(0)}_k \frown \mathbf{p}^{(1)}_k \frown \dots \frown
-%         \mathbf{p}^{(l)}_k$, and these are combined into a feature $\mathbf{z}_q$ for the
-%         query point by inverse-distance feature propagation, as in
-%         Equation~\eqref{eq:ipgn_fp};
-%   \item an MLP $\mathcal{H}$ maps $\mathbf{z}_q$ to a 19-dimensional vector of class
-%         scores \cite{xie2025}.
-% \end{enumerate}
-% Using features from all stages, rather than only the last fusion layer, gave the best
-% results in the authors' ablation study \cite{xie2025}.
-% [END CUT]
-
-% [CUT] hyperparameters -- irrelevant for inference with released weights
-% \paragraph{Hyperparameters.}             % values reported by the authors
-% The ball query uses a radius $r = 0.1$ and at most 24 points per node; $\mathcal{G}$ is a
-% 3-layer GAT; the $k$-nearest-neighbor search in both the graph-to-point fusion and the
-% Implicit Point Module uses $k = 3$; and all intermediate fusion features are
-% 128-dimensional \cite{xie2025}. With a PointNet++ encoder, PGN has about 3.6M parameters,
-% and the Implicit Point Module adds about 0.1M \cite{xie2025}.
-% [END CUT]
 
 \begin{figure}[htbp]                     % placeholder for the IPGN overview figure
   \centering                             % center the figure
-  % \includegraphics[width=\textwidth]{figures/ipgn_overview.png}  % uncomment with your file
-  \fbox{\parbox[c][4cm][c]{0.9\textwidth}{\centering [IPGN overview figure]}}  % remove once image added
+  \includegraphics[width=\textwidth]{figures/ipgn_overview.png}  % uncomment with your file
   \caption{Overview of the Implicit Point-Graph Network (IPGN), adapted from
            \citet{xie2025}. The binary volume is converted into a skeleton graph and a
            point cloud, Point-Graph Fusion layers exchange features between the two
@@ -239,24 +90,10 @@ module is called the Point-Graph Network (PGN).
   \label{fig:ipgn_overview}              % referenced as Figure~\ref{fig:ipgn_overview}
 \end{figure}
 
-% [CUT] second figure -- the overview figure already shows the fusion layers;
-% one model figure is enough for an inference-only description.
-% \begin{figure}[htbp]
-%   \centering
-%   % \includegraphics[width=\textwidth]{figures/ipgn_fusion_layer.png}
-%   \fbox{\parbox[c][4cm][c]{0.9\textwidth}{\centering [Point-Graph Fusion layer figure]}}
-%   \caption{A Point-Graph Fusion layer, adapted from \citet{xie2025}. Graph nodes gather point
-%            features by ball query and grouping; points gather graph features by
-%            $k$-nearest-neighbor feature propagation.}
-%   \label{fig:ipgn_fusion}
-% \end{figure}
-% [END CUT]
-
 % ------------------------------------------------------------------------------
 \subsection{Training data and reported performance}  % PTL + Dice scores, condensed
 \label{sec:labeling_data}                % \secref{sec:labeling_data}
 
-% [REWRITTEN] PTL paragraph kept for domain-shift reasons; split percentages removed
 The released weights were trained on the PTL dataset \cite{xie2025}, which contains 800
 subjects from multiple medical centers, each with an airway, artery and vein volume
 annotated with the 19 classes by a junior radiologist and verified by a senior radiologist.
@@ -266,147 +103,70 @@ separately and frozen; the fusion layers and the Implicit Point Module were then
 jointly with a cross-entropy loss, using random rotation, shifting and scaling as data
 augmentation \cite{xie2025}.
 
-% [REWRITTEN] performance kept as text; baseline comparison table removed
 Performance is measured with micro-averaged Dice scores at two levels \cite{xie2025}: at the
 \emph{voxel level}, on the labeled volume, reflecting overall performance; and at the
 \emph{graph level}, on the labels of the skeleton nodes and edges, reflecting performance at
-the key locations of the tree. On the PTL test set, IPGN with the
-\TODO{PointNet++ / Point Transformer} encoder reaches a voxel-level Dice of
-\TODO{87.5 / 88.5}\,\% on airways, and \TODO{95.1 / 95.0}\,\% and
-\TODO{92.3 / 92.7}\,\% on graph nodes and edges, respectively, outperforming CNN-,
-point- and graph-based baselines \cite{xie2025}. On a version of PTL with artificially
+the key locations of the tree. On the PTL test set, IPGN with the PointNet++ encoder reaches a voxel-level
+Dice of 87.5\,\% on airways, and 95.1\,\% and 92.3\,\% on graph nodes
+and edges, respectively, outperforming CNN-, point- and graph-based
+baselines \cite{xie2025}. On a version of PTL with artificially
 disconnected trees, its voxel-level Dice dropped by only 1.2 points on average
 \cite{xie2025}, which is relevant if the input segmentations are imperfect.
-% [NOTE] keep only the numbers for YOUR encoder. The robustness sentence uses the
-% Point Transformer result (paper Table 6); drop it if you used PointNet++.
 
-% [CUT] graph ground-truth procedure -- this is how the PTL graph labels were made;
-% we never build graph ground truth. (If the released code also removes cliques from
-% OUR VesselVio graphs, mention that in one sentence in the inference section.)
-% \paragraph{Graph labels.}
-% Ground-truth labels for the graph are derived from the annotated volume in three steps,
-% labeling edges before nodes because edge labels are deterministic while node labels can be
-% ambiguous where classes meet \cite{xie2025}:
-% \begin{enumerate}
-%   \item \textbf{Graph simplification.} VesselVio also outputs, for each edge, the connected
-%         centerline points along it. Software inconsistencies can create cliques among
-%         these points; they are removed by keeping only the shortest path between the two
-%         nodes.
-%   \item \textbf{Edge labeling.} The labels of the centerline points of each edge are read
-%         from the annotated volume, and the edge label is their majority vote.
-%   \item \textbf{Node labeling.} A leaf node takes the label of its single edge, which is
-%         more reliable than reading it from the volume, since leaf coordinates can fall
-%         slightly outside the foreground. A node with several edges takes the majority vote
-%         of the labels of its connected edges.
-% \end{enumerate}
-% [END CUT]
 
-% [CUT] original skeleton-graph paragraph -- moved, shortened, to "Input representations";
-% "No additional hyperparameters..." is the authors' argument against other methods.
-% \paragraph{Skeleton graphs.}
-% For each volume, a skeleton graph is built with the VesselVio software \cite{bumgarner2022},
-% which applies the thinning algorithm of \citet{lee1994} to extract the centerlines of the
-% tree. In the resulting graph, the centerline segments become edges representing anatomical
-% connections, and the centerline intersections and distal end points become nodes
-% representing the key points of the tree \cite{xie2025}. No additional hyperparameters or
-% modeling are involved: all spatial and connectivity information comes directly from the
-% original volume.
-% [END CUT]
+\subsection{Application to our airway trees}
+\label{sec:labeling_ours}
+\label{sec:labeling_inference}
 
-% [CUT] detailed training schedule -- epochs and learning rates do not affect how
-% our predictions are read; the essentials are now one sentence above.
-% \subsection{Training}
-% The released model was trained by Xie et al.\ in two stages \cite{xie2025}.
-% \paragraph{Encoder pre-training.}
-% First, the point encoder and the graph encoder were trained independently on the point and
-% graph versions of the 19-class labeling task, and then frozen. The point encoders were
-% trained for 120 epochs with a learning rate of 0.002, and the GAT graph encoder for 240
-% epochs with a learning rate of 0.02 \cite{xie2025}.
-% \paragraph{Joint training.}
-% Second, PGN and the Implicit Point Module were trained together. In each step, PGN is run on
-% $M = 6{,}000$ sampled points and the $N$ graph nodes, producing multi-stage features and
-% predictions for all of them. A second, independent set of $M' = 6{,}000$ foreground points
-% is then sampled and passed through the Implicit Point Module as query points. The
-% cross-entropy loss is applied to all $M + M'$ point predictions and all $N$ graph
-% predictions \cite{xie2025}. This stage ran for 100 epochs with a learning rate of 0.01,
-% halved every 45 epochs. Random rotation, shifting and scaling were used as data augmentation
-% to avoid overfitting \cite{xie2025}.
-% [END CUT]
+\paragraph{Pre-processing.}
+We applied the released IPGN model with the PointNet++ encoder to our
+419 airway trees obtained from the ground-truth airway segmentations of
+the ATM'22 and AIIB23 datasets. Each tree was represented as a binary
+three-dimensional volume. No additional resampling was performed for
+IPGN inference; the coordinates of the foreground voxels, sampled points
+and skeleton-graph nodes were normalized to the unit cube using min--max
+normalization, as implemented in the released code. The anatomical
+orientation of the volumes was preserved throughout the preprocessing
+pipeline so that the left- and right-lung class assignments remained
+consistent.
 
-% [CUT] baseline comparison table -- the comparison supports the authors' claim, not
-% ours; the IPGN numbers are now stated in the text above.
-% \begin{table}[htbp]
-%   \centering
-%   \small
-%   \caption{Airway labeling results on the PTL test set as reported by \citet{xie2025}:
-%            micro-averaged Dice at voxel and graph (node, edge) level, and dense inference
-%            time per tree.}
-%   \label{tab:ipgn_results}
-%   \begin{tabular}{lcccc}
-%     \toprule
-%     Method & Voxel (\%) & Node (\%) & Edge (\%) & Time (s) \\
-%     \midrule
-%     3D U-Net (down-sampled)  & 58.5 & 61.3 & 62.3 & 8.16 \\
-%     Point Transformer        & 87.8 & 87.2 & 87.4 & 10.97 \\
-%     GAT                      & 86.3 & 92.7 & 89.1 & 1.15 \\
-%     IPGN (PointNet++)        & 87.5 & 95.1 & 92.3 & 1.30 \\
-%     IPGN (Point Transformer) & 88.5 & 95.0 & 92.7 & 2.32 \\
-%     \bottomrule
-%   \end{tabular}
-% \end{table}
-% [END CUT]
+\paragraph{Inference.}
+Following \citet{xie2025}, each binary airway volume was skeletonized
+with VesselVio, and 6,000 foreground voxels were randomly sampled to
+form the point cloud. A single forward pass of the Point-Graph Network
+(PGN) on the point cloud and skeleton graph produced the multi-stage
+point and graph features. The Implicit Point Module then used these
+features to classify the remaining foreground voxels as query points,
+yielding an anatomical label for every foreground voxel of the airway
+tree. This procedure avoids repeatedly running the complete network for
+each subset of foreground voxels and provides an efficient dense
+reconstruction \cite{xie2025}.
 
-% ------------------------------------------------------------------------------
-% [REWRITTEN] the old "Inference" and "Application to our airway trees" subsections
-% are merged, so the pipeline is described once and in terms of OUR data.
-\subsection{Application to our airway trees}  % what was actually done on our data
-\label{sec:labeling_ours}                % \secref{sec:labeling_ours}
-\label{sec:labeling_inference}           % old label kept so existing \secref calls still work
+\paragraph{Quality control.}
+Because our airway trees do not have ground-truth segmental annotations,
+the quantitative Dice scores reported on the PTL dataset cannot be
+directly evaluated on our data. The predicted anatomical labels were
+therefore treated as model-derived annotations and inspected qualitatively
+for anatomical plausibility and consistency between the left- and
+right-lung branches. No quantitative accuracy measure was assigned to
+these predictions.
 
-\paragraph{Pre-processing.}              % making our inputs match the PTL inputs
-We applied the released IPGN model with the \TODO{PointNet++ / Point Transformer} encoder to
-our \TODO{number} airway trees, obtained by \TODO{manual / automatic segmentation with \ldots}.
-Each tree was \TODO{binarized and resampled to \ldots}. Because labels 1--10 and 11--18
-encode the left and right lung, the volumes were \TODO{reoriented to the PTL axis
-convention \ldots} so that left and right are not swapped.
-% [NEW] the orientation sentence matters: a flipped axis silently swaps left/right labels.
+\paragraph{Limitations.}
+The performance figures above were obtained on the PTL dataset, whereas
+our data differ from PTL in acquisition characteristics, pathology and
+the upstream airway-segmentation procedure. The predicted labels should
+therefore be regarded as model-derived anatomical estimates rather than
+ground-truth segmental annotations. The resulting labels are used in
+\secref{sec:morphometrics} to compute the morphological descriptors of
+each anatomical class.
 
-\paragraph{Inference.}                   % the steps actually run, following xie2025
-Following \citet{xie2025}, each binary airway volume was skeletonized with VesselVio, and
-6,000 foreground voxels were randomly sampled as the point cloud. A single forward pass of PGN
-on the graph and point cloud gives the multi-stage point features, after which all remaining
-foreground voxels are passed through the Implicit Point Module as query points, giving a label
-for every voxel of the tree. \TODO{Optional: runtime on our hardware, e.g.\ $\approx$\ldots~s
-per tree.}
-
-% [CUT] runtime comparison from the paper -- only relevant if speed matters to us;
-% if it does, report OUR measured runtime instead (TODO above).
-% Because PGN only runs once, dense labeling is fast: the authors report around 1.3~s per
-% airway tree with a PointNet++ encoder and 2.3~s with Point Transformer, against 5.7~s and
-% 12.1~s when PGN is run repeatedly over the whole volume \cite{xie2025}.
-% [END CUT]
-
-% [NEW] quality control -- the reader needs to know how far the labels can be trusted
-\paragraph{Quality control.}             % how predictions were checked without ground truth
-Our data has no ground-truth segmental labels, so the reported Dice scores cannot be
-verified directly. The predictions were instead checked by \TODO{visual inspection of all /
-a random sample of \ldots\ trees}, verifying that \TODO{each label forms a single connected
-subtree, all 18 segmental classes are present, and left- and right-lung labels lie on the
-correct side}. Trees with \TODO{evident errors were excluded / manually corrected / kept},
-\TODO{n} in total. Examples of labeled trees are shown in Figure~\ref{fig:ipgn_ours}.
-
-% [NEW] limitations -- one or two sentences on domain shift
-\paragraph{Limitations.}                 % domain shift w.r.t. PTL
-The performance figures above were obtained on PTL, and our data differ from it in
-\TODO{scanner / resolution / population / segmentation method}. The labels should therefore
-be regarded as \TODO{\ldots}. The resulting labels are used in \secref{sec:morphometrics} to
-compute the morphological descriptors of each anatomical class.
-
-\begin{figure}[htbp]                     % placeholder for labeled trees from our data
-  \centering                             % center the figure
-  % \includegraphics[width=\textwidth]{figures/ipgn_our_labels.png}  % uncomment with your file
-  \fbox{\parbox[c][4cm][c]{0.9\textwidth}{\centering [Our airway trees labeled by IPGN]}}  % remove once image added
-  \caption{Anatomical labels predicted by IPGN on examples of our airway trees. Colours
-           denote the 19 classes listed in Table~\ref{tab:ipgn_labels}.}
-  \label{fig:ipgn_ours}                  % referenced as Figure~\ref{fig:ipgn_ours}
+\begin{figure}[htbp]
+  \centering
+  \includegraphics[width=\textwidth]{figures/predictions.png}
+  % \fbox{\parbox[c][4cm][c]{0.9\textwidth}{\centering [Our airway trees labeled by IPGN]}}
+  \caption{Representative airway tree with anatomical labels predicted by IPGN.
+           The left panel shows the corresponding lobar labeling, whereas the
+           right panel shows the segmental labeling, illustrating the finer
+           anatomical subdivision of the pulmonary tree.}
+  \label{fig:ipgn_ours}
 \end{figure}

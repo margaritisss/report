@@ -15,7 +15,12 @@ The three methods distort the data in different ways, which is why we compare th
 \paragraph{Kernel PCA}                   % linear PCA in the RBF feature space
 Principal component analysis (PCA) finds the orthogonal directions of largest variance; kernel PCA
 \cite{scholkopf1998kpca} does the same in the feature space of a kernel. With the RBF kernel of
-Eq.~\eqref{eq:rbf} and the same median-rule $\gamma$ as kernel K-means, it shows the space in
+Eq.~\eqref{eq:rbf}
+\begin{equation}
+  k(\mathbf{x}_i,\mathbf{x}_j) = \exp\!\left(-\gamma \|\mathbf{x}_i-\mathbf{x}_j\|^2\right)
+  \label{eq:rbf}
+\end{equation}
+and the same median-rule $\gamma$ as kernel K-means, it shows the space in
 which kernel K-means operates. The kernel matrix $K$ is first centred,
 $\tilde{K} = H K H$ with $H = I - \frac{1}{N}\mathbf{1}\mathbf{1}^{\top}$, and decomposed as
 $\tilde{K}\mathbf{v}_m = \lambda_m \mathbf{v}_m$. The coordinate of tree $i$ on the $m$-th
@@ -45,7 +50,7 @@ perplexities from 5 to 50 in steps of 5.
 
 \paragraph{UMAP}
 Uniform Manifold Approximation and Projection (UMAP) \cite{mcinnes2018umap} is a nonlinear
-dimensionality-reduction method that seeks to preserve the neighbourhood structure of the
+dimensionality reduction method that seeks to preserve the neighbourhood structure of the
 high-dimensional data in a lower-dimensional representation. Given the latent codes
 $\mathbf{x}_1,\ldots,\mathbf{x}_N$, UMAP first identifies the nearest neighbours of each
 observation using the Euclidean distance. These neighbourhood relationships are represented by

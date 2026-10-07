@@ -21,7 +21,25 @@
 \definecolor{dotC}{HTML}{1ED69A}         % cluster 2
 \definecolor{dotD}{HTML}{F2B21B}         % cluster 3
 \newcommand{\stat}{\scriptsize\color{black!60}}  % small grey statistics lines inside a cell
+\newcommand{\topgap}{\rule{0pt}{3ex}}     % invisible strut: space above the mean
+\newcommand{\botgap}{\rule[-1.2ex]{0pt}{0pt}}  % invisible strut: space below the SD line
 \newcommand{\clustertablesetup}{%        % spacing for these tables only (local to the table)
-  \renewcommand{\arraystretch}{1.15}%    % a little vertical breathing room
+  \renewcommand{\arraystretch}{1.0}%     % the struts handle the vertical space
   \setlength{\aboverulesep}{0pt}%        % shaded cells touch the rules, no white gaps
   \setlength{\belowrulesep}{0pt}}
+% ---- shared legend for cluster scatter plots: \clusterkey{dotA}{Cluster 0 ($n=325$)}
+\newcommand{\clusterkey}[2]{%            % coloured dot + label, same colours as the tables
+  \mbox{{\color{#1}\large\textbullet}\,#2}}
+% ---- one projection panel: \projpanel{width}{image file}{label}
+% The label sits inside the empty top-left corner of the plot, so stacked panels need no extra lines.
+% If the image file does not exist yet, a grey box of the same size is shown instead.
+\newcommand{\projpanel}[3]{%
+  \IfFileExists{#2}%
+    {\begin{tikzpicture}%
+       \node[inner sep=0] (img) {\includegraphics[width=#1]{#2}};%     % the plot
+       \node[anchor=north west, fill=white, fill opacity=0.9, text opacity=1,
+             inner sep=2pt, font=\small\bfseries]
+         at ([xshift=0.045\linewidth, yshift=-3pt]img.north west) {#3};% % panel name, top-left
+     \end{tikzpicture}}%
+    {\fbox{\parbox[c][\dimexpr#1*100/203-2\fboxsep-2\fboxrule\relax][c]{\dimexpr#1-2\fboxsep-2\fboxrule\relax}%
+       {\centering\color{tpgrey}[#3: \texttt{\detokenize{#2}}]}}}}  % placeholder, same shape as the plots

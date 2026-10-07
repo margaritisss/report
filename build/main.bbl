@@ -91,6 +91,11 @@ Clevert, D.-A., Unterthiner, T., and Hochreiter, S. (2016).
 \newblock Fast and accurate deep network learning by exponential linear units ({ELUs}).
 \newblock In {\em International Conference on Learning Representations (ICLR)}.
 
+\bibitem[Cohen, 1988]{cohen1988}
+Cohen, J. (1988).
+\newblock {\em Statistical Power Analysis for the Behavioral Sciences}.
+\newblock Lawrence Erlbaum Associates, Hillsdale, NJ, second edition.
+
 \bibitem[Davoodi and Boozarjomehry, 2016]{davoodi2016}
 Davoodi, A. and Boozarjomehry, R.~B. (2016).
 \newblock Developmental model of an automatic production of the human bronchial tree based on {L}-system.
@@ -230,11 +235,6 @@ Kitaoka, H., Park, Y., Tschirren, J., Reinhardt, J.~M., Sonka, M., McLennan, G.,
 Kitaoka, H., Takaki, R., and Suki, B. (1999).
 \newblock A three-dimensional model of the human airway tree.
 \newblock {\em Journal of Applied Physiology}, 87(6):2207--2217.
-
-\bibitem[Kruskal and Wallis, 1952]{kruskal1952}
-Kruskal, W.~H. and Wallis, W.~A. (1952).
-\newblock Use of ranks in one-criterion variance analysis.
-\newblock {\em Journal of the American Statistical Association}, 47(260):583--621.
 
 \bibitem[Lauria et~al., 2022]{lauria2022}
 Lauria, M., Singhrao, K., Stiehl, B., et~al. (2022).
@@ -410,6 +410,11 @@ Ren, X., Huang, J., Zeng, X., Museth, K., Fidler, S., and Williams, F. (2024).
 Rousseeuw, P.~J. (1987).
 \newblock Silhouettes: a graphical aid to the interpretation and validation of cluster analysis.
 \newblock {\em Journal of Computational and Applied Mathematics}, 20:53--65.
+
+\bibitem[Salimans and Kingma, 2016]{salimans2016}
+Salimans, T. and Kingma, D.~P. (2016).
+\newblock Weight normalization: A simple reparameterization to accelerate training of deep neural networks.
+\newblock In {\em Advances in Neural Information Processing Systems}.
 
 \bibitem[Sch{\"o}lkopf et~al., 1998]{scholkopf1998kpca}
 Sch{\"o}lkopf, B., Smola, A., and M{\"u}ller, K.-R. (1998).

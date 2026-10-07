@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.4.4)  6 OCT 2026 19:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.4.4)  7 OCT 2026 15:00
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -578,34 +578,21 @@ File: pgflibraryarrows.meta.code.tex 2023-01-15 v3.1.10 (3.1.10)
 \pgfarrowlength=\dimen296
 \pgfarrowwidth=\dimen297
 \pgfarrowlinewidth=\dimen298
-) (/usr/share/texlive/texmf-dist/tex/latex/placeins/placeins.sty
+)) (/usr/share/texlive/texmf-dist/tex/latex/placeins/placeins.sty
 Package: placeins 2005/04/18  v 2.2
-) (/usr/share/texlive/texmf-dist/tex/latex/makecell/makecell.sty
-Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
-\rotheadsize=\dimen299
-\c@nlinenum=\count326
-\TeXr@lab=\toks42
-)) (/usr/share/texlive/texmf-dist/tex/latex/pdflscape/pdflscape.sty
-Package: pdflscape 2022-10-27 v0.13 Display of landscape pages in PDF
- (/usr/share/texlive/texmf-dist/tex/latex/pdflscape/pdflscape-nometadata.sty
-Package: pdflscape-nometadata 2022-10-28 v0.13 Display of landscape pages in PDF (HO)
- (/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
-Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
-)
-Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
-)) (./setup/helpers.tex) (./setup/paragraph-styles.tex (/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.sty
+) (./setup/helpers.tex) (./setup/paragraph-styles.tex (/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype.sty
 Package: microtype 2023/03/13 v3.1a Micro-typographical refinements (RS)
-\MT@toks=\toks43
+\MT@toks=\toks42
 \MT@tempbox=\box70
-\MT@count=\count327
+\MT@count=\count326
 LaTeX Info: Redefining \noprotrusionifhmode on input line 1059.
 LaTeX Info: Redefining \leftprotrusion on input line 1060.
-\MT@prot@toks=\toks44
+\MT@prot@toks=\toks43
 LaTeX Info: Redefining \rightprotrusion on input line 1078.
 LaTeX Info: Redefining \textls on input line 1368.
-\MT@outer@kern=\dimen300
+\MT@outer@kern=\dimen299
 LaTeX Info: Redefining \textmicrotypecontext on input line 1988.
-\MT@listname@count=\count328
+\MT@listname@count=\count327
  (/usr/share/texlive/texmf-dist/tex/latex/microtype/microtype-pdftex.def
 File: microtype-pdftex.def 2023/03/13 v3.1a Definitions specific to pdftex (RS)
 LaTeX Info: Redefining \lsstyle on input line 902.
@@ -618,37 +605,37 @@ File: microtype.cfg 2023/03/13 v3.1a microtype main configuration file (RS)
 ))
 \paragraphtextgap=\skip71
 ) (./setup/heading-styles.tex) (./setup/titlepage.tex)
-LaTeX Font Info:    Trying to load font information for T1+phv on input line 26.
+LaTeX Font Info:    Trying to load font information for T1+phv on input line 25.
  (/usr/share/texlive/texmf-dist/tex/latex/psnfss/t1phv.fd
 File: t1phv.fd 2020/03/25 scalable font definitions for T1/phv.
 )
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 10.07397pt on input line 26.
+(Font)              scaled to size 10.07397pt on input line 25.
  (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count329
+\l__color_backend_stack_int=\count328
 \l__pdf_internal_box=\box71
 ) (build/main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 26.
-LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -686,41 +673,42 @@ LaTeX Font Info:    ... okay on input line 26.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count330
-\scratchdimen=\dimen301
+\scratchcounter=\count329
+\scratchdimen=\dimen300
 \scratchbox=\box72
-\nofMPsegments=\count331
-\nofMParguments=\count332
-\everyMPshowfont=\toks45
-\MPscratchCnt=\count333
-\MPscratchDim=\dimen302
-\MPnumerator=\count334
-\makeMPintoPDFobject=\count335
-\everyMPtoPDFconversion=\toks46
+\nofMPsegments=\count330
+\nofMParguments=\count331
+\everyMPshowfont=\toks44
+\MPscratchCnt=\count332
+\MPscratchDim=\dimen301
+\MPnumerator=\count333
+\makeMPintoPDFobject=\count334
+\everyMPtoPDFconversion=\toks45
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring OFF on input line 26.
+Package hyperref Info: Link coloring OFF on input line 25.
+ (build/main.out) (build/main.out)
 \@outlinefile=\write4
 \openout4 = `main.out'.
 
-\c@lstlisting=\count336
-LaTeX Info: Redefining \microtypecontext on input line 26.
-Package microtype Info: Applying patch `item' on input line 26.
-Package microtype Info: Applying patch `toc' on input line 26.
-Package microtype Info: Applying patch `eqnum' on input line 26.
-Package microtype Info: Applying patch `footnote' on input line 26.
-Package microtype Info: Applying patch `verbatim' on input line 26.
+\c@lstlisting=\count335
+LaTeX Info: Redefining \microtypecontext on input line 25.
+Package microtype Info: Applying patch `item' on input line 25.
+Package microtype Info: Applying patch `toc' on input line 25.
+Package microtype Info: Applying patch `eqnum' on input line 25.
+Package microtype Info: Applying patch `footnote' on input line 25.
+Package microtype Info: Applying patch `verbatim' on input line 25.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `alltext-nott'.
-LaTeX Info: Redefining \showhyphens on input line 26.
+LaTeX Info: Redefining \showhyphens on input line 25.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -729,106 +717,74 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 10.07397pt on input line 28.
+(Font)              scaled to size 10.07397pt on input line 27.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 15.89755pt on input line 28.
+(Font)              scaled to size 15.89755pt on input line 27.
 LaTeX Font Info:    Font shape `T1/phv/b/sc' will be
-(Font)              scaled to size 15.89755pt on input line 28.
-<assets/Logo_Telecom_IPParis_RVB_noir_H.pdf, id=8, 348.35645pt x 162.5548pt>
+(Font)              scaled to size 15.89755pt on input line 27.
+<assets/Logo_Telecom_IPParis_RVB_noir_H.pdf, id=232, 348.35645pt x 162.5548pt>
 File: assets/Logo_Telecom_IPParis_RVB_noir_H.pdf Graphic file (type pdf)
 <use assets/Logo_Telecom_IPParis_RVB_noir_H.pdf>
-Package pdftex.def Info: assets/Logo_Telecom_IPParis_RVB_noir_H.pdf  used on input line 28.
+Package pdftex.def Info: assets/Logo_Telecom_IPParis_RVB_noir_H.pdf  used on input line 27.
 (pdftex.def)             Requested size: 182.92708pt x 85.35826pt.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 25.29994pt on input line 28.
+(Font)              scaled to size 25.29994pt on input line 27.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 25.29994pt on input line 28.
+(Font)              scaled to size 25.29994pt on input line 27.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 15.17996pt on input line 28.
+(Font)              scaled to size 15.17996pt on input line 27.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 12.14397pt on input line 28.
+(Font)              scaled to size 12.14397pt on input line 27.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 9.19998pt on input line 28.
+(Font)              scaled to size 9.19998pt on input line 27.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 11.13197pt on input line 28.
+(Font)              scaled to size 11.13197pt on input line 27.
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <12.1> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 28.
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 27.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 11.13197pt on input line 28.
+(Font)              scaled to size 11.13197pt on input line 27.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 11.03998pt on input line 28.
+(Font)              scaled to size 11.03998pt on input line 27.
  [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc} <./assets/Logo_Telecom_IPParis_RVB_noir_H.pdf>] (./sections/00-executive-summary.tex
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc} <./assets/Logo_Telecom_IPParis_RVB_noir_H.pdf>]
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 13.24796pt on input line 1.
+(Font)              scaled to size 13.24796pt on input line 34.
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 13.24796pt on input line 1.
-LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
-(Font)              Font shape `T1/phv/m/sl' tried instead on input line 5.
-LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
-(Font)              scaled to size 10.07397pt on input line 5.
-) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-cmr.cfg
+(Font)              scaled to size 13.24796pt on input line 34.
+ (build/main.toc (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 32.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 4.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 32.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 4.
  (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/share/texlive/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
-)
-
-LaTeX Warning: Reference `LastPage' on page 2 undefined on input line 32.
-
-[2 <./assets/Logo_Telecom_IPParis_RVB_noir_V.pdf>] (./sections/01-acknowledgements.tex)
-
-LaTeX Warning: Reference `LastPage' on page 3 undefined on input line 34.
-
-[3
-
-]
-No file main.toc.
+) [2 <./assets/Logo_Telecom_IPParis_RVB_noir_V.pdf>])
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
-
-LaTeX Warning: Reference `LastPage' on page 4 undefined on input line 38.
-
-[4
-
-] (./sections/02-introduction.tex) (./sections/02-background.tex
-
-LaTeX Warning: Reference `sec:anatomy' on page 5 undefined on input line 7.
-
-
-LaTeX Warning: Reference `sec:data_representation' on page 5 undefined on input line 8.
-
-
-LaTeX Warning: Reference `sec:related' on page 5 undefined on input line 8.
-
-(./sections/background/anatomy.tex
+ [3] (./sections/02-introduction.tex
+LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10.95> not available
+(Font)              Font shape `T1/phv/m/sl' tried instead on input line 5.
+LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
+(Font)              scaled to size 10.07397pt on input line 5.
+) (./sections/02-background.tex (./sections/background/anatomy.tex
 LaTeX Font Info:    Font shape `T1/phv/b/n' will be
 (Font)              scaled to size 11.03998pt on input line 6.
-
-
-LaTeX Warning: Reference `fig:anatomy_overview' on page 5 undefined on input line 10.
-
-<figures/airway_bronchial_alveolar_trees.jpg, id=33, 2236.355pt x 1586.92876pt>
+<figures/airway_bronchial_alveolar_trees.jpg, id=316, 2236.355pt x 1586.92876pt>
 File: figures/airway_bronchial_alveolar_trees.jpg Graphic file (type jpg)
 <use figures/airway_bronchial_alveolar_trees.jpg>
 Package pdftex.def Info: figures/airway_bronchial_alveolar_trees.jpg  used on input line 16.
 (pdftex.def)             Requested size: 455.24411pt x 323.02213pt.
-
-LaTeX Warning: Reference `tab:weibel_generations' on page 5 undefined on input line 23.
-
 LaTeX Font Info:    Trying to load font information for TS1+phv on input line 23.
-(/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1phv.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ts1phv.fd
 File: ts1phv.fd 2020/03/25 scalable font definitions for TS1/phv.
 )
 LaTeX Font Info:    Font shape `TS1/phv/m/n' will be
@@ -837,1576 +793,225 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `phv' (encoding: TS1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
+ [4
 
-
-Package natbib Warning: Citation `anatomyapp' on page 5 undefined on input line 23.
-
-
-LaTeX Warning: Reference `tab:weibel_generations' on page 5 undefined on input line 23.
-
-
-Package natbib Warning: Citation `anatomyapp' on page 5 undefined on input line 23.
-
-
-Package natbib Warning: Citation `weibel1963' on page 5 undefined on input line 30.
-
-
-LaTeX Warning: Reference `tab:weibel_generations' on page 5 undefined on input line 32.
-
-
-Package natbib Warning: Citation `weibel1963' on page 5 undefined on input line 37.
-
-
-Package natbib Warning: Citation `burgel2013small' on page 5 undefined on input line 43.
-
-
-Package natbib Warning: Citation `horsfield1971models' on page 5 undefined on input line 46.
-
-
-Package natbib Warning: Citation `kitaoka1999' on page 5 undefined on input line 46.
-
-
-Package natbib Warning: Citation `weibel1963' on page 5 undefined on input line 55.
-
-
-Package natbib Warning: Citation `burgel2013small' on page 5 undefined on input line 55.
-
-
-Package natbib Warning: Citation `weibel1963' on page 5 undefined on input line 55.
-
-
-Package natbib Warning: Citation `burgel2013small' on page 5 undefined on input line 55.
-
-
-LaTeX Warning: Reference `tab:segmental_bronchi' on page 5 undefined on input line 85.
-
-
-Package natbib Warning: Citation `boyden1949' on page 5 undefined on input line 86.
-
-
-Package natbib Warning: Citation `boyden1949' on page 5 undefined on input line 88.
-
-
-Package natbib Warning: Citation `zhao2009' on page 5 undefined on input line 89.
-
-
-LaTeX Warning: Reference `sec:labeling' on page 5 undefined on input line 91.
-
-
-Package natbib Warning: Citation `xie2025' on page 5 undefined on input line 91.
-
-
-LaTeX Warning: Reference `LastPage' on page 5 undefined on input line 92.
-
-[5
-
-]
-
-LaTeX Warning: Reference `LastPage' on page 6 undefined on input line 92.
-
-[6 <./figures/airway_bronchial_alveolar_trees.jpg>]
-
-Package natbib Warning: Citation `burgel2013small' on page 7 undefined on input line 118.
-
-
-LaTeX Warning: Reference `sec:atm22' on page 7 undefined on input line 120.
-
-
-LaTeX Warning: Reference `tab:weibel_generations' on page 7 undefined on input line 121.
-
-
-Package natbib Warning: Citation `tanabe2019peripheral' on page 7 undefined on input line 123.
-
-
-Package natbib Warning: Citation `zhang2024' on page 7 undefined on input line 125.
-
-
-Package natbib Warning: Citation `tanabe2018uhrct' on page 7 undefined on input line 127.
-
-
-Package natbib Warning: Citation `tanabe2019peripheral' on page 7 undefined on input line 127.
-
-
-Package natbib Warning: Citation `tanabe2018uhrct' on page 7 undefined on input line 129.
-
-
-Package natbib Warning: Citation `lewis2005' on page 7 undefined on input line 131.
-
-
-Package natbib Warning: Citation `genkin2024' on page 7 undefined on input line 131.
-
-
-Package natbib Warning: Citation `kitaoka1999' on page 7 undefined on input line 138.
-
-
-Package natbib Warning: Citation `tawhai2000' on page 7 undefined on input line 138.
-
-
-LaTeX Warning: Reference `fig:anatomy_fractal' on page 7 undefined on input line 139.
-
-
-Package natbib Warning: Citation `tawhai2004' on page 7 undefined on input line 142.
-
-
-Package natbib Warning: Citation `bordas2015' on page 7 undefined on input line 142.
-
-
-Package natbib Warning: Citation `pennati2024modeling' on page 7 undefined on input line 142.
-
-
-LaTeX Warning: Reference `fig:anatomy_pipeline' on page 7 undefined on input line 142.
-
-
-Package natbib Warning: Citation `nousias2020avatree' on page 7 undefined on input line 144.
-
-
-LaTeX Warning: Reference `fig:anatomy_generations' on page 7 undefined on input line 144.
-
-<figures/airway_fractal_model.png, id=52, 852.18375pt x 534.99875pt>
+] [5 <./figures/airway_bronchial_alveolar_trees.jpg>] [6]
+<figures/airway_fractal_model.png, id=434, 852.18375pt x 534.99875pt>
 File: figures/airway_fractal_model.png Graphic file (type png)
 <use figures/airway_fractal_model.png>
 Package pdftex.def Info: figures/airway_fractal_model.png  used on input line 151.
 (pdftex.def)             Requested size: 341.43307pt x 214.35489pt.
-
-Package natbib Warning: Citation `varner2017computational' on page 7 undefined on input line 155.
-
-
-Package natbib Warning: Citation `varner2017computational' on page 7 undefined on input line 155.
-
-<figures/airway_ct_to_complete_tree.png, id=54, 2313.64375pt x 632.3625pt>
+<figures/airway_ct_to_complete_tree.png, id=440, 2313.64375pt x 632.3625pt>
 File: figures/airway_ct_to_complete_tree.png Graphic file (type png)
 <use figures/airway_ct_to_complete_tree.png>
 Package pdftex.def Info: figures/airway_ct_to_complete_tree.png  used on input line 161.
 (pdftex.def)             Requested size: 455.24411pt x 124.42465pt.
-
-Package natbib Warning: Citation `pennati2024modeling' on page 7 undefined on input line 165.
-
-
-Package natbib Warning: Citation `pennati2024modeling' on page 7 undefined on input line 165.
-
-<figures/airway_estimated_12gen.png, id=55, 1525.7pt x 1286.8075pt>
+<figures/airway_estimated_12gen.png, id=445, 1525.7pt x 1286.8075pt>
 File: figures/airway_estimated_12gen.png Graphic file (type png)
 <use figures/airway_estimated_12gen.png>
 Package pdftex.def Info: figures/airway_estimated_12gen.png  used on input line 173.
 (pdftex.def)             Requested size: 223.07211pt x 188.1433pt.
-<figures/airway_estimated_23gen.png, id=56, 1525.7pt x 1286.8075pt>
+<figures/airway_estimated_23gen.png, id=446, 1525.7pt x 1286.8075pt>
 File: figures/airway_estimated_23gen.png Graphic file (type png)
 <use figures/airway_estimated_23gen.png>
 Package pdftex.def Info: figures/airway_estimated_23gen.png  used on input line 178.
 (pdftex.def)             Requested size: 223.07211pt x 188.1433pt.
-
-Package natbib Warning: Citation `nousias2020avatree' on page 7 undefined on input line 184.
-
-
-Package natbib Warning: Citation `nousias2020avatree' on page 7 undefined on input line 184.
-
 ) (./sections/background/data-representation.tex
-
-LaTeX Warning: Reference `fig:airway_representations' on page 7 undefined on input line 11.
-
-
-LaTeX Warning: Reference `tab:airway_representations' on page 7 undefined on input line 12.
-
-
-LaTeX Warning: Reference `LastPage' on page 7 undefined on input line 13.
-
-[7]
-
-LaTeX Warning: Reference `LastPage' on page 8 undefined on input line 13.
-
-[8 <./figures/airway_fractal_model.png> <./figures/airway_ct_to_complete_tree.png>]
-<figures/airway_representations.png, id=74, 1525.7pt x 1038.88126pt>
+<figures/airway_representations.png, id=453, 1525.7pt x 1038.88126pt>
 File: figures/airway_representations.png Graphic file (type png)
 <use figures/airway_representations.png>
 Package pdftex.def Info: figures/airway_representations.png  used on input line 16.
 (pdftex.def)             Requested size: 455.24411pt x 309.98647pt.
-
-
-LaTeX Warning: Reference `sec:datasets' on page 9 undefined on input line 30.
-
-
-Package natbib Warning: Citation `brock2016' on page 9 undefined on input line 31.
-
-
-Package natbib Warning: Citation `garciauceda2021' on page 9 undefined on input line 31.
-
-
-Package natbib Warning: Citation `zhang2024' on page 9 undefined on input line 34.
-
-
-Package natbib Warning: Citation `museth2013' on page 9 undefined on input line 35.
-
-
-Package natbib Warning: Citation `ren2024' on page 9 undefined on input line 35.
-
-
-Package natbib Warning: Citation `prabhakar2026vaesselsparse' on page 9 undefined on input line 36.
-
-
-Package natbib Warning: Citation `lorensen1987' on page 9 undefined on input line 41.
-
-
-Package natbib Warning: Citation `nousias2020avatree' on page 9 undefined on input line 43.
-
-
-Package natbib Warning: Citation `lauria2022' on page 9 undefined on input line 44.
-
-
-Package natbib Warning: Citation `ho2024' on page 9 undefined on input line 44.
-
-
-Package natbib Warning: Citation `zhang2024' on page 9 undefined on input line 46.
-
-
-Package natbib Warning: Citation `qi2017' on page 9 undefined on input line 52.
-
-
-Package natbib Warning: Citation `zhao2021' on page 9 undefined on input line 52.
-
-
-LaTeX Warning: Reference `LastPage' on page 9 undefined on input line 57.
-
-[9 <./figures/airway_estimated_12gen.png> <./figures/airway_estimated_23gen.png>]
-
-LaTeX Warning: Reference `LastPage' on page 10 undefined on input line 57.
-
-[10 <./figures/airway_representations.png (PNG copy)>]
-
-Package natbib Warning: Citation `lee1994' on page 11 undefined on input line 59.
-
-
-Package natbib Warning: Citation `palagyi2006' on page 11 undefined on input line 59.
-
-
-Package natbib Warning: Citation `bumgarner2022' on page 11 undefined on input line 61.
-
-
-Package natbib Warning: Citation `tschirren2005matching' on page 11 undefined on input line 64.
-
-
-Package natbib Warning: Citation `feragen2011airway' on page 11 undefined on input line 64.
-
-
-Package natbib Warning: Citation `xie2025' on page 11 undefined on input line 64.
-
-
-Package natbib Warning: Citation `kaji2024airway' on page 11 undefined on input line 65.
-
-
-Package natbib Warning: Citation `zhang2025airmorph' on page 11 undefined on input line 65.
-
-
-Package natbib Warning: Citation `prabhakar2024vesselgraph' on page 11 undefined on input line 65.
-
-
-Package natbib Warning: Citation `park2019' on page 11 undefined on input line 75.
-
-
-Package natbib Warning: Citation `sitzmann2020' on page 11 undefined on input line 75.
-
-
-Package natbib Warning: Citation `weng2026topofield' on page 11 undefined on input line 76.
-
-
-Package natbib Warning: Citation `zhang2024' on page 11 undefined on input line 78.
-
-
-Package natbib Warning: Citation `horsfield1971models' on page 11 undefined on input line 84.
-
-
-Package natbib Warning: Citation `kitaoka1999' on page 11 undefined on input line 84.
-
-
-Package natbib Warning: Citation `feragen2011means' on page 11 undefined on input line 85.
-
-
-Package natbib Warning: Citation `feragen2011airway' on page 11 undefined on input line 85.
-
-
-Package natbib Warning: Citation `feldman2023vesselvae' on page 11 undefined on input line 86.
-
-
-Package natbib Warning: Citation `batten2025vetta' on page 11 undefined on input line 86.
-
-
-Package natbib Warning: Citation `feldman2025vesselgpt' on page 11 undefined on input line 87.
-
-
-Package natbib Warning: Citation `ortizpuerta2022' on page 11 undefined on input line 88.
-
-
-Package natbib Warning: Citation `feldman2025vesselgpt' on page 11 undefined on input line 89.
-
-
-Package natbib Warning: Citation `miyawaki2017automatic' on page 11 undefined on input line 91.
-
-) (./sections/background/related-work.tex
-
-Package natbib Warning: Citation `horsfield1986' on page 11 undefined on input line 14.
-
-
-Package natbib Warning: Citation `horsfield1971models' on page 11 undefined on input line 14.
-
-
-Package natbib Warning: Citation `yeh1980models' on page 11 undefined on input line 15.
-
-
-Package natbib Warning: Citation `kamiya1974' on page 11 undefined on input line 16.
-
-
-Package natbib Warning: Citation `wang1992' on page 11 undefined on input line 16.
-
-
-Package natbib Warning: Citation `kitaoka1999' on page 11 undefined on input line 18.
-
-
-Package natbib Warning: Citation `hegedus2004' on page 11 undefined on input line 20.
-
-
-Package natbib Warning: Citation `florens2010' on page 11 undefined on input line 22.
-
-
-Package natbib Warning: Citation `tawhai2011' on page 11 undefined on input line 23.
-
-
-LaTeX Warning: Reference `LastPage' on page 11 undefined on input line 25.
-
-[11]
-
-Package natbib Warning: Citation `wang1992' on page 12 undefined on input line 38.
-
-
-Package natbib Warning: Citation `tawhai2000' on page 12 undefined on input line 38.
-
-
-Package natbib Warning: Citation `davoodi2016' on page 12 undefined on input line 40.
-
-
-Package natbib Warning: Citation `abbasi2021' on page 12 undefined on input line 41.
-
-
-Package natbib Warning: Citation `geronzi2024' on page 12 undefined on input line 42.
-
-
-Package natbib Warning: Citation `palagyi2006' on page 12 undefined on input line 52.
-
-
-Package natbib Warning: Citation `nakamura2008' on page 12 undefined on input line 54.
-
-
-Package natbib Warning: Citation `tawhai2004' on page 12 undefined on input line 55.
-
-
-Package natbib Warning: Citation `lin2009' on page 12 undefined on input line 58.
-
-
-Package natbib Warning: Citation `tawhai2009' on page 12 undefined on input line 58.
-
-
-Package natbib Warning: Citation `lin2013' on page 12 undefined on input line 61.
-
-
-Package natbib Warning: Citation `montesantos2013' on page 12 undefined on input line 62.
-
-
-Package natbib Warning: Citation `montesantos2016' on page 12 undefined on input line 63.
-
-
-Package natbib Warning: Citation `bordas2015' on page 12 undefined on input line 65.
-
-
-LaTeX Warning: Reference `LastPage' on page 12 undefined on input line 69.
-
-[12]
-
-Package natbib Warning: Citation `boyden1949' on page 13 undefined on input line 71.
-
-
-Package natbib Warning: Citation `zhao2009' on page 13 undefined on input line 73.
-
-
-Package natbib Warning: Citation `miyawaki2017automatic' on page 13 undefined on input line 77.
-
-
-Package natbib Warning: Citation `nousias2020avatree' on page 13 undefined on input line 90.
-
-
-Package natbib Warning: Citation `marchandise2013' on page 13 undefined on input line 103.
-
-
-Package natbib Warning: Citation `lauria2022' on page 13 undefined on input line 106.
-
-
-Package natbib Warning: Citation `ortizpuerta2022' on page 13 undefined on input line 107.
-
-
-Package natbib Warning: Citation `ho2024' on page 13 undefined on input line 108.
-
-
-Package natbib Warning: Citation `bordas2015' on page 13 undefined on input line 110.
-
-
-Package natbib Warning: Citation `agujetas2020' on page 13 undefined on input line 110.
-
-
-Package natbib Warning: Citation `ilegbusi2023' on page 13 undefined on input line 110.
-
-
-Package natbib Warning: Citation `pennati2024modeling' on page 13 undefined on input line 113.
-
-
-LaTeX Warning: Reference `LastPage' on page 13 undefined on input line 127.
-
-[13]
-
-Package natbib Warning: Citation `feldman2023vesselvae' on page 14 undefined on input line 208.
-
-
-Package natbib Warning: Citation `feldman2025vesselgpt' on page 14 undefined on input line 217.
-
-
-Package natbib Warning: Citation `prabhakar2024vesselgraph' on page 14 undefined on input line 225.
-
-
-Package natbib Warning: Citation `prabhakar2025semantic' on page 14 undefined on input line 225.
-
-
-Package natbib Warning: Citation `batten2025vetta' on page 14 undefined on input line 230.
-
-
-Package natbib Warning: Citation `prabhakar2026vaesselsparse' on page 14 undefined on input line 241.
-
-
-Package natbib Warning: Citation `kitaoka2002automated' on page 14 undefined on input line 259.
-
-
-Package natbib Warning: Citation `tschirren2005matching' on page 14 undefined on input line 259.
-
-
-Package natbib Warning: Citation `metzen2009matching' on page 14 undefined on input line 259.
-
-
-Package natbib Warning: Citation `tschirren2005matching' on page 14 undefined on input line 260.
-
-
-Package natbib Warning: Citation `vanginneken2008robust' on page 14 undefined on input line 261.
-
-
-Package natbib Warning: Citation `kaftan2006novel' on page 14 undefined on input line 264.
-
-
-Package natbib Warning: Citation `bulow2006point' on page 14 undefined on input line 266.
-
-
-LaTeX Warning: Reference `LastPage' on page 14 undefined on input line 269.
-
-[14]
-
-Package natbib Warning: Citation `feragen2011airway' on page 15 undefined on input line 271.
-
-
-Package natbib Warning: Citation `feragen2012hierarchical' on page 15 undefined on input line 286.
-
-
-Package natbib Warning: Citation `weng2026topofield' on page 15 undefined on input line 291.
-
-
-Package natbib Warning: Citation `nakano2000airway' on page 15 undefined on input line 313.
-
-
-Package natbib Warning: Citation `hasegawa2006airflow' on page 15 undefined on input line 314.
-
-
-Package natbib Warning: Citation `patel2008pi10' on page 15 undefined on input line 316.
-
-
-Package natbib Warning: Citation `oguma2015irregularity' on page 15 undefined on input line 317.
-
-
-Package natbib Warning: Citation `kirby2018tac' on page 15 undefined on input line 322.
-
-
-Package natbib Warning: Citation `bodduluri2018afd' on page 15 undefined on input line 324.
-
-
-Package natbib Warning: Citation `bodduluri2021sav' on page 15 undefined on input line 327.
-
-
-Package natbib Warning: Citation `smith2020dysanapsis' on page 15 undefined on input line 327.
-
-
-Package natbib Warning: Citation `maetani2023dysanapsis' on page 15 undefined on input line 329.
-
-
-LaTeX Warning: Reference `LastPage' on page 15 undefined on input line 331.
-
-[15]
-
-Package natbib Warning: Citation `feragen2011means' on page 16 undefined on input line 333.
-
-
-Package natbib Warning: Citation `sorensen2011dissimilarity' on page 16 undefined on input line 335.
-
-
-Package natbib Warning: Citation `feragen2013geometric' on page 16 undefined on input line 338.
-
-
-Package natbib Warning: Citation `belchi2018topology' on page 16 undefined on input line 351.
-
-
-Package natbib Warning: Citation `kaji2024airway' on page 16 undefined on input line 353.
-
-)) (./sections/03-dataset.tex (./sections/datasets/atm22.tex
-
-Package natbib Warning: Citation `zhang2023atm22' on page 16 undefined on input line 8.
-
-
-LaTeX Warning: Reference `LastPage' on page 16 undefined on input line 14.
-
-[16]
-
-LaTeX Warning: Reference `tab:atm22_split' on page 17 undefined on input line 19.
-
-
-LaTeX Warning: Reference `LastPage' on page 17 undefined on input line 88.
-
-[17]) (./sections/datasets/aiib23.tex
-
-Package natbib Warning: Citation `nan2024aiib23' on page 18 undefined on input line 9.
-
-
-LaTeX Warning: Reference `tab:aiib23_splits' on page 18 undefined on input line 35.
-
-
-Package natbib Warning: Citation `nan2024aiib23' on page 18 undefined on input line 39.
-
+ [7 <./figures/airway_fractal_model.png> <./figures/airway_ct_to_complete_tree.png>] [8 <./figures/airway_estimated_12gen.png> <./figures/airway_estimated_23gen.png> <./figures/airway_representations.png (PNG copy)>] [9]) (./sections/background/related-work.tex [10] [11] [12] [13] [14])) (./sections/03-dataset.tex (./sections/datasets/atm22.tex [15]) (./sections/datasets/aiib23.tex [16]
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 7.35999pt on input line 47.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 8.27998pt on input line 52.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 5.51999pt on input line 52.
-
-LaTeX Warning: Reference `LastPage' on page 18 undefined on input line 73.
-
-[18])) (./sections/04-registration.tex (./sections/registration/template-construction.tex
-
-Package natbib Warning: Citation `tustison2021antsx' on page 19 undefined on input line 13.
-
-
-Package natbib Warning: Citation `avants2010sygn' on page 19 undefined on input line 20.
-
-
-LaTeX Warning: Reference `sec:affine' on page 19 undefined on input line 22.
-
+ [17])) (./sections/04-registration.tex (./sections/registration/template-construction.tex
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 68.
-(/usr/share/texmf/tex/latex/lm/t1lmtt.fd
+ (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: T1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-
-
-LaTeX Warning: Reference `sec:sygn' on page 19 undefined on input line 71.
-
-
-LaTeX Warning: Reference `LastPage' on page 19 undefined on input line 72.
-
-[19{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}]
+ [18{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}]
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.95> not available
 (Font)              Font shape `T1/lmtt/b/n' tried instead on input line 145.
-
-
-Package natbib Warning: Citation `avants2008syn' on page 20 undefined on input line 151.
-
-
-LaTeX Warning: Reference `eq:pullback' on page 20 undefined on input line 153.
-
-
-LaTeX Warning: Reference `LastPage' on page 20 undefined on input line 154.
-
-[20]
-
-LaTeX Warning: Reference `sec:sygn' on page 21 undefined on input line 178.
-
-
-Package natbib Warning: Citation `avants2008syn' on page 21 undefined on input line 186.
-
-
-Package natbib Warning: Citation `avants2010sygn' on page 21 undefined on input line 191.
-
-
-Package natbib Warning: Citation `avants2008syn' on page 21 undefined on input line 202.
-
-
-Package natbib Warning: Citation `avants2010sygn' on page 21 undefined on input line 202.
-
-
-Package natbib Warning: Citation `avants2008syn' on page 21 undefined on input line 215.
-
-
-LaTeX Warning: Reference `LastPage' on page 21 undefined on input line 221.
-
-[21]
-
-LaTeX Warning: Reference `sec:sygn' on page 22 undefined on input line 243.
-
-
-LaTeX Warning: Reference `eq:syn_flow' on page 22 undefined on input line 248.
-
-
-LaTeX Warning: Reference `fig:syn_path' on page 22 undefined on input line 250.
-
-<figures/syn_path_airways.png, id=194, 1719.42375pt x 921.4425pt>
+ [19] [20]
+<figures/syn_path_airways.png, id=898, 1719.42375pt x 921.4425pt>
 File: figures/syn_path_airways.png Graphic file (type png)
 <use figures/syn_path_airways.png>
 Package pdftex.def Info: figures/syn_path_airways.png  used on input line 266.
 (pdftex.def)             Requested size: 455.24411pt x 243.95613pt.
-
-LaTeX Warning: Reference `eq:syn_composition' on page 22 undefined on input line 273.
-
-
-LaTeX Warning: Reference `eq:syn_composition' on page 22 undefined on input line 273.
-
-
-Package natbib Warning: Citation `avants2008syn' on page 22 undefined on input line 278.
-
-
-LaTeX Warning: Reference `sec:sygn' on page 22 undefined on input line 282.
-
-
-LaTeX Warning: Reference `eq:syn_energy' on page 22 undefined on input line 293.
-
-
-LaTeX Warning: Reference `LastPage' on page 22 undefined on input line 307.
-
-[22]
-
-LaTeX Warning: Reference `eq:syn_flow' on page 23 undefined on input line 312.
-
-
-LaTeX Warning: Reference `eq:syn_composition' on page 23 undefined on input line 313.
-
-
-LaTeX Warning: Reference `eq:syn_energy' on page 23 undefined on input line 330.
-
-
-Package natbib Warning: Citation `avants2010sygn' on page 23 undefined on input line 333.
-
-
-LaTeX Warning: Reference `LastPage' on page 23 undefined on input line 334.
-
-[23 <./figures/syn_path_airways.png (PNG copy)>]
-
-LaTeX Warning: Reference `eq:sygn_energy' on page 24 undefined on input line 345.
-
-
-LaTeX Warning: Reference `fig:sygn_paths' on page 24 undefined on input line 354.
-
-<figures/sygn_paths.png, id=214, 1572.87625pt x 576.1525pt>
+ [21 <./figures/syn_path_airways.png (PNG copy)>] [22]
+<figures/sygn_paths.png, id=934, 1572.87625pt x 576.1525pt>
 File: figures/sygn_paths.png Graphic file (type png)
 <use figures/sygn_paths.png>
 Package pdftex.def Info: figures/sygn_paths.png  used on input line 358.
 (pdftex.def)             Requested size: 364.19667pt x 133.409pt.
-
-Package natbib Warning: Citation `avants2010sygn' on page 24 undefined on input line 363.
-
-
-Package natbib Warning: Citation `avants2010sygn' on page 24 undefined on input line 363.
-
-
-Package natbib Warning: Citation `avants2010sygn' on page 24 undefined on input line 368.
-
-
-LaTeX Warning: Reference `LastPage' on page 24 undefined on input line 378.
-
-[24 <./figures/sygn_paths.png>]
-
-LaTeX Warning: Reference `sec:syn' on page 25 undefined on input line 391.
-
-
-Package natbib Warning: Citation `avants2010sygn' on page 25 undefined on input line 396.
-
-
-LaTeX Warning: Reference `eq:local_cc' on page 25 undefined on input line 398.
-
-
-LaTeX Warning: Reference `fig:sygn_paths' on page 25 undefined on input line 426.
-
-
-Package natbib Warning: Citation `avants2010sygn' on page 25 undefined on input line 426.
-
-
-LaTeX Warning: Reference `eq:shape_distance' on page 25 undefined on input line 429.
-
-
-LaTeX Warning: Reference `LastPage' on page 25 undefined on input line 436.
-
-[25]
-
-LaTeX Warning: Reference `eq:shape_update' on page 26 undefined on input line 466.
-
-
-Package natbib Warning: Citation `avants2010sygn' on page 26 undefined on input line 470.
-
-
-LaTeX Warning: Reference `fig:sygn_ellipses' on page 26 undefined on input line 470.
-
-<figures/sygn_ellipses.png, id=237, 1274.7625pt x 585.18625pt>
+ [23 <./figures/sygn_paths.png>] [24]
+<figures/sygn_ellipses.png, id=979, 1274.7625pt x 585.18625pt>
 File: figures/sygn_ellipses.png Graphic file (type png)
 <use figures/sygn_ellipses.png>
 Package pdftex.def Info: figures/sygn_ellipses.png  used on input line 482.
 (pdftex.def)             Requested size: 364.19667pt x 167.18163pt.
-
-Package natbib Warning: Citation `avants2010sygn' on page 26 undefined on input line 488.
-
-
-Package natbib Warning: Citation `avants2010sygn' on page 26 undefined on input line 488.
-
-
-Package natbib Warning: Citation `avants2010sygn' on page 26 undefined on input line 494.
-
-
-LaTeX Warning: Reference `eq:frechet_condition' on page 26 undefined on input line 498.
-
-
-LaTeX Warning: Reference `eq:initial_template' on page 26 undefined on input line 509.
-
-
-LaTeX Warning: Reference `LastPage' on page 26 undefined on input line 513.
-
-[26]
-
-LaTeX Warning: Reference `sec:affine' on page 27 undefined on input line 517.
-
-
-LaTeX Warning: Reference `fig:template_pipeline' on page 27 undefined on input line 518.
-
-LaTeX Font Info:    Font shape `T1/phv/b/n' will be
-(Font)              scaled to size 9.19998pt on input line 528.
-
-LaTeX Warning: Reference `eq:initial_template' on page 27 undefined on input line 528.
-
-
-LaTeX Warning: Reference `eq:average_registered' on page 27 undefined on input line 530.
-
-
-LaTeX Warning: Reference `eq:shape_update' on page 27 undefined on input line 531.
-
-
-LaTeX Warning: Reference `eq:blending' on page 27 undefined on input line 532.
-
+ [25 <./figures/sygn_ellipses.png>]
 LaTeX Font Info:    Font shape `T1/phv/m/it' in size <10> not available
 (Font)              Font shape `T1/phv/m/sl' tried instead on input line 534.
 LaTeX Font Info:    Font shape `T1/phv/m/sl' will be
 (Font)              scaled to size 9.19998pt on input line 534.
-) (./sections/registration/affine-registration.tex
-
-LaTeX Warning: Reference `LastPage' on page 27 undefined on input line 40.
-
-[27 <./figures/sygn_ellipses.png>]
-
-Package natbib Warning: Citation `mattes2003petct' on page 28 undefined on input line 52.
-
-
-LaTeX Warning: Reference `eq:optimisation' on page 28 undefined on input line 66.
-
-
-Package natbib Warning: Citation `thevenaz1998pyramid' on page 28 undefined on input line 76.
-
-
-LaTeX Warning: Reference `tab:multires' on page 28 undefined on input line 81.
-
-
-LaTeX Warning: Reference `LastPage' on page 28 undefined on input line 82.
-
-[28])) (./sections/05-encoding.tex (./sections/encoding/vae.tex
-
-Package natbib Warning: Citation `brock2016' on page 29 undefined on input line 8.
-
-
-Package natbib Warning: Citation `brock2016' on page 29 undefined on input line 24.
-
-
-LaTeX Warning: Reference `LastPage' on page 29 undefined on input line 25.
-
-[29]
-
-Package natbib Warning: Citation `brock2016' on page 30 undefined on input line 35.
-
-
-LaTeX Warning: Reference `fig:vae_arch' on page 30 undefined on input line 38.
-
-
-LaTeX Warning: Reference `tab:vae_layers' on page 30 undefined on input line 38.
-
-
-Package natbib Warning: Citation `brock2016' on page 30 undefined on input line 43.
-
-
-Package natbib Warning: Citation `ba2016' on page 30 undefined on input line 74.
-
-
-Package natbib Warning: Citation `odena2016' on page 30 undefined on input line 81.
-
-
-LaTeX Warning: Reference `LastPage' on page 30 undefined on input line 87.
-
-[30]
-
-Package natbib Warning: Citation `clevert2016' on page 31 undefined on input line 88.
-
-
-Package natbib Warning: Citation `ioffe2015' on page 31 undefined on input line 89.
-
-
-Package natbib Warning: Citation `ulyanov2016' on page 31 undefined on input line 90.
-
-
-Package natbib Warning: Citation `glorot2010' on page 31 undefined on input line 93.
-
-<figures/vae_architecture.png, id=286, 2180.145pt x 453.695pt>
+) (./sections/registration/affine-registration.tex [26] [27])) (./sections/05-encoding.tex (./sections/encoding/vae.tex [28]
+<figures/vae_architecture.png, id=1065, 2180.145pt x 453.695pt>
 File: figures/vae_architecture.png Graphic file (type png)
 <use figures/vae_architecture.png>
 Package pdftex.def Info: figures/vae_architecture.png  used on input line 121.
 (pdftex.def)             Requested size: 455.24411pt x 94.73186pt.
-
-Package natbib Warning: Citation `brock2016' on page 31 undefined on input line 124.
-
-
-Package natbib Warning: Citation `brock2016' on page 31 undefined on input line 132.
-
-
-Package natbib Warning: Citation `brock2016' on page 31 undefined on input line 144.
-
-
-LaTeX Warning: Reference `LastPage' on page 31 undefined on input line 151.
-
-[31 <./figures/vae_architecture.png>]
-
-Package natbib Warning: Citation `brock2016' on page 32 undefined on input line 152.
-
-
-Package natbib Warning: Citation `higgins2017' on page 32 undefined on input line 166.
-
-
-Package natbib Warning: Citation `shit2021' on page 32 undefined on input line 172.
-
-
-Package natbib Warning: Citation `sutskever2013' on page 32 undefined on input line 200.
-
-
-Package natbib Warning: Citation `brock2016' on page 32 undefined on input line 202.
-
-
-LaTeX Warning: Reference `fig:vae_curves' on page 32 undefined on input line 213.
-
-
-LaTeX Warning: Reference `fig:vae_recon' on page 32 undefined on input line 215.
-
-
-LaTeX Warning: Reference `LastPage' on page 32 undefined on input line 220.
-
-[32]
-<figures/vae_training_curves.jpeg, id=310, 841.1425pt x 301.125pt>
+ [29] [30 <./figures/vae_architecture.png>]
+<figures/vae_training_curves.jpeg, id=1111, 841.1425pt x 301.125pt>
 File: figures/vae_training_curves.jpeg Graphic file (type jpg)
 <use figures/vae_training_curves.jpeg>
 Package pdftex.def Info: figures/vae_training_curves.jpeg  used on input line 231.
 (pdftex.def)             Requested size: 455.24411pt x 162.97725pt.
-<figures/vae_reconstructions.png, id=311, 1464.47125pt x 769.87625pt>
+<figures/vae_reconstructions.png, id=1112, 1464.47125pt x 769.87625pt>
 File: figures/vae_reconstructions.png Graphic file (type png)
 <use figures/vae_reconstructions.png>
 Package pdftex.def Info: figures/vae_reconstructions.png  used on input line 240.
 (pdftex.def)             Requested size: 455.24411pt x 239.31702pt.
-
-
-LaTeX Warning: Reference `fig:vae_curves_reg' on page 33 undefined on input line 267.
-
-
-LaTeX Warning: Reference `LastPage' on page 33 undefined on input line 273.
-
-[33 <./figures/vae_training_curves.jpeg> <./figures/vae_reconstructions.png>]
-<figures/vae_curves_regularized.jpeg, id=320, 886.31125pt x 418.56375pt>
+<figures/vae_curves_regularized.jpeg, id=1114, 886.31125pt x 418.56375pt>
 File: figures/vae_curves_regularized.jpeg Graphic file (type jpg)
 <use figures/vae_curves_regularized.jpeg>
 Package pdftex.def Info: figures/vae_curves_regularized.jpeg  used on input line 276.
 (pdftex.def)             Requested size: 455.24411pt x 214.99112pt.
-) (./sections/encoding/autoencoders.tex
-
-Package natbib Warning: Citation `ren2024' on page 34 undefined on input line 39.
-
-
-Package natbib Warning: Citation `ren2024' on page 34 undefined on input line 42.
-
-
-LaTeX Warning: Reference `LastPage' on page 34 undefined on input line 45.
-
-[34 <./figures/vae_curves_regularized.jpeg>]
-
-Package natbib Warning: Citation `ren2024' on page 35 undefined on input line 47.
-
-
-Package natbib Warning: Citation `museth2013' on page 35 undefined on input line 51.
-
-
-LaTeX Warning: Reference `eq:ae_loss' on page 35 undefined on input line 61.
-
-
-LaTeX Warning: Reference `fig:ae_recon' on page 35 undefined on input line 69.
-
-
-LaTeX Warning: Reference `fig:ae_curves' on page 35 undefined on input line 72.
-
-<figures/ae_sparse_reconstructions.png, id=329, 1904.11375pt x 1020.81375pt>
+) (./sections/encoding/autoencoders.tex [31] [32 <./figures/vae_training_curves.jpeg> <./figures/vae_reconstructions.png>] [33 <./figures/vae_curves_regularized.jpeg>]
+<figures/ae_sparse_reconstructions.png, id=1153, 1904.11375pt x 1020.81375pt>
 File: figures/ae_sparse_reconstructions.png Graphic file (type png)
 <use figures/ae_sparse_reconstructions.png>
 Package pdftex.def Info: figures/ae_sparse_reconstructions.png  used on input line 83.
 (pdftex.def)             Requested size: 455.24411pt x 244.05014pt.
-) (./sections/encoding/implicit.tex
+) (./sections/encoding/implicit.tex [34]
 
-LaTeX Warning: Reference `sec:vae' on page 35 undefined on input line 27.
+LaTeX Warning: Reference `sec:implicit_inference' on page 35 undefined on input line 90.
 
+[35 <./figures/ae_sparse_reconstructions.png>] [36] [37]
 
-LaTeX Warning: Reference `sec:ae' on page 35 undefined on input line 27.
+Package natbib Warning: Citation `...' on page 38 undefined on input line 261.
 
 
-Package natbib Warning: Citation `park2019' on page 35 undefined on input line 29.
+Package natbib Warning: Citation `...' on page 38 undefined on input line 262.
 
 
-Package natbib Warning: Citation `zhang2024' on page 35 undefined on input line 30.
-
-
-LaTeX Warning: Reference `sec:clustering' on page 35 undefined on input line 32.
-
-
-Package natbib Warning: Citation `zhang2024' on page 35 undefined on input line 43.
-
-
-LaTeX Warning: Reference `LastPage' on page 35 undefined on input line 44.
-
-[35]
-
-Package natbib Warning: Citation `park2019' on page 36 undefined on input line 48.
-
-
-Package natbib Warning: Citation `zhang2024' on page 36 undefined on input line 48.
-
-
-Package natbib Warning: Citation `park2019' on page 36 undefined on input line 48.
-
-
-Package natbib Warning: Citation `zhang2024' on page 36 undefined on input line 53.
-
-
-Package natbib Warning: Citation `gropp2020' on page 36 undefined on input line 56.
-
-
-LaTeX Warning: Reference `sec:implicit_loss' on page 36 undefined on input line 58.
-
-
-Package natbib Warning: Citation `park2019' on page 36 undefined on input line 70.
-
-
-LaTeX Warning: Reference `LastPage' on page 36 undefined on input line 75.
-
-[36 <./figures/ae_sparse_reconstructions.png>]
-
-Package natbib Warning: Citation `lorensen1987' on page 37 undefined on input line 82.
-
-
-LaTeX Warning: Reference `fig:implicit_arch' on page 37 undefined on input line 85.
-
-
-Package natbib Warning: Citation `park2019' on page 37 undefined on input line 88.
-
-
-LaTeX Warning: Reference `sec:implicit_inference' on page 37 undefined on input line 90.
-
-
-Package natbib Warning: Citation `park2019' on page 37 undefined on input line 93.
-
-
-Package natbib Warning: Citation `salimans2016' on page 37 undefined on input line 94.
-
-
-LaTeX Warning: Reference `sec:implicit_loss' on page 37 undefined on input line 100.
-
-
-Package natbib Warning: Citation `gropp2020' on page 37 undefined on input line 103.
-
-
-Package natbib Warning: Citation `gropp2020' on page 37 undefined on input line 112.
-
-
-Package natbib Warning: Citation `park2019' on page 37 undefined on input line 126.
-
-
-Package natbib Warning: Citation `park2019' on page 37 undefined on input line 126.
-
-
-LaTeX Warning: Reference `sec:implicit_training' on page 37 undefined on input line 140.
-
-
-LaTeX Warning: Reference `LastPage' on page 37 undefined on input line 148.
-
-[37]
-
-Package natbib Warning: Citation `zhang2024' on page 38 undefined on input line 149.
-
-
-Package natbib Warning: Citation `zhang2024' on page 38 undefined on input line 173.
-
-
-LaTeX Warning: Reference `eq:implicit_val' on page 38 undefined on input line 219.
-
-
-Package natbib Warning: Citation `park2019' on page 38 undefined on input line 220.
-
-
-Package natbib Warning: Citation `zhang2024' on page 38 undefined on input line 223.
-
-
-Package natbib Warning: Citation `zhang2024' on page 38 undefined on input line 223.
-
-
-LaTeX Warning: Reference `eq:implicit_geo' on page 38 undefined on input line 226.
-
-
-Package natbib Warning: Citation `gropp2020' on page 38 undefined on input line 228.
-
-
-Package natbib Warning: Citation `zhang2024' on page 38 undefined on input line 228.
-
-
-Package natbib Warning: Citation `zhang2024' on page 38 undefined on input line 231.
-
-
-Package natbib Warning: Citation `park2019' on page 38 undefined on input line 234.
-
-
-LaTeX Warning: Reference `LastPage' on page 38 undefined on input line 239.
+LaTeX Warning: Reference `fig:implicit_curves' on page 38 undefined on input line 289.
 
 [38]
-
-Package natbib Warning: Citation `zhang2024' on page 39 undefined on input line 252.
-
-
-Package natbib Warning: Citation `...' on page 39 undefined on input line 261.
-
-
-Package natbib Warning: Citation `...' on page 39 undefined on input line 262.
-
-
-Package natbib Warning: Citation `lorensen1987' on page 39 undefined on input line 265.
-
-
-Package natbib Warning: Citation `park2019' on page 39 undefined on input line 266.
-
-
-Package natbib Warning: Citation `kingma2015' on page 39 undefined on input line 285.
-
-
-LaTeX Warning: Reference `fig:implicit_curves' on page 39 undefined on input line 289.
-
-
-LaTeX Warning: Reference `sec:clustering' on page 39 undefined on input line 294.
-
-
-Package natbib Warning: Citation `park2019' on page 39 undefined on input line 299.
-
-
-LaTeX Warning: Reference `LastPage' on page 39 undefined on input line 308.
-
-[39]
-
-LaTeX Warning: Reference `eq:implicit_val' on page 40 undefined on input line 315.
-
-
-LaTeX Warning: Reference `eq:implicit_reg' on page 40 undefined on input line 315.
-
-
-LaTeX Warning: Reference `eq:implicit_val' on page 40 undefined on input line 315.
-
-
-LaTeX Warning: Reference `eq:implicit_reg' on page 40 undefined on input line 315.
-
-
-Package natbib Warning: Citation `zhang2024' on page 40 undefined on input line 328.
-
-
-Package natbib Warning: Citation `zhang2024' on page 40 undefined on input line 337.
-
-
-LaTeX Warning: Reference `eq:td_bd' on page 40 undefined on input line 345.
-
-
-Package natbib Warning: Citation `zhang2024' on page 40 undefined on input line 346.
-
-
-LaTeX Warning: Reference `tab:implicit_results' on page 40 undefined on input line 355.
-
-
-LaTeX Warning: Reference `fig:implicit_recon' on page 40 undefined on input line 356.
-
-
-LaTeX Warning: Reference `LastPage' on page 40 undefined on input line 360.
-
-[40]
-
-Package natbib Warning: Citation `zhang2024' on page 41 undefined on input line 365.
-
-
-Package natbib Warning: Citation `zhang2024' on page 41 undefined on input line 365.
-
-)) (./sections/06-labelling.tex
-
-Package natbib Warning: Citation `xie2025' on page 41 undefined on input line 22.
-
-
-Package natbib Warning: Citation `xie2025' on page 41 undefined on input line 34.
-
-
-Package natbib Warning: Citation `xie2025' on page 41 undefined on input line 36.
-
-
-LaTeX Warning: Reference `tab:ipgn_labels' on page 41 undefined on input line 37.
-
-
-Package natbib Warning: Citation `xie2025' on page 41 undefined on input line 48.
-
-
-Package natbib Warning: Citation `xie2025' on page 41 undefined on input line 48.
-
-
-Package natbib Warning: Citation `xie2025' on page 41 undefined on input line 75.
-
-
-Package natbib Warning: Citation `xie2025' on page 41 undefined on input line 94.
-
-
-Package natbib Warning: Citation `bumgarner2022' on page 41 undefined on input line 96.
-
-
-Package natbib Warning: Citation `lee1994' on page 41 undefined on input line 96.
-
-
-LaTeX Warning: Reference `LastPage' on page 41 undefined on input line 100.
-
-[41]
-
-LaTeX Warning: Reference `fig:ipgn_overview' on page 42 undefined on input line 103.
-
-
-Package natbib Warning: Citation `xie2025' on page 42 undefined on input line 103.
-
-
-Package natbib Warning: Citation `velickovic2018' on page 42 undefined on input line 104.
-
-
-Package natbib Warning: Citation `qi2017' on page 42 undefined on input line 106.
-
-
-Package natbib Warning: Citation `zhao2021' on page 42 undefined on input line 106.
-
-
-Package natbib Warning: Citation `xie2025' on page 42 undefined on input line 238.
-
-
-Package natbib Warning: Citation `xie2025' on page 42 undefined on input line 238.
-
-
-Package natbib Warning: Citation `xie2025' on page 42 undefined on input line 260.
-
-
-Package natbib Warning: Citation `xie2025' on page 42 undefined on input line 267.
-
-
-Package natbib Warning: Citation `xie2025' on page 42 undefined on input line 270.
-
-
-Package natbib Warning: Citation `xie2025' on page 42 undefined on input line 277.
-
-
-Package natbib Warning: Citation `xie2025' on page 42 undefined on input line 279.
-
-
-LaTeX Warning: Reference `LastPage' on page 42 undefined on input line 282.
-
-[42]
-
-Package natbib Warning: Citation `xie2025' on page 43 undefined on input line 375.
-
-
-LaTeX Warning: Reference `fig:ipgn_ours' on page 43 undefined on input line 396.
-
-
-LaTeX Warning: Reference `LastPage' on page 43 undefined on input line 397.
-
-[43]
-
-LaTeX Warning: Reference `sec:morphometrics' on page 44 undefined on input line 402.
-
-
-LaTeX Warning: Reference `tab:ipgn_labels' on page 44 undefined on input line 410.
-
-
-LaTeX Warning: Reference `tab:ipgn_labels' on page 44 undefined on input line 410.
-
-) (./sections/07-morphological-metrics.tex
-
-LaTeX Warning: Reference `sec:labeling' on page 44 undefined on input line 8.
-
-
-Package natbib Warning: Citation `zhang2025airmorph' on page 44 undefined on input line 10.
-
-
-Package natbib Warning: Citation `zhang2025airmorph' on page 44 undefined on input line 14.
-
-
-Package natbib Warning: Citation `zhang2025airmorph' on page 44 undefined on input line 22.
-
-
-LaTeX Warning: Reference `fig:morph_def' on page 44 undefined on input line 23.
-
-
-Package natbib Warning: Citation `zhang2025airmorph' on page 44 undefined on input line 37.
-
-
-LaTeX Warning: Reference `LastPage' on page 44 undefined on input line 40.
-
-[44]
-
-LaTeX Warning: Reference `tab:morph_summary' on page 45 undefined on input line 41.
-
-
-Package natbib Warning: Citation `zhang2025airmorph' on page 45 undefined on input line 46.
-
-
-Package natbib Warning: Citation `zhang2025airmorph' on page 45 undefined on input line 67.
-
-
-Package natbib Warning: Citation `zhang2025airmorph' on page 45 undefined on input line 76.
-
-
-Package natbib Warning: Citation `zhang2025airmorph' on page 45 undefined on input line 108.
-
-
-LaTeX Warning: Reference `LastPage' on page 45 undefined on input line 111.
-
-[45]
-
-Package natbib Warning: Citation `zhang2025airmorph' on page 46 undefined on input line 129.
-
-
-Package natbib Warning: Citation `zhang2025airmorph' on page 46 undefined on input line 134.
-
-
-Package natbib Warning: Citation `zhang2025airmorph' on page 46 undefined on input line 144.
-
-
-Package natbib Warning: Citation `zhang2025airmorph' on page 46 undefined on input line 148.
-
-
-LaTeX Warning: Reference `LastPage' on page 46 undefined on input line 168.
-
-[46]
-
-Package natbib Warning: Citation `zhang2025airmorph' on page 47 undefined on input line 172.
-
-
-Package natbib Warning: Citation `zhang2025airmorph' on page 47 undefined on input line 184.
-
-
-Package natbib Warning: Citation `zhang2025airmorph' on page 47 undefined on input line 188.
-
-
-Package natbib Warning: Citation `zhang2025airmorph' on page 47 undefined on input line 200.
-
-
-Package natbib Warning: Citation `zhang2025airmorph' on page 47 undefined on input line 205.
-
-
-Package natbib Warning: Citation `zhang2025airmorph' on page 47 undefined on input line 222.
-
-
-Package natbib Warning: Citation `zhang2025airmorph' on page 47 undefined on input line 227.
-
-
-LaTeX Warning: Reference `LastPage' on page 47 undefined on input line 228.
-
-[47]
-
-Package natbib Warning: Citation `zhang2025airmorph' on page 48 undefined on input line 242.
-
-
-LaTeX Warning: Reference `fig:morph_ours' on page 48 undefined on input line 254.
-
-
-LaTeX Warning: Reference `sec:clustering' on page 48 undefined on input line 255.
-
-) (./sections/08-clustering.tex
-
-Package natbib Warning: Citation `norouzi2024volpam' on page 48 undefined on input line 8.
-
-
-LaTeX Warning: Reference `sec:morphometrics' on page 48 undefined on input line 13.
-
-
-LaTeX Warning: Reference `fig:clustering_pipeline' on page 48 undefined on input line 13.
-
-(./sections/clustering/agglomerative.tex
-
-Package natbib Warning: Citation `norouzi2024volpam' on page 48 undefined on input line 8.
-
-
-Package natbib Warning: Citation `norouzi2024volpam' on page 48 undefined on input line 15.
-
-
-LaTeX Warning: Reference `LastPage' on page 48 undefined on input line 16.
-
-[48]
-
-Package natbib Warning: Citation `norouzi2024volpam' on page 49 undefined on input line 18.
-
-
-Package natbib Warning: Citation `ward1963' on page 49 undefined on input line 19.
-
-
-LaTeX Warning: Reference `eq:kmeans' on page 49 undefined on input line 31.
-
-
-Package natbib Warning: Citation `norouzi2024volpam' on page 49 undefined on input line 35.
-
-
-Package natbib Warning: Citation `norouzi2024volpam' on page 49 undefined on input line 47.
-
-
-LaTeX Warning: Reference `LastPage' on page 49 undefined on input line 52.
-
-[49]) (./sections/clustering/kmeans.tex
-
-Package natbib Warning: Citation `lloyd1982' on page 50 undefined on input line 14.
-
-
-Package natbib Warning: Citation `arthur2007kmeanspp' on page 50 undefined on input line 18.
-
-
-Package natbib Warning: Citation `pedregosa2011sklearn' on page 50 undefined on input line 20.
-
-
-Package natbib Warning: Citation `rousseeuw1987silhouettes' on page 50 undefined on input line 30.
-
-) (./sections/clustering/projections.tex
-
-Package natbib Warning: Citation `scholkopf1998kpca' on page 50 undefined on input line 17.
-
-
-LaTeX Warning: Reference `eq:rbf' on page 50 undefined on input line 18.
-
-
-LaTeX Warning: Reference `LastPage' on page 50 undefined on input line 27.
-
-[50]
-
-Package natbib Warning: Citation `vandermaaten2008tsne' on page 51 undefined on input line 29.
-
-
-Package natbib Warning: Citation `mcinnes2018umap' on page 51 undefined on input line 47.
-
-
-LaTeX Warning: Reference `LastPage' on page 51 undefined on input line 86.
-
-[51]) (./sections/clustering/results.tex
-
-LaTeX Warning: Reference `eq:davg' on page 52 undefined on input line 18.
-
-
-LaTeX Warning: Reference `eq:kstar' on page 52 undefined on input line 18.
-
-
-LaTeX Warning: Reference `eq:davg' on page 52 undefined on input line 18.
-
-
-LaTeX Warning: Reference `eq:kstar' on page 52 undefined on input line 18.
-
-
-LaTeX Warning: Reference `LastPage' on page 52 undefined on input line 36.
-
-[52]
-
-LaTeX Warning: Reference `eq:kmeans' on page 53 undefined on input line 44.
-
-
-LaTeX Warning: Reference `eq:silhouette' on page 53 undefined on input line 44.
-
-
-LaTeX Warning: Reference `eq:kmeans' on page 53 undefined on input line 44.
-
-
-LaTeX Warning: Reference `eq:silhouette' on page 53 undefined on input line 44.
-
-
-LaTeX Warning: Reference `tab:clust_ari' on page 53 undefined on input line 69.
-
-
-LaTeX Warning: Reference `sec:clust_kmeans' on page 53 undefined on input line 69.
-
-
-LaTeX Warning: Reference `sec:morphometrics' on page 53 undefined on input line 74.
-
-
-LaTeX Warning: Reference `LastPage' on page 53 undefined on input line 79.
-
-[53]
-
-LaTeX Warning: Reference `tab:unreg-kmeans' on page 54 undefined on input line 95.
-
-
-LaTeX Warning: Reference `tab:reg-agglo' on page 54 undefined on input line 95.
-
-
-Package natbib Warning: Citation `kruskal1952' on page 54 undefined on input line 107.
-
-(./sections/clustering/cluster-tables.tex
-
-./sections/clustering/cluster-tables.tex:1: LaTeX Error: Can be used only in preamble.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.1 \documentclass
-                  {article}
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-./sections/clustering/cluster-tables.tex:2: LaTeX Error: Can be used only in preamble.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.2 \usepackage
-               [a4paper,landscape,margin=1.5cm]{geometry} % wide tables need...
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-./sections/clustering/cluster-tables.tex:3: LaTeX Error: Can be used only in preamble.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.3 \usepackage
-               [table]{xcolor}  % [table] loads colortbl for \cellcolor
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-./sections/clustering/cluster-tables.tex:4: LaTeX Error: Can be used only in preamble.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.4 \usepackage
-               {booktabs}       % \toprule, \midrule, \bottomrule
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-./sections/clustering/cluster-tables.tex:5: LaTeX Error: Can be used only in preamble.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.5 \usepackage
-               {graphicx}       % \resizebox
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-./sections/clustering/cluster-tables.tex:6: LaTeX Error: Can be used only in preamble.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.6 \usepackage
-               {amsmath}        % \text inside math
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-./sections/clustering/cluster-tables.tex:19: LaTeX Error: Command \stat already defined.
-               Or name \end... illegal, see p.192 of the manual.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.19 ...ommand{\stat}{\scriptsize\color{black!60}}
-                                                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-./sections/clustering/cluster-tables.tex:27: LaTeX Error: Can be used only in preamble.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.27 \begin{document}
-                     
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
+LaTeX Font Info:    Font shape `T1/phv/b/n' will be
+(Font)              scaled to size 9.19998pt on input line 375.
+)) (./sections/06-labelling.tex [39] [40]
+<figures/ipgn_overview.png, id=1341, 8222.72pt x 2300.595pt>
+File: figures/ipgn_overview.png Graphic file (type png)
+<use figures/ipgn_overview.png>
+Package pdftex.def Info: figures/ipgn_overview.png  used on input line 85.
+(pdftex.def)             Requested size: 455.24411pt x 127.35806pt.
+ [41 <./figures/ipgn_overview.png>]
+<figures/predictions.png, id=1370, 3755.02875pt x 1793.70125pt>
+File: figures/predictions.png Graphic file (type png)
+<use figures/predictions.png>
+Package pdftex.def Info: figures/predictions.png  used on input line 165.
+(pdftex.def)             Requested size: 455.24411pt x 217.4518pt.
+) (./sections/07-morphological-metrics.tex [42]
+<figures/morphological_metrics.png, id=1394, 1985.4175pt x 2346.7675pt>
+File: figures/morphological_metrics.png Graphic file (type png)
+<use figures/morphological_metrics.png>
+Package pdftex.def Info: figures/morphological_metrics.png  used on input line 61.
+(pdftex.def)             Requested size: 455.24411pt x 538.09798pt.
+ [43 <./figures/predictions.png>] [44 <./figures/morphological_metrics.png>] [45] [46] [47]
+<figures/morph_signatures_ours.png, id=1488, 1797.71625pt x 881.2925pt>
+File: figures/morph_signatures_ours.png Graphic file (type png)
+<use figures/morph_signatures_ours.png>
+Package pdftex.def Info: figures/morph_signatures_ours.png  used on input line 243.
+(pdftex.def)             Requested size: 455.24411pt x 223.17343pt.
+) (./sections/08-clustering.tex (./sections/clustering/agglomerative.tex [48 <./figures/morph_signatures_ours.png>]) (./sections/clustering/kmeans.tex [49]) (./sections/clustering/projections.tex [50] [51]) (./sections/clustering/results.tex [52] [53]
+LaTeX Font Info:    Font shape `TS1/phv/m/n' will be
+(Font)              scaled to size 11.03998pt on input line 170.
+<figures/clustering/reg_agglo_kernelPCA_2d.png, id=1625, 2758.305pt x 1159.33125pt>
+File: figures/clustering/reg_agglo_kernelPCA_2d.png Graphic file (type png)
+<use figures/clustering/reg_agglo_kernelPCA_2d.png>
+Package pdftex.def Info: figures/clustering/reg_agglo_kernelPCA_2d.png  used on input line 172.
+(pdftex.def)             Requested size: 391.51021pt x 164.5519pt.
+<figures/clustering/reg_agglo_tsne_2d.png, id=1626, 2758.305pt x 1159.33125pt>
+File: figures/clustering/reg_agglo_tsne_2d.png Graphic file (type png)
+<use figures/clustering/reg_agglo_tsne_2d.png>
+Package pdftex.def Info: figures/clustering/reg_agglo_tsne_2d.png  used on input line 174.
+(pdftex.def)             Requested size: 391.51021pt x 164.5519pt.
+<figures/clustering/reg_agglo_umap_2d.png, id=1627, 2758.305pt x 1159.33125pt>
+File: figures/clustering/reg_agglo_umap_2d.png Graphic file (type png)
+<use figures/clustering/reg_agglo_umap_2d.png>
+Package pdftex.def Info: figures/clustering/reg_agglo_umap_2d.png  used on input line 176.
+(pdftex.def)             Requested size: 391.51021pt x 164.5519pt.
+<figures/clustering/unreg_agglo_kernelPCA_2d.png, id=1628, 2758.305pt x 1171.37625pt>
+File: figures/clustering/unreg_agglo_kernelPCA_2d.png Graphic file (type png)
+<use figures/clustering/unreg_agglo_kernelPCA_2d.png>
+Package pdftex.def Info: figures/clustering/unreg_agglo_kernelPCA_2d.png  used on input line 185.
+(pdftex.def)             Requested size: 391.51021pt x 166.26152pt.
+<figures/clustering/unreg_agglo_tsne_2d.png, id=1629, 2758.305pt x 1171.37625pt>
+File: figures/clustering/unreg_agglo_tsne_2d.png Graphic file (type png)
+<use figures/clustering/unreg_agglo_tsne_2d.png>
+Package pdftex.def Info: figures/clustering/unreg_agglo_tsne_2d.png  used on input line 187.
+(pdftex.def)             Requested size: 391.51021pt x 166.26152pt.
+<figures/clustering/unreg_agglo_umap_2d.png, id=1630, 2758.305pt x 1171.37625pt>
+File: figures/clustering/unreg_agglo_umap_2d.png Graphic file (type png)
+<use figures/clustering/unreg_agglo_umap_2d.png>
+Package pdftex.def Info: figures/clustering/unreg_agglo_umap_2d.png  used on input line 189.
+(pdftex.def)             Requested size: 391.51021pt x 166.26152pt.
+<figures/clustering/reg_kmeans_kernelPCA_2d.png, id=1631, 2758.305pt x 1159.33125pt>
+File: figures/clustering/reg_kmeans_kernelPCA_2d.png Graphic file (type png)
+<use figures/clustering/reg_kmeans_kernelPCA_2d.png>
+Package pdftex.def Info: figures/clustering/reg_kmeans_kernelPCA_2d.png  used on input line 204.
+(pdftex.def)             Requested size: 391.51021pt x 164.5519pt.
+<figures/clustering/reg_kmeans_tsne_2d.png, id=1632, 2758.305pt x 1159.33125pt>
+File: figures/clustering/reg_kmeans_tsne_2d.png Graphic file (type png)
+<use figures/clustering/reg_kmeans_tsne_2d.png>
+Package pdftex.def Info: figures/clustering/reg_kmeans_tsne_2d.png  used on input line 206.
+(pdftex.def)             Requested size: 391.51021pt x 164.5519pt.
+<figures/clustering/reg_kmeans_umap_2d.png, id=1633, 2758.305pt x 1159.33125pt>
+File: figures/clustering/reg_kmeans_umap_2d.png Graphic file (type png)
+<use figures/clustering/reg_kmeans_umap_2d.png>
+Package pdftex.def Info: figures/clustering/reg_kmeans_umap_2d.png  used on input line 208.
+(pdftex.def)             Requested size: 391.51021pt x 164.5519pt.
+<figures/clustering/unreg_kmeans_kernelPCA_2d.png, id=1634, 2758.305pt x 1171.37625pt>
+File: figures/clustering/unreg_kmeans_kernelPCA_2d.png Graphic file (type png)
+<use figures/clustering/unreg_kmeans_kernelPCA_2d.png>
+Package pdftex.def Info: figures/clustering/unreg_kmeans_kernelPCA_2d.png  used on input line 217.
+(pdftex.def)             Requested size: 391.51021pt x 166.26152pt.
+<figures/clustering/unreg_kmeans_tsne_2d.png, id=1635, 2758.305pt x 1171.37625pt>
+File: figures/clustering/unreg_kmeans_tsne_2d.png Graphic file (type png)
+<use figures/clustering/unreg_kmeans_tsne_2d.png>
+Package pdftex.def Info: figures/clustering/unreg_kmeans_tsne_2d.png  used on input line 219.
+(pdftex.def)             Requested size: 391.51021pt x 166.26152pt.
+<figures/clustering/unreg_kmeans_umap_2d.png, id=1636, 2758.305pt x 1171.37625pt>
+File: figures/clustering/unreg_kmeans_umap_2d.png Graphic file (type png)
+<use figures/clustering/unreg_kmeans_umap_2d.png>
+Package pdftex.def Info: figures/clustering/unreg_kmeans_umap_2d.png  used on input line 221.
+(pdftex.def)             Requested size: 391.51021pt x 166.26152pt.
+<figures/clustering/umap_2D_8metrics.png, id=1637, 1567.89764pt x 716.55705pt>
+File: figures/clustering/umap_2D_8metrics.png Graphic file (type png)
+<use figures/clustering/umap_2D_8metrics.png>
+Package pdftex.def Info: figures/clustering/umap_2D_8metrics.png  used on input line 255.
+(pdftex.def)             Requested size: 455.24411pt x 208.0477pt.
+ (./sections/clustering/cluster-tables.tex
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 4.59999pt on input line 65.
+(Font)              scaled to size 4.59999pt on input line 40.
+))) (./sections/09-conclusions.tex [54] [55 <./figures/clustering/reg_agglo_kernelPCA_2d.png> <./figures/clustering/reg_agglo_tsne_2d.png> <./figures/clustering/reg_agglo_umap_2d.png>] [56 <./figures/clustering/unreg_agglo_kernelPCA_2d.png> <./figures/clustering/unreg_agglo_tsne_2d.png> <./figures/clustering/unreg_agglo_umap_2d.png>] [57 <./figures/clustering/reg_kmeans_kernelPCA_2d.png> <./figures/clustering/reg_kmeans_tsne_2d.png> <./figures/clustering/reg_kmeans_umap_2d.png>] [58 <./figures/clustering/unreg_kmeans_kernelPCA_2d.png> <./figures/clustering/unreg_kmeans_tsne_2d.png> <./figures/clustering/unreg_kmeans_umap_2d.png>] [59 <./figures/clustering/umap_2D_8metrics.png>] [60]) [61] (./sections/11-references.tex (build/main.bbl [62
 
-LaTeX Warning: Reference `LastPage' on page 54 undefined on input line 68.
 
-[54]
-
-LaTeX Warning: Reference `LastPage' on page 55 undefined on input line 68.
-
-[55]
-
-LaTeX Warning: Reference `LastPage' on page 56 undefined on input line 107.
-
-[56
-
-]
-
-LaTeX Warning: Reference `LastPage' on page 57 undefined on input line 146.
-
-[57
-
-]
-
-LaTeX Warning: Reference `LastPage' on page 58 undefined on input line 185.
-
-[58
-
-]
+] [63] [64] [65] [66] [67]))
 
 Package natbib Warning: There were undefined citations.
 
-
+[68] 
 enddocument/afterlastpage: lastpage setting LastPage.
 (build/main.aux)
  ***********
@@ -2417,38 +1022,22 @@ L3 programming layer <2024-01-22>
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  5FEF9E7FAAA2D4B5AC73DDF2EEF9DD29;9503.
-
-Package lastpage Warning: Rerun to get the references right on input line 187.
-
- ) ) ) )
-(\end occurred inside a group at level 1)
-
-### semi simple group (level 1) entered at line 27 (\begingroup)
-### bottom level 
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 39D59FF3E847ECABFFA7A3C71D8B6A61;9476.
+ ) 
 Here is how much of TeX's memory you used:
- 29348 strings out of 476106
- 525209 string characters out of 5793934
- 1950975 words of memory out of 5000000
- 49881 multiletter control sequences out of 15000+600000
- 658991 words of font info for 469 fonts, out of 8000000 for 9000
+ 29784 strings out of 476106
+ 538132 string characters out of 5793934
+ 2003975 words of memory out of 5000000
+ 50221 multiletter control sequences out of 15000+600000
+ 660815 words of font info for 451 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  99i,19n,101p,1028b,1323s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmmib8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb>
-Output written on build/main.pdf (58 pages, 14704792 bytes).
+Output written on build/main.pdf (68 pages, 32750947 bytes).
 PDF statistics:
- 741 PDF objects out of 1000 (max. 8388607)
- 596 compressed objects within 6 object streams
- 309 named destinations out of 1000 (max. 500000)
- 118877 words of extra memory for PDF output out of 128383 (max. 10000000)
+ 1946 PDF objects out of 2073 (max. 8388607)
+ 1709 compressed objects within 18 object streams
+ 435 named destinations out of 1000 (max. 500000)
+ 121458 words of extra memory for PDF output out of 128383 (max. 10000000)
 

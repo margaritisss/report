@@ -293,29 +293,29 @@ After training, each training tree is represented by its latent code
 $\mathbf{z}_i \in \mathbb{R}^{256}$. These codes are the features used for clustering in
 \secref{sec:clustering}.
 
-\paragraph{Latent codes of unseen trees.}  % test-time optimization
-\label{sec:implicit_inference}           % \secref{sec:implicit_inference}
-For validation and test trees, the decoder weights are frozen and only a new code
-$\mathbf{z}$ is optimized \cite{park2019}. The code is initialized from
-$\mathcal{N}(0, 0.01^2)$ and optimized for 800 iterations with Adam, with a learning rate of
-$5\times10^{-3}$ divided by 10 after 400 iterations. The objective is the same SDF loss,
-$\mathcal{L}_{\mathrm{sdf\text{-}val}} + \mathcal{L}_{\mathrm{sdf\text{-}geo}}$, on freshly
-drawn samples of the tree, plus a prior term
-$10^{-4}\,\omega_s \,\overline{\mathbf{z}^2}$, where $\overline{\mathbf{z}^2}$ is the mean of
-the squared code entries.
-% [NOTE] if the clustering uses only training codes, this paragraph is only needed for
-% the validation/test reconstruction metrics below.
+% \paragraph{Latent codes of unseen trees.}  % test-time optimization
+% \label{sec:implicit_inference}           % \secref{sec:implicit_inference}
+% For validation and test trees, the decoder weights are frozen and only a new code
+% $\mathbf{z}$ is optimized \cite{park2019}. The code is initialized from
+% $\mathcal{N}(0, 0.01^2)$ and optimized for 800 iterations with Adam, with a learning rate of
+% $5\times10^{-3}$ divided by 10 after 400 iterations. The objective is the same SDF loss,
+% $\mathcal{L}_{\mathrm{sdf\text{-}val}} + \mathcal{L}_{\mathrm{sdf\text{-}geo}}$, on freshly
+% drawn samples of the tree, plus a prior term
+% $10^{-4}\,\omega_s \,\overline{\mathbf{z}^2}$, where $\overline{\mathbf{z}^2}$ is the mean of
+% the squared code entries.
+% % [NOTE] if the clustering uses only training codes, this paragraph is only needed for
+% % the validation/test reconstruction metrics below.
 
-\begin{figure}[htbp]                     % placeholder for training curves
-  \centering                             % center the figure
-  % \includegraphics[width=\textwidth]{figures/deepsdf_training_curves.png}  % uncomment with your file
-  \fbox{\parbox[c][4cm][c]{0.9\textwidth}{\centering [DeepSDF training loss curves]}}  % remove once image added
-  \caption{Training losses of the DeepSDF model: total loss and the weighted terms of
-           Equations~\eqref{eq:implicit_val}--\eqref{eq:implicit_reg} (SDF value, $\varphi$,
-           normal, Eikonal and code regularization).}
-  \label{fig:implicit_curves}            % referenced as Figure~\ref{fig:implicit_curves}
-  \label{fig:dgci_curves}                % old name
-\end{figure}
+% \begin{figure}[htbp]                     % placeholder for training curves
+%   \centering                             % center the figure
+%   % \includegraphics[width=\textwidth]{figures/deepsdf_training_curves.png}  % uncomment with your file
+%   \fbox{\parbox[c][4cm][c]{0.9\textwidth}{\centering [DeepSDF training loss curves]}}  % remove once image added
+%   \caption{Training losses of the DeepSDF model: total loss and the weighted terms of
+%            Equations~\eqref{eq:implicit_val}--\eqref{eq:implicit_reg} (SDF value, $\varphi$,
+%            normal, Eikonal and code regularization).}
+%   \label{fig:implicit_curves}            % referenced as Figure~\ref{fig:implicit_curves}
+%   \label{fig:dgci_curves}                % old name
+% \end{figure}
 % [NOTE] the auto-decoder has no validation loss during training (validation codes are only
 % fitted afterwards), so the old "training and validation losses" wording was removed.
 % train_deep_sdf.py logs the per-term values each epoch; plot_log.py plots them.
