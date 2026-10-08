@@ -13,6 +13,16 @@
 % train_deep_sdf.py, deep_sdf/dgci_loss.py, networks/deep_sdf_decoder.py,
 % reconstruct.py and Dgci/normalized_SDF_points/run_batch.sh.
 %
+% Second pass:
+%  - new paragraph "Effect of the normal term" + Figure fig:implicit_normal
+%    (ablation without / with the normal term);
+%  - new paragraph "Effect of the Eikonal term" + Figure fig:implicit_eikonal
+%    (line example of Gropp et al. 2020, Fig. 1 top-left and the inset of Sec. 2);
+%  - the inference paragraph (sec:implicit_inference) is active again, because it
+%    is referenced in "Auto-decoder" and the test metrics need inferred codes;
+%  - removed the old commented-out (summed) version of the loss;
+%  - small language fixes (duplicated opening sentences, "512^3 grid", ...).
+%
 % Notation: the instance code is now z_i (DeepSDF's symbol) instead of alpha_i.
 % If the clustering section refers to alpha_i, rename it there too.
 % Old \label names (sec:dgci*, fig:dgci*, tab:dgci*) are kept as aliases
@@ -24,13 +34,12 @@
 \label{sec:implicit}                     % \secref{sec:implicit}
 \label{sec:dgci}                         % old name, kept so existing references still work
 
-The voxel-based models did not produce
-satisfactory reconstructions. The voxel-based models did not produce satisfactory reconstructions. 
-We therefore turned to continuous implicit neural representations, using the We therefore trained an implicit model: the DeepSDF
-auto-decoder of \citet{park2019}, optimized with the signed distance loss proposed for
-airway trees by \citet{zhang2024} instead of the original DeepSDF loss. This model gave the
-best reconstructions of all the architectures we tested and its learned latent codes are
-the representation used for the clustering.
+The voxel-based models did not produce satisfactory reconstructions. We therefore turned
+to continuous implicit neural representations and trained the DeepSDF auto-decoder of
+\citet{park2019}, optimized with the signed distance loss proposed for airway trees by
+\citet{zhang2024} instead of the original DeepSDF loss. This model gave the best
+reconstructions of all the architectures we tested, and its learned latent codes are the
+representation used for the clustering.
 
 % ------------------------------------------------------------------------------
 % \subsubsection{Motivation}               % why an implicit representation
@@ -38,21 +47,21 @@ the representation used for the clustering.
 % \label{sec:dgci_motivation}              % old name
 
 Airway annotations are made slice by slice in CT image stacks, so the reconstructed shape is
-inevitably limited by the resolution of the discrete voxels and the image contrast degrades
-as the bronchi become thinner. As a result, voxel based airway trees tend to be coarse and
-affected by spike-like noise and CNN methods which also work in the discrete voxel
-space suffer from the same problems as well as from breakages in the tree \cite{zhang2024}.
+inevitably limited by the resolution of the discrete voxels, and the image contrast degrades
+as the bronchi become thinner. As a result, voxel-based airway trees tend to be coarse and
+affected by spike-like noise, and CNN methods, which also work in the discrete voxel
+space, suffer from the same problems as well as from breakages in the tree \cite{zhang2024}.
 
-Implicit neural representations address this by using coordinate based neural
+Implicit neural representations address this by using coordinate-based neural
 networks to parameterize a shape in continuous physical space instead of on a voxel grid.
-They are therefore not bounded by the CT grid resolution and they yield smoother shapes
+They are therefore not bounded by the CT grid resolution, and they yield smoother shapes
 with fewer spike-like artifacts \cite{park2019,zhang2024}. DeepSDF \cite{park2019} learns a
-single network that represents a whole class of shapes where each shape being identified by a
+single network that represents a whole class of shapes, each shape being identified by a
 low-dimensional latent code. These codes form a compact and continuous embedding of the
-training shapes which is what we need for clustering.
+training shapes, which is what we need for clustering.
 
 However, \citet{zhang2024} observed that the loss used by DeepSDF, an L1 penalty on the
-predicted SDF values is not sufficient to model fine airway structures with high fidelity.
+predicted SDF values, is not sufficient to model fine airway structures with high fidelity.
 They proposed additional geometric constraints, derived from implicit geometric
 regularization \cite{gropp2020}, as part of their Deep Geometric Correspondence Implicit
 (DGCI) model. We kept the DeepSDF architecture and adopted only this loss
@@ -115,9 +124,9 @@ regularization \cite{gropp2020}:
         tree starts from the same sphere.
 \end{itemize}
 
-\begin{figure}[htbp]                     % placeholder for the architecture diagram
+\begin{figure}[htbp]                     % architecture diagram
   \centering                             % center the figure
-  \includegraphics[width=\textwidth]{figures/deepsdf_architecture.png}  % uncomment with your file
+  \includegraphics[width=\textwidth]{figures/deepsdf_architecture.png}  % architecture image
   \caption{The DeepSDF auto-decoder, adapted from \citet{park2019}. The latent code
            $\mathbf{z}_i \in \mathbb{R}^{256}$ of tree $i$ is concatenated with a query point
            $\mathbf{p}$ and passed through eight fully connected layers of width 512, with the
@@ -172,48 +181,6 @@ $\mathbf{p}$. Unlike \citet{zhang2024}, who sum over the points, we divide each 
 number of points of its set in the mini-batch, so every term is a mean and the weights do
 not depend on the number of samples.
 
-
-% \paragraph{Sample sets.}                 % the three kinds of points per tree
-% For each tree $i$, three sets of points are drawn in every iteration
-% (\secref{sec:implicit_training}): surface points $S_i$, with their ground-truth outward
-% normals $\mathbf{n}'$; free-space points $V_i$ near and away from the surface, with their
-% ground-truth signed distances $s'$; and points $U_i$ drawn uniformly in the normalized
-% volume $[-1,1]^3$, which have no ground truth. On the surface, $s' = 0$.
-
-% \paragraph{SDF loss.}                    % Eqs. 3-4 of Zhang et al. without beta
-% We use the SDF loss of \citet{zhang2024}, written here without their shared code, so that
-% $\mathcal{F}$ depends only on $\mathbf{z}_i$. It has two parts,
-% $\mathcal{L}_{\mathrm{sdf}} = \mathcal{L}_{\mathrm{sdf\text{-}val}} +
-% \mathcal{L}_{\mathrm{sdf\text{-}geo}}$, which supervise the values and the geometry of the
-% predicted SDF respectively:
-% \begin{equation}
-%   \mathcal{L}_{\mathrm{sdf\text{-}val}} = \sum_i \Big(
-%   \omega_s \sum_{\mathbf{p} \in S_i \cup V_i}
-%       \big|\mathcal{F}(\mathbf{p}; \mathbf{z}_i) - s'\big|
-%   + \omega_\varphi \sum_{\mathbf{p} \in U_i}
-%       \varphi\big(\mathcal{F}(\mathbf{p}; \mathbf{z}_i)\big)
-%   \Big),
-%   \label{eq:implicit_val}                % SDF value term
-% \end{equation}
-% \begin{equation}
-%   \begin{split}
-%     \mathcal{L}_{\mathrm{sdf\text{-}geo}} = \sum_i \Big(
-%     &\omega_n \sum_{\mathbf{p} \in S_i}
-%         \big(1 - S_{\cos}(\nabla\mathcal{F}(\mathbf{p}; \mathbf{z}_i), \mathbf{n}')\big) \\
-%     &+ \omega_{\mathrm{Eik}} \sum_{\mathbf{p} \in S_i \cup V_i \cup U_i}
-%         \big|\,\|\nabla\mathcal{F}(\mathbf{p}; \mathbf{z}_i)\|_2 - 1\big|
-%     \Big),
-%   \end{split}
-%   \label{eq:implicit_geo}                % normal consistency + Eikonal term (split to fit)
-% \end{equation}
-
-
-
-
-% where $S_{\cos}$ is the cosine similarity and the gradient is taken with respect to
-% $\mathbf{p}$. In practice, each sum is normalized by the number of points of its set in the
-% mini-batch, so every term is a mean and the weights do not depend on the number of samples.
-
 The first term of Equation~\eqref{eq:implicit_val} regresses the SDF values directly. Unlike
 DeepSDF, which clamps both prediction and target to $[-0.1, 0.1]$ \cite{park2019}, it is
 applied without clamping. The second term, with $\varphi(s) = \exp(-\delta |s|)$ and
@@ -224,6 +191,130 @@ the uniform points $U_i$, because many free-space points $V_i$ lie very close to
 where a small SDF is correct and should not be penalized. Equation~\eqref{eq:implicit_geo}
 aligns the SDF gradient with the surface normals and constrains its norm to one everywhere,
 as required for a true distance function (Eikonal equation) \cite{gropp2020,zhang2024}.
+
+\paragraph{Effect of the normal term.}   % why the normal term removes the spikes
+The value term of Equation~\eqref{eq:implicit_val} supervises $\mathcal{F}$ only at the
+sampled points, and only through its values. Between the samples, the zero level set is
+free to oscillate, and the network can match the sampled distances closely while producing
+a surface made of step-like facets and thin spikes. This is what we obtained when the model
+was trained without the normal term (Figure~\ref{fig:implicit_normal}a): the branching
+pattern is captured, but the branches have a jagged, blocky surface, with spikes along the
+thinner bronchi and at the branch tips. This is consistent with \citet{zhang2024}, who
+point out that the L1 loss on SDF values used by DeepSDF alone is not sufficient to model
+fine airway structures with high fidelity.
+
+The normal term adds first-order supervision. At a point of the zero level set, the
+gradient $\nabla\mathcal{F}(\mathbf{p}; \mathbf{z}_i)$ is normal to the predicted surface,
+so $1 - S_{\cos}(\nabla\mathcal{F}, \mathbf{n}')$ measures the angle between the predicted
+and the ground-truth surface normals: it is zero when they point in the same direction and
+reaches 2 when they are opposite. A spike or a step on the predicted surface tilts its
+normals away from those of the true airway wall, so it is penalized even where the
+predicted SDF values are almost correct. The term thus constrains the orientation of the
+surface, and not only its position, at every surface sample, which forces the zero level set
+to follow the local shape of the wall between the samples. Because the cosine similarity
+depends only on the direction of the gradient, it does not compete with the Eikonal term,
+which constrains its norm; together, the two terms constrain the full gradient on the
+surface. With the normal term (Figure~\ref{fig:implicit_normal}b), the same tree is
+reconstructed with smooth tubular branches and rounded tips. This agrees with
+\citet{zhang2024}, who report that the implicit geometric regularization favors smooth
+surfaces without sacrificing fidelity, and that the resulting reduction of spike-like noise
+also benefits downstream tasks such as skeletonization.
+
+\begin{figure}[htbp]                     % ablation: without / with the normal term
+  \centering                             % center the figure
+
+  \begin{minipage}[t]{0.48\textwidth}    % left panel
+    \centering
+    \includegraphics[width=\textwidth]{figures/recon_without_normal_.png}  % rename to your file
+
+    \vspace{2mm}
+    \textbf{(a)} Without the normal term ($\omega_n = 0$)
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.48\textwidth}    % right panel
+    \centering
+    \includegraphics[width=\textwidth]{figures/recon_with_normal_.png}  % rename to your file
+
+    \vspace{2mm}
+    \textbf{(b)} With the normal term ($\omega_n = 10^2$)
+  \end{minipage}
+
+  \caption{Effect of the normal consistency term of Equation~\eqref{eq:implicit_geo} on the
+           reconstruction of the same airway tree (mesh wireframe shown). (a) Supervised by
+           the SDF values only, the extracted surface is blocky, with step-like facets and
+           spikes on the thinner branches. (b) Aligning $\nabla\mathcal{F}$ with the
+           ground-truth normals yields smooth tubular branches with rounded tips.}
+  \label{fig:implicit_normal}            % referenced as Figure~\ref{fig:implicit_normal}
+\end{figure}
+
+\paragraph{Effect of the Eikonal term.}  % why ||grad F|| = 1, and IGR's implicit regularization
+The second term of Equation~\eqref{eq:implicit_geo} comes from the Eikonal equation
+$\|\nabla\mathcal{F}(\mathbf{p}; \mathbf{z}_i)\|_2 = 1$. A function that vanishes on the
+surface, has the surface normals as gradients there and satisfies this equation everywhere
+is a signed distance function \cite{gropp2020}: its value changes by exactly one unit per
+unit of distance travelled away from the surface, so its level sets are parallel copies of
+the surface, equally spaced. The term penalizes any deviation from this unit slope at all
+points $\Omega_i$, including the uniform points $U_i$, for which no ground-truth SDF is
+available. Without it, the value term fixes $\mathcal{F}$ only at the samples, and the
+network is free to become flat ($\|\nabla\mathcal{F}\| \approx 0$) or too steep between
+them. Flat regions where $\mathcal{F}$ stays close to zero are particularly harmful: small
+errors there cross zero and create spurious pieces of surface, which the $\varphi$ term of
+Equation~\eqref{eq:implicit_val} also penalizes. This is also why the final $\tanh$ of
+DeepSDF was removed.
+
+\citet{gropp2020} showed that the Eikonal term has a second, less obvious effect, which
+they call implicit geometric regularization. For a finite set of surface points, the
+Eikonal equation has no unique solution: infinitely many signed distance functions vanish on
+the same points. Figure~\ref{fig:implicit_eikonal} shows two of them for points sampled
+along a line. Both functions vanish on the input points (white disks) and have a unit
+gradient everywhere, as the equally spaced level sets show, so both reach zero loss. Yet,
+when an MLP is trained by gradient descent on a loss made of a data term and the Eikonal
+term, the optimization consistently reaches the plausible solution, the straight line of
+Figure~\ref{fig:implicit_eikonal}a, and avoids the one of
+Figure~\ref{fig:implicit_eikonal}b. \citet{gropp2020} prove this for a linear model: if the
+points lie close to a plane, gradient descent converges with probability one to the signed
+distance function of that plane, and all other critical points of the loss are saddle
+points or maxima (\emph{plane reproduction}). For an MLP, the same argument applies
+locally, since the network is approximately linear in a small neighborhood, with the
+deviation from a plane given by the local curvature of the surface. In practice, this
+favors smooth zero level sets that still keep a high level of detail \cite{gropp2020}.
+
+In our setting, $\mathcal{F}$ is also supervised by dense SDF values around the surface,
+so the problem is less underdetermined than the reconstruction from raw points studied by
+\citet{gropp2020}. Between the samples, however, the same mechanism applies: among the many functions that satisfy the Eikonal constraint, gradient-based optimization favors a zero level set that smoothly interpolates the surface samples rather than one that oscillates between them (Figure~\ref{fig:implicit_eikonal}b). It thus complements the normal term: the normal term
+fixes the direction of $\nabla\mathcal{F}$ on the surface, and the Eikonal term fixes its
+norm everywhere. Following \citet{zhang2024}, we penalize the absolute deviation
+$\big|\|\nabla\mathcal{F}\|_2 - 1\big|$ rather than the squared deviation used by
+\citet{gropp2020}.
+
+\begin{figure}[htbp]                     % IGR: two zero-loss SDFs for the same points
+  \centering                             % center the figure
+
+  \begin{minipage}[t]{0.40\textwidth}    % left panel: plausible solution
+    \centering
+    \includegraphics[width=\textwidth]{figures/igr_line_plausibl.png}  % rename to your file
+
+    \vspace{2mm}
+    \textbf{(a)} Solution reached by the optimization
+  \end{minipage}
+  \hspace{0.06\textwidth}
+  \begin{minipage}[t]{0.40\textwidth}    % right panel: alternative zero-loss solution
+    \centering
+    \includegraphics[width=\textwidth]{figures/igr_line_alternative.png}  % rename to your file
+
+    \vspace{2mm}
+    \textbf{(b)} Alternative zero-loss solution
+  \end{minipage}
+
+  \caption{Implicit geometric regularization, reproduced from \citet{gropp2020}. White disks:
+           input points sampled along a line. Black curves: level sets of a function trained
+           with a data term and the Eikonal term, the thick curve being the zero level set.
+           Both functions vanish on the points and have unit gradient norm everywhere
+           (equally spaced level sets), so both are signed distance functions with zero
+           loss. Gradient descent reaches the straight line (a) and avoids the oscillating
+           surface (b).}
+  \label{fig:implicit_eikonal}           % referenced as Figure~\ref{fig:implicit_eikonal}
+\end{figure}
 
 \paragraph{Latent code regularization.}  % DeepSDF's prior on the codes
 \citet{zhang2024} regularize their instance and shared codes and add a correspondence loss
@@ -260,16 +351,41 @@ Each airway surface was extracted from its binary segmentation with Marching
 Cubes \cite{lorensen1987}, and the SDF samples were prepared with the preprocessing of
 DeepSDF \cite{park2019}. Each mesh is centered on its bounding box and scaled to fit in the
 unit sphere with a margin of 3\%; the offset and scale are stored, so that predictions can
-be mapped back to CT coordinates. Then, for each tree:
-\begin{itemize}                          % the two sample files per tree
-  \item 200,000 surface points with outward normals are obtained by rendering the mesh
-        from virtual cameras placed around it and back-projecting the depth maps;
-  \item 500,000 SDF samples are generated: 94\% near the surface, by perturbing surface
-        points with Gaussian noise of variance $5\times10^{-4}$ and $5\times10^{-5}$, and
-        6\% uniformly in $[-1,1]^3$. Their signed distance is the distance to the closest
-        surface point, with the sign given by the orientation of the closest normals.
-\end{itemize}
-% [NOTE] Marching Cubes / mask-to-mesh step: confirm it is the one in jobs/job_nifti_to_mesh.sh.
+be mapped back to CT coordinates. For each tree, two one-million-point representations are
+then constructed. First, one million surface points with outward normals are obtained by
+rendering the mesh from virtual cameras placed around it and back-projecting the depth maps.
+Second, one million SDF samples are generated: 94\% are sampled near the surface by
+perturbing surface points with Gaussian noise of variance $5\times10^{-4}$ and
+$5\times10^{-5}$, and 6\% are sampled uniformly in $[-1,1]^3$. Their signed distance is the
+distance to the closest surface point, with the sign given by the orientation of the closest
+normals. Figure~\ref{fig:implicit_samples} shows the two point sets for a representative
+airway tree.
+
+\begin{figure}[htbp]                     % surface points / SDF samples
+  \centering
+
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figures/surface_points.png}
+
+    \vspace{2mm}
+    \textbf{(a)} One million surface points
+  \end{minipage}
+  \hfill
+  \begin{minipage}[t]{0.48\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{figures/sdf_points.png}
+
+    \vspace{2mm}
+    \textbf{(b)} One million SDF samples
+  \end{minipage}
+
+  \caption{Point-based representations used to train the implicit model.
+           (a) Surface points sampled on the airway tree, together with their surface
+           normals. (b) SDF samples distributed around the airway surface, including
+           near-surface perturbations and uniformly sampled points in the normalized volume.}
+  \label{fig:implicit_samples}
+\end{figure}
 
 \paragraph{Training.}                    % sampling per iteration, optimizer, schedule
 In every iteration, we draw for each tree 4,096 surface points ($S_i$), 4,096 free-space
@@ -279,40 +395,23 @@ occupies only a small fraction of the normalized volume and most samples are nat
 outside. The mini-batch contains $B = 64$ trees. The decoder weights and the latent codes
 are optimized with Adam \cite{kingma2015}, with initial learning rates of $10^{-3}$ and
 $2\times10^{-3}$ respectively, both halved every 4,000 epochs. The codes are initialized
-from $\mathcal{N}(0, 1/K)$. The model was trained for 5000 epochs on a single
-NVIDIA A100 GPU. 
-% [NOTE] specs.json allows 20,001 epochs; report the epoch of the checkpoint you actually used.
+from $\mathcal{N}(0, 1/K)$. The model was trained for 5,000 epochs on a single
+NVIDIA A100 GPU.
 
 After training, each training tree is represented by its latent code
 $\mathbf{z}_i \in \mathbb{R}^{256}$. These codes are the features used for clustering in
 \secref{sec:clustering}.
 
-% \paragraph{Latent codes of unseen trees.}  % test-time optimization
-% \label{sec:implicit_inference}           % \secref{sec:implicit_inference}
-% For validation and test trees, the decoder weights are frozen and only a new code
-% $\mathbf{z}$ is optimized \cite{park2019}. The code is initialized from
-% $\mathcal{N}(0, 0.01^2)$ and optimized for 800 iterations with Adam, with a learning rate of
-% $5\times10^{-3}$ divided by 10 after 400 iterations. The objective is the same SDF loss,
-% $\mathcal{L}_{\mathrm{sdf\text{-}val}} + \mathcal{L}_{\mathrm{sdf\text{-}geo}}$, on freshly
-% drawn samples of the tree, plus a prior term
-% $10^{-4}\,\omega_s \,\overline{\mathbf{z}^2}$, where $\overline{\mathbf{z}^2}$ is the mean of
-% the squared code entries.
-% % [NOTE] if the clustering uses only training codes, this paragraph is only needed for
-% % the validation/test reconstruction metrics below.
-
-% \begin{figure}[htbp]                     % placeholder for training curves
-%   \centering                             % center the figure
-%   % \includegraphics[width=\textwidth]{figures/deepsdf_training_curves.png}  % uncomment with your file
-%   \fbox{\parbox[c][4cm][c]{0.9\textwidth}{\centering [DeepSDF training loss curves]}}  % remove once image added
-%   \caption{Training losses of the DeepSDF model: total loss and the weighted terms of
-%            Equations~\eqref{eq:implicit_val}--\eqref{eq:implicit_reg} (SDF value, $\varphi$,
-%            normal, Eikonal and code regularization).}
-%   \label{fig:implicit_curves}            % referenced as Figure~\ref{fig:implicit_curves}
-%   \label{fig:dgci_curves}                % old name
-% \end{figure}
-% [NOTE] the auto-decoder has no validation loss during training (validation codes are only
-% fitted afterwards), so the old "training and validation losses" wording was removed.
-% train_deep_sdf.py logs the per-term values each epoch; plot_log.py plots them.
+\paragraph{Latent codes of unseen trees.}  % test-time optimization
+\label{sec:implicit_inference}           % \secref{sec:implicit_inference}
+For validation and test trees, the decoder weights are frozen and only a new code
+$\mathbf{z}$ is optimized \cite{park2019}. The code is initialized from
+$\mathcal{N}(0, 0.01^2)$ and optimized for 800 iterations with Adam, with a learning rate of
+$5\times10^{-3}$ divided by 10 after 400 iterations. The objective is the same SDF loss,
+$\mathcal{L}_{\mathrm{sdf\text{-}val}} + \mathcal{L}_{\mathrm{sdf\text{-}geo}}$, on freshly
+drawn samples of the tree, plus a prior term
+$10^{-4}\,\omega_s \,\overline{\mathbf{z}^2}$, where $\overline{\mathbf{z}^2}$ is the mean of
+the squared code entries.
 
 % ------------------------------------------------------------------------------
 \subsubsection{Evaluation metrics}       % continuous-space and voxel-space metrics
@@ -320,9 +419,8 @@ $\mathbf{z}_i \in \mathbb{R}^{256}$. These codes are the features used for clust
 \label{sec:dgci_metrics}                 % old name
 
 We follow the evaluation protocol of \citet{zhang2024}, which measures shape quality both in
-continuous space on the mesh extracted from the predicted SDF and in discrete voxel space. 
-Meshes are extracted with Marching Cubes on a $512^3$.
-
+continuous space, on the mesh extracted from the predicted SDF, and in discrete voxel space.
+Meshes are extracted with Marching Cubes on a $512^3$ grid.
 
 \paragraph{Continuous space.}            % non-manifold counts on the mesh
 Smoothness and connectivity of the reconstructed mesh are measured by counting non-manifold
@@ -332,47 +430,44 @@ that prevents a closed, continuous body from being formed. Fewer non-manifold el
 indicate better connectivity and smoothness \cite{zhang2024}.
 
 \paragraph{Discrete space.}              % topology metrics on the voxelized result
-To compute voxel-based metrics the predicted SDF is evaluated directly on the voxel grid of
-the original CT image, the center of each voxel is mapped to the normalized volume with the
-stored offset and scale, and the voxel is labeled as airway if the predicted SDF is negative
+To compute voxel-based metrics, the predicted SDF is evaluated directly on the voxel grid of
+the original CT image: the center of each voxel is mapped to the normalized volume with the
+stored offset and scale, and the voxel is labeled as airway if the predicted SDF is negative,
 with $2\times$ supersampling near the surface and a 50\% occupancy threshold. On this
 volume we compute the tree length detected rate (TD) and the branch detected rate (BD),
 defined in Eq.~\eqref{eq:td_bd}, and the Dice coefficient, which measure the topological
 completeness and correctness of the reconstruction \cite{zhang2024}.
-% [NOTE] this describes track_reconstruction.voxelize (same procedure as DGCI's create_mask).
-% If your final evaluation used mesh voxelization + hole filling instead, revert to that.
 
 % ------------------------------------------------------------------------------
 \subsubsection{Results}                  % quantitative and qualitative results
 \label{sec:implicit_results}             % \secref{sec:implicit_results}
 \label{sec:dgci_results}                 % old name
 
-Table~\ref{tab:implicit_results} reports the metrics and Figures~\ref{fig:implicit_recon}
-and~\ref{fig:implicit_recon_} show examples of reconstructed airway trees. This model
-produced the best reconstructions of all the models we trained. The qualitative results
-show good preservation of the overall airway-tree topology and connectivity, with the
-main and intermediate bronchial branches reconstructed continuously. A substantial
-portion of the distal branching structure is also preserved, although the smallest
-terminal branches are occasionally simplified or omitted. The reconstructed airways
-exhibit smooth and continuous tubular surfaces, particularly along the larger proximal
-branches, with some local surface irregularities visible at finer scales.
+Table~\ref{tab:implicit_results} reports the metrics, and Figures~\ref{fig:implicit_recon}
+and~\ref{fig:implicit_recon_atm} show examples of reconstructed airway trees. This model
+produced the best reconstructions of all the models we trained. The reconstructions
+preserve the overall topology and connectivity of the airway tree, with the main and
+intermediate bronchi reconstructed without breaks. A large part of the distal branching is
+also preserved, although the smallest terminal branches are occasionally simplified or
+missing. The surfaces are smooth and tubular, without the spikes of
+Figure~\ref{fig:implicit_normal}a, particularly along the larger proximal branches, with
+some local irregularities at finer scales.
 
 \begin{table}[htbp]
   \centering
   \small
-  \caption{Reconstruction results of the DeepSDF model trained with the SDF loss of
-           \citet{zhang2024}, reported as mean $\pm$ standard deviation.}
+  \caption{Reconstruction results of the DeepSDF model trained with the SDF loss}
   \label{tab:implicit_results}
-  \begin{tabular}{lcccccc}
+  \label{tab:dgci_results}               % old name
+  \vspace{2mm}
+  \begin{tabular}{cccccc}
     \toprule
-    & \multicolumn{3}{c}{Continuous space} & \multicolumn{3}{c}{Discrete space} \\
-    \cmidrule(lr){2-4} \cmidrule(lr){5-7}
-    Set & NM-V $\downarrow$ & NM-E $\downarrow$ & NM-F $\downarrow$
-        & TD (\%) $\uparrow$ & BD (\%) $\uparrow$ & Dice (\%) $\uparrow$ \\
+    \multicolumn{3}{c}{Continuous space} & \multicolumn{3}{c}{Discrete space} \\
+    \cmidrule(lr){1-3} \cmidrule(lr){4-6}
+    NM-V $\downarrow$ & NM-E $\downarrow$ & NM-F $\downarrow$
+      & TD (\%) $\uparrow$ & BD (\%) $\uparrow$ & Dice (\%) $\uparrow$ \\
     \midrule
-    Validation & \TODO{?} & \TODO{?} & \TODO{?} & \TODO{?} & \TODO{?} & \TODO{?} \\
-    Test
-      & $0.0 \pm 0.0$
+    $0.0 \pm 0.0$
       & $4.6 \pm 6.6$
       & $235.3 \pm 170.5$
       & $94.23 \pm 3.23$
@@ -382,18 +477,19 @@ branches, with some local surface irregularities visible at finer scales.
   \end{tabular}
 \end{table}
 
-\begin{figure}[htbp]                     % placeholder for reconstructions
+\begin{figure}[htbp]                     % reconstructions, AIIB23
   \centering                             % center the figure
-  \includegraphics[width=\textwidth]{figures/AIIB23.png}  % uncomment with your file
-  \caption{Ground-truth airway trees and their reconstructions by the DeepSDF model on AIIB23 dataset.}
+  \includegraphics[width=\textwidth]{figures/AIIB23.png}
+  \caption{Ground-truth airway trees and their reconstructions by the DeepSDF model on the
+           AIIB23 dataset.}
   \label{fig:implicit_recon}             % referenced as Figure~\ref{fig:implicit_recon}
   \label{fig:dgci_recon}                 % old name
 \end{figure}
 
-\begin{figure}[htbp]                     % placeholder for reconstructions
+\begin{figure}[htbp]                     % reconstructions, ATM22
   \centering                             % center the figure
-  \includegraphics[width=\textwidth]{figures/ATM22.png}  % uncomment with your file
-  \caption{Ground-truth airway trees and their reconstructions by the DeepSDF model on ATM22 dataset.}
-  \label{fig:implicit_recon_}             % referenced as Figure~\ref{fig:implicit_recon}
-  \label{fig:dgci_recon_}                 % old name
+  \includegraphics[width=\textwidth]{figures/ATM22.png}
+  \caption{Ground-truth airway trees and their reconstructions by the DeepSDF model on the
+           ATM22 dataset.}
+  \label{fig:implicit_recon_atm}         % referenced as Figure~\ref{fig:implicit_recon_atm}
 \end{figure}

@@ -11,7 +11,7 @@
 \DeclareOption{fr}{\renewcommand{\tp@lang}{french}}   % \documentclass[fr]{telereport}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}  % anything else goes to article
 \ProcessOptions\relax                             % apply the options chosen by the user
-\LoadClass[11pt,a4paper]{article}                 % Typst default: 11pt text on A4
+\LoadClass[10pt,a4paper]{article}                 % body text size (10pt, 11pt or 12pt)
 
 % ---------------------------------------------------------------- packages
 \RequirePackage[T1]{fontenc}                      % proper accents (é, è) in the PDF
@@ -50,6 +50,7 @@
 \newcommand{\tp@title}{}                          % filled by \title
 \newcommand{\tp@shorttitle}{}                     % filled by \shorttitle
 \newcommand{\tp@subtitle}{}                       % filled by \subtitle
+\newcommand{\tp@projecttitle}{}                   % filled by \projecttitle
 \newcommand{\tp@date}{}                           % filled by \date
 \newcommand{\tp@sidebar}{}                        % filled by \sidebartext
 \newcommand{\tp@keywords}{}                       % filled by \keywords
@@ -61,6 +62,7 @@
 \renewcommand{\title}[1]{\renewcommand{\tp@title}{#1}}               % main title
 \newcommand{\shorttitle}[1]{\renewcommand{\tp@shorttitle}{#1}}       % header title
 \newcommand{\subtitle}[1]{\renewcommand{\tp@subtitle}{#1}}           % cover subtitle
+\newcommand{\projecttitle}[1]{\renewcommand{\tp@projecttitle}{#1}}   % internship topic on the cover
 \renewcommand{\date}[1]{\renewcommand{\tp@date}{#1}}                 % date under the cover
 \newcommand{\sidebartext}[1]{\renewcommand{\tp@sidebar}{#1}}         % vertical red-bar text
 \newcommand{\keywords}[1]{\renewcommand{\tp@keywords}{#1}}           % comma-separated list
@@ -89,7 +91,7 @@
 \geometry{top=3.5cm, bottom=2.5cm, left=2.5cm, right=2.5cm}  % content margins from Typst
 \geometry{headheight=2.2cm, headsep=0.4cm}         % tall header to fit the 2cm logo
 \setlength{\parindent}{0pt}                       % Typst paragraphs are not indented
-\setlength{\parskip}{0.65em}                      % ...they are separated by space instead
+\setlength{\parskip}{0.25em}                      % ...they are separated by space instead
 \newcommand{\tp@logoV}{assets/Logo_Telecom_IPParis_RVB_noir_V} % vertical logo (header)
 \newcommand{\tp@logoH}{assets/Logo_Telecom_IPParis_RVB_noir_H} % horizontal logo (cover)
 \newsavebox{\tp@headlogo}                         % measure the logo once
@@ -218,8 +220,12 @@
 % The centred cover content, grouped exactly like the Typst version.
 \newcommand{\tp@covercontent}{%
   {\fontsize{27.5}{33}\selectfont\bfseries\tp@title\par}%          % title, 2.5em
-  \ifdefempty{\tp@subtitle}{}{\vspace{1.5em}%
-    {\fontsize{16.5}{20}\selectfont\color{tpgrey}\tp@subtitle\par}}%  % subtitle, 1.5em grey
+  \ifdefempty{\tp@subtitle}{}{\vspace{0.8em}%
+    {\fontsize{16.5}{20}\selectfont\color{tpgrey}\tp@subtitle\par}}%  % team name, grey, under the title
+  \ifdefempty{\tp@projecttitle}{}{\vspace{1.0em}%
+    {\color{tpgrey}\rule{4.5cm}{1.6pt}}{\color{black}\rule{4.5cm}{1.6pt}}{\color{tpred}\rule{4.5cm}{1.6pt}}\par  % tricolour rule
+    \vspace{0.9em}%
+    {\fontsize{16}{21}\selectfont\bfseries\color{tpred}\tp@projecttitle\par}}%  % project title
   \vspace{4em}%                                   % gap between groups
   \ifdefempty{\tp@authors}{}{%
     {\fontsize{13.2}{17}\selectfont\tp@authors\par}}%             % authors, 1.2em
